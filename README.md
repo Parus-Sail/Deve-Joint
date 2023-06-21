@@ -13,9 +13,9 @@
 возможности для совместной работы над реальными проеĸтами.
 
 <h2>Запуск</h2>
-Запускаем стандартно
-
-`docker-compose  up -d --build`
+cp ./envfiles/env_dev ./.env (должен быть в той же папке что и docker-compose )
+запуск:
+` docker-compose -f .\docker-compose.dev.yml up --build `
 
 Docker-compose ожидает найти локально .env файл с заданными переменными среды.
 Что должно быть задано можно посмотреть в .env.sample.

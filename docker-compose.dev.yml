@@ -4,6 +4,7 @@ volumes:
   pgdata:
   static:
 
+
 services:
   web:
     container_name: ${PROJECT_NAME}-web

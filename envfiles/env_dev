@@ -1,0 +1,10 @@
+BUILD=dev
+DEBUG=True
+SECRET_KEY=django-insecure--9y3n9l!#_)-eubj@8-3&vie@p-#(c-hesl2vjwf3=(yuxl9#6
+DJANGO_ALLOWED_HOSTS=*
+POSTGRES_USER=postgres
+POSTGRES_PASSWORD=passw0rd
+POSTGRES_DB=deve_joint
+POSTGRES_HOST=devejoint-db
+PG_EXT_PORT=16432
+PROJECT_NAME=devejoint

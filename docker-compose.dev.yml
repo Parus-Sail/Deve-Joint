@@ -1,0 +1,37 @@
+version: "3.8"
+
+volumes:
+  pgdata:
+  static:
+
+services:
+  web:
+    container_name: ${PROJECT_NAME}-web
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    env_file:
+      - .env
+    volumes:
+      - ./app:/app
+      - static:/usr/src/app/static
+    ports:
+      - "8181:8080"
+    networks:
+      - default
+    depends_on:
+      - db
+
+  db:
+    container_name: ${PROJECT_NAME}-db
+    image: postgres:13.2
+    environment:
+      PGDATA: /data/postgres
+    env_file:
+      - .env
+    volumes:
+      - pgdata:/data/postgres
+    ports:
+      - "${PG_EXT_PORT}:5432"
+    networks:
+      - default

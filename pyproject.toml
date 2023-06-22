@@ -1,9 +1,19 @@
 [tool.poetry]
-name = "command"
+name = "DeveJoint"
 version = "0.1.0"
-description = ""
-authors = ["V-U-Simon <V-U-Simon@yandex.ru>"]
+description = "A platform for bringing together IT professionals, which will connect professionals who are looking for an opportunity to participate in a project to create IT products on a voluntary or commercial basis by posting on the portal"
+authors = [
+    "V-U-Simon <V-U-Simon@yandex.ru>",
+    "bervr",
+    "DashViolin",
+    "Joattt",
+    "LaseStar",
+    "segonaz",
+    "Sergiusz2try",
+    "Zhdanov-Vyacheslav"
+    ]
 readme = "README.md"
+repository = "https://github.com/Parus-Sail/Deve-Joint"
 
 [tool.poetry.dependencies]
 python = "3.10.10"

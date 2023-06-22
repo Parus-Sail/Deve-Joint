@@ -3,7 +3,8 @@ FROM python:3.10.10-slim as python-base
 ENV APP_DIR=/app
 ENV APP_USER=service_user
 
-ENV PYTHONUNBUFFERED=1 \
+ENV BUILD = production \
+    PYTHONUNBUFFERED=1 \
     PYTHONDONTWRITEBYTECODE=1 \
     POETRY_VERSION=1.3.2 \
     POETRY_HOME="/opt/poetry" \
@@ -11,6 +12,7 @@ ENV PYTHONUNBUFFERED=1 \
     POETRY_NO_INTERACTION=1 \
     PYSETUP_PATH="/opt/pysetup"\
     VENV_PATH="/opt/pysetup/.venv"
+
 ENV PATH="$POETRY_HOME/bin:$VENV_PATH/bin:$PATH"
 
 
@@ -18,9 +20,11 @@ FROM python-base as poetry
 # вторая стадия - поставим poetry и no-dev зависисмости (все долгоиграющие), закешировали слой
 RUN pip install poetry
 WORKDIR $PYSETUP_PATH
-COPY poetry.lock .
-COPY pyproject.toml .
-RUN poetry install --without dev
+COPY poetry.lock pyproject.toml /
+# т.к. мы используем докер, нужно отключить виртуальное окружение (масло масленное),
+# затем ставим зависимости, если BUILD "production", пакеты для разработки не ставим
+RUN poetry config virtualenvs.create false && \
+    poetry install $(test $BUILD == production && echo "--no-dev")
 
 
 FROM poetry as ready

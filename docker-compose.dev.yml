@@ -1,9 +1,8 @@
-version: "3.9"
+version: "3.8"
 
 volumes:
-  devejointpgdata:
-    external: true
-  static_volume:
+  pgdata:
+  static:
 
 services:
   web:
@@ -15,7 +14,7 @@ services:
       - .env
     volumes:
       - ./app:/app
-      - static_volume:/usr/src/app/static
+      - static:/usr/src/app/static
     ports:
       - "8181:8080"
     networks:
@@ -31,7 +30,7 @@ services:
     env_file:
       - .env
     volumes:
-      - /srv/${PROJECT_NAME}/db:/data/postgres
+      - pgdata:/data/postgres
     ports:
       - "${PG_EXT_PORT}:5432"
     networks:

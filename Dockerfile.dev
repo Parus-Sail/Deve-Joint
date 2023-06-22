@@ -33,11 +33,9 @@ WORKDIR $PYSETUP_PATH
 RUN poetry install
 
 WORKDIR ${APP_DIR}
-COPY app .
 
-RUN chmod +x ./entrypoint.sh
-CMD ["gunicorn", "DeveJoint.wsgi", "-b 0.0.0.0:8080"]
+#RUN chmod +x ./entrypoint.sh
 ENTRYPOINT [ "sh", "./entrypoint.sh" ]
-
+CMD ["gunicorn", "DeveJoint.wsgi", "-b 0.0.0.0:8080"]
 
 

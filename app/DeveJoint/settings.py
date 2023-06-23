@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     ################
     "debug_toolbar",
     ################
+    "projects",
+    ################
 ]
 
 MIDDLEWARE = [
@@ -103,6 +105,9 @@ AUTH_PASSWORD_VALIDATORS = [
         "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
     },
 ]
+
+# todo: 👤 используемая модель для пользователей
+AUTH_USER_MODEL = ''  # 'some_app.SomeModelUser'
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/

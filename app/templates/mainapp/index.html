@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Main page
+{% endblock title %}
+
+{% block content %}
+    {% if user.is_authenticated %}
+        <h4>Logged in : {{ user.get_current_name }}</h4>
+        <a href="{% url 'authapp:logout' %}"> Log out </a>
+        <br>
+        <a href="{% url 'authapp:profile' %}"> Profile </a>
+        <hr/>
+    {% else %}
+        <a href="{% url 'authapp:login' %}"> Log in </a>
+        <br>
+        <a href="{% url 'authapp:register' %}"> Register </a>
+    {% endif %}
+    <br>
+    <a href="{% url 'authapp:password_reset' %}"> Change password </a>
+{% endblock content %}
+

@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Failed Verify Email
+{% endblock title %}
+
+{% block content %}
+<div class="container ml-4">
+  <div class="jumbotron">
+    <p class="lead">Ссылка не корректна</p>
+    <hr class="my-4">
+    <p>
+      Ваша ссылка не корректна, залогиньтесь снова
+    </p>
+    <p class="lead">
+      <a class="btn btn-secondary" href="{% url 'authapp:login' %}" role="button"> Log In </a>
+    </p>
+  </div>
+</div>
+{% endblock content %}

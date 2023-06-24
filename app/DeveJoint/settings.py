@@ -19,12 +19,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get("SECRET_KEY", 'secret-123')
+SECRET_KEY = os.environ.get("SECRET_KEY", "secret-123")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = bool(os.environ.get("DEBUG", True))
 
-ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS", '*').split(" ")
+ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS", "*").split(" ")
 INTERNAL_IPS = ["127.0.0.1"]
 
 # Application definition
@@ -39,7 +39,15 @@ INSTALLED_APPS = [
     ################
     "debug_toolbar",
     ################
-    'MainPageApp',
+    "MainPageApp",
+    ################
+    "authapp.apps.AuthappConfig",
+    ################
+    # for test with bootstrap start
+    # "crispy_forms",
+    # "crispy_bootstrap5",
+    # for test with bootstrap end
+    ################
 ]
 
 MIDDLEWARE = [
@@ -58,7 +66,7 @@ ROOT_URLCONF = "DeveJoint.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": ['templates'],
+        "DIRS": ["templates"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -79,11 +87,11 @@ WSGI_APPLICATION = "DeveJoint.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": os.getenv("POSTGRES_DB") or 'deve_joint',
-        "USER": os.getenv("POSTGRES_USER") or 'postgres',
-        "PASSWORD": os.getenv("POSTGRES_PASSWORD") or 'passw0rd',
-        "HOST": os.getenv("POSTGRES_HOST") or 'localhost',
-        "PORT": os.getenv("PGPORT") or '16432',
+        "NAME": os.getenv("POSTGRES_DB") or "deve_joint",
+        "USER": os.getenv("POSTGRES_USER") or "postgres",
+        "PASSWORD": os.getenv("POSTGRES_PASSWORD") or "passw0rd",
+        "HOST": os.getenv("POSTGRES_HOST") or "localhost",
+        "PORT": os.getenv("PGPORT") or "16432",
     },
     # "default": {
     #     "ENGINE": "django.db.backends.sqlite3",
@@ -131,7 +139,7 @@ STATICFILES_FINDERS = (
     "django.contrib.staticfiles.finders.AppDirectoriesFinder",
 )
 
-STATICFILES_DIRS = (BASE_DIR / 'static',)
+STATICFILES_DIRS = (BASE_DIR / "static",)
 
 STATIC_ROOT = BASE_DIR / "static_root"  # пока не используется
 MEDIA_ROOT = BASE_DIR / "media"
@@ -140,3 +148,23 @@ MEDIA_ROOT = BASE_DIR / "media"
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# Boostrap for test
+# CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+# CRISPY_TEMPLATE_PACK = "bootstrap5"
+
+# Sending Email
+if DEBUG:
+    # Sending Email to console
+    EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+else:
+    # Sending Email to user
+    EMAIL_HOST = os.environ.get("EMAIL_HOST")
+    EMAIL_PORT = int(os.environ.get("EMAIL_PORT"))
+    EMAIL_USE_TLS = os.environ.get("EMAIL_USE_TLS")
+    EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER")
+    EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD")
+    EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+
+# Custom user model
+AUTH_USER_MODEL = "authapp.BaseOpenSailUser"

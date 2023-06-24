@@ -24,6 +24,8 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("main/", include("MainPageApp.urls", namespace="main")),
     path("", RedirectView.as_view(url="main/")),
+    path("auth/", include("authapp.urls", namespace="authapp")),
+    path("__debug__/", include("debug_toolbar.urls")),
 ]
 
 if settings.DEBUG:

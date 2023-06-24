@@ -1,7 +1,7 @@
 {% autoescape off %}
 
-Добрый день!
-{{ user.get_current_name }}, пожалуйста перейдите по ссылке чтобы закончить регистрацию
+Hello!
+{{ user.get_current_name }}, please follow the link to complete the registration
 {{ protocol }}://{{ domain }}{% url 'authapp:verify_email' uidb64=uid token=token %}
 
 {% endautoescape %}

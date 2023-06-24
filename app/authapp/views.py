@@ -1,12 +1,14 @@
 from authapp import forms as authapp_forms
 from django.contrib.auth import get_user_model, login, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth.tokens import \
-    default_token_generator as token_generator
-from django.contrib.auth.views import (LoginView, PasswordResetCompleteView,
-                                       PasswordResetConfirmView,
-                                       PasswordResetDoneView,
-                                       PasswordResetView)
+from django.contrib.auth.tokens import default_token_generator as token_generator
+from django.contrib.auth.views import (
+    LoginView,
+    PasswordResetCompleteView,
+    PasswordResetConfirmView,
+    PasswordResetDoneView,
+    PasswordResetView,
+)
 from django.core.exceptions import ValidationError
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
@@ -75,6 +77,7 @@ class ShowConfirmationEmail(TemplateView):
 
 
 class VerifyEmail(View):
+
     def get(self, request, uidb64, token):
         user = self.get_user(uidb64)
 

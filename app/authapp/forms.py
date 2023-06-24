@@ -1,7 +1,6 @@
 from django import forms
 from django.contrib.auth import authenticate, get_user_model
-from django.contrib.auth.forms import (AuthenticationForm, UserChangeForm,
-                                       UserCreationForm)
+from django.contrib.auth.forms import AuthenticationForm, UserChangeForm, UserCreationForm
 from django.core.exceptions import ValidationError
 
 from .utils import SendEmailForVerify
@@ -10,6 +9,7 @@ User = get_user_model()
 
 
 class CustomUserCreationForm(UserCreationForm):
+
     class Meta:
         model = User
         fields = ("email", "username", "password1", "password2")
@@ -33,6 +33,7 @@ class CustomUserChangeForm(UserChangeForm):
 
 
 class CustomUserLoginForm(AuthenticationForm, SendEmailForVerify):
+
     class Meta:
         model = User
 

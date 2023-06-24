@@ -1,9 +1,7 @@
+from authapp import forms as authapp_forms
 from django.contrib import admin
 from django.contrib.auth import get_user_model
 from django.contrib.auth.admin import UserAdmin
-
-
-from authapp import forms as authapp_forms
 
 User = get_user_model()
 
@@ -19,7 +17,9 @@ class CustomUserAdmin(UserAdmin):
         *UserAdmin.add_fieldsets,
         (
             "Дополнительные обязательные поля",
-            {"fields": ("email",)},
+            {
+                "fields": ("email",)
+            },
         ),
     )
 

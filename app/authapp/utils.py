@@ -1,5 +1,4 @@
-from django.contrib.auth.tokens import \
-    default_token_generator as token_generator
+from django.contrib.auth.tokens import default_token_generator as token_generator
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.mail import EmailMessage
 from django.template.loader import render_to_string
@@ -8,6 +7,7 @@ from django.utils.http import urlsafe_base64_encode
 
 
 class SendEmailForVerify:
+
     def send_email_for_verify(self, user):
         current_site = get_current_site(self.request)
         context = {

@@ -28,7 +28,7 @@ class CustomUserCreationForm(UserCreationForm):
     def clean_username(self):
         username = self.cleaned_data["username"]
         if len(username) < 4:
-            raise ValidationError("The minimum name length is 4 characters!")
+            raise ValidationError("Длина имени минимум 4 символа!")
 
         return username
 

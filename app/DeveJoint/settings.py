@@ -48,6 +48,8 @@ INSTALLED_APPS = [
     # "crispy_bootstrap5",
     # for test with bootstrap end
     ################
+    # "crispy_forms",
+    # "crispy_bootstrap5",
 ]
 
 MIDDLEWARE = [

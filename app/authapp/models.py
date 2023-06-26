@@ -12,8 +12,8 @@ class BaseOpenSailUser(AbstractUser):
     REQUIRED_FIELDS = ["username"]
 
     class Meta:
-        verbose_name = "User"
-        verbose_name_plural = "Users"
+        verbose_name = "Пользователь"
+        verbose_name_plural = "Пользователи"
         ordering = ["username"]
 
     def get_current_name(self):

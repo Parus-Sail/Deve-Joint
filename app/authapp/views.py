@@ -40,14 +40,14 @@ class LoginUser(LoginView):
     template_name = "authapp/registration/login.html"
 
     def get_success_url(self):
-        return reverse_lazy("mainapp:index")
+        return reverse_lazy("main:index")
 
 
 class UserUpdateView(LoginRequiredMixin, UpdateView):
     model = User
     form_class = authapp_forms.CustomUserChangeForm
     template_name = "authapp/registration/profile.html"
-    success_url = reverse_lazy("mainapp:index")
+    success_url = reverse_lazy("main:index")
 
     def get_object(self):
         return self.request.user
@@ -86,7 +86,7 @@ class VerifyEmail(View):
             user.email_verify = True
             user.save()
             login(request, user)
-            return redirect("mainapp:index")
+            return redirect("main:index")
         else:
             return redirect("authapp:failed_verify_email")
 

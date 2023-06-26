@@ -1,9 +1,11 @@
 from django.contrib.auth.tokens import default_token_generator as token_generator
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.mail import EmailMessage
+from django.forms.utils import ErrorList
 from django.template.loader import render_to_string
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode
+from django.utils.safestring import mark_safe
 
 
 class SendEmailForVerify:
@@ -29,3 +31,21 @@ class SendEmailForVerify:
             ],
         )
         email.send()
+
+
+class DivErrorList(ErrorList):
+    """
+    Класс для кастомного css ошибок в формах
+    """
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+    def __str__(self):
+        return self.as_divs()
+
+    def as_divs(self):
+        if not self:
+            return ""
+        return mark_safe('<div class="text-danger">%s</div>' %
+                         "".join(['<div class="error">%s</div>' % e for e in self]))

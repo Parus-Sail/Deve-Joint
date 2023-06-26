@@ -1,14 +1,25 @@
 from django import forms
 from django.contrib.auth import authenticate, get_user_model
-from django.contrib.auth.forms import AuthenticationForm, UserChangeForm, UserCreationForm
+from django.contrib.auth.forms import AuthenticationForm, SetPasswordForm, UserChangeForm, UserCreationForm
 from django.core.exceptions import ValidationError
 
-from .utils import SendEmailForVerify
+from .utils import DivErrorList, SendEmailForVerify
 
 User = get_user_model()
 
 
 class CustomUserCreationForm(UserCreationForm):
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        fields = ("email", "username", "password1", "password2")
+        for field in fields:
+            # кастомный css для полей
+            self.fields[field].widget.attrs.update({"class": "form-control"})
+            # убираем стандартную помощь от Django
+            self.fields[field].help_text = None
+        # кастомный css для ошибок
+        self.error_class = DivErrorList
 
     class Meta:
         model = User
@@ -17,7 +28,7 @@ class CustomUserCreationForm(UserCreationForm):
     def clean_username(self):
         username = self.cleaned_data["username"]
         if len(username) < 4:
-            raise ValidationError("Длина имени минимуму 4 символа!")
+            raise ValidationError("The minimum name length is 4 characters!")
 
         return username
 
@@ -26,6 +37,15 @@ class CustomUserChangeForm(UserChangeForm):
     password = None
     email = forms.CharField(disabled=True)
     username = forms.CharField(disabled=True)
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        fields = ("first_name", "last_name", "email", "username")
+        for field in fields:
+            # кастомный css для полей
+            self.fields[field].widget.attrs.update({"class": "form-control"})
+        # кастомный css для ошибок
+        self.error_class = DivErrorList
 
     class Meta:
         model = User
@@ -47,7 +67,7 @@ class CustomUserLoginForm(AuthenticationForm, SendEmailForVerify):
             if self.user_cache is not None and not self.user_cache.email_verify:
                 self.send_email_for_verify(user=self.user_cache)
                 raise ValidationError(
-                    "Email не подтвержден, проверьте свой почтовый ящик",
+                    "Email not verified, please verify your email.",
                     code="invalid_login",
                 )
 
@@ -57,3 +77,17 @@ class CustomUserLoginForm(AuthenticationForm, SendEmailForVerify):
                 self.confirm_login_allowed(self.user_cache)
 
         return self.cleaned_data
+
+
+class CustomUserPasswordConfirmForm(SetPasswordForm):
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        fields = ("new_password1", "new_password2")
+        for field in fields:
+            # кастомный css для полей
+            self.fields[field].widget.attrs.update({"class": "form-control"})
+            # убираем стандартную помощь от Django
+            self.fields[field].help_text = None
+        # кастомный css для ошибок
+        self.error_class = DivErrorList

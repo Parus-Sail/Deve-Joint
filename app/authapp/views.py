@@ -64,6 +64,7 @@ class UserPasswordResetDone(PasswordResetDoneView):
 
 
 class UserPasswordResetConfirm(PasswordResetConfirmView):
+    form_class = authapp_forms.CustomUserPasswordConfirmForm
     template_name = "authapp/registration/password_reset_confirm.html"
     success_url = reverse_lazy("authapp:password_reset_complete")
 

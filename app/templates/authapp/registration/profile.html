@@ -1,20 +1,24 @@
 {% extends 'base.html' %}
-{% load crispy_forms_tags %}
 
 {% block title %}
-Profile
+    Profile
 {% endblock title %}
 
 {% block content %}
-<h5>Profile</h5>
-<div class="container">
-  <div class="row-cols-1 row-cols-md-2 row-cols-lg-2">
-    <form method="post">
-      {% csrf_token %} {{ form|crispy }}
-      <button type="submit" class="btn btn-primary">
-        Submit
-      </button>
-    </form>
-  </div>
-</div>
+    <div class="container">
+        <div class="col-lg-8 col-12 mx-auto">
+            <form class="custom-form contact-form" method="post">
+                {% csrf_token %}
+                <h2 class="text-center mb-4 logo-text">Profile</h2>
+                <div class="row justify-content-center">
+                    <div class="col-lg-6 col-md-6 col-12">
+                        {% csrf_token %}
+                        {{ form }}
+                        <button type="submit" class="form-control">Submit</button>
+                        <br>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
 {% endblock %}

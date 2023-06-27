@@ -16,7 +16,7 @@ POSTGRES_DB="deve_joint"
 POSTGRES_USER="postgres"
 POSTGRES_PASSWORD="passw0rd"
 POSTGRES_HOST="devejoint-db"
-PGPORT=16432
+PG_EXT_PORT=16432
 
 # email setup
 EMAIL_HOST=smtp.gmail.com

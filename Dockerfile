@@ -10,7 +10,7 @@ ENV BUILD = production \
     POETRY_HOME="/opt/poetry" \
     POETRY_VIRTUALENVS_IN_PROJECT=true \
     POETRY_NO_INTERACTION=1 \
-    PYSETUP_PATH="/opt/pysetup"\
+    PYSETUP_PATH="/opt/pysetup" \
     VENV_PATH="/opt/pysetup/.venv"
 
 ENV PATH="$POETRY_HOME/bin:$VENV_PATH/bin:$PATH"

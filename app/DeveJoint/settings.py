@@ -83,7 +83,7 @@ DATABASES = {
         "USER": os.getenv("POSTGRES_USER") or 'postgres',
         "PASSWORD": os.getenv("POSTGRES_PASSWORD") or 'passw0rd',
         "HOST": os.getenv("POSTGRES_HOST") or 'localhost',
-        "PORT": os.getenv("EXT_PG_PORT") or '16432',
+        "PORT": os.getenv("EXT_PG_PORT") or '5432',
     },
     # "default": {
     #     "ENGINE": "django.db.backends.sqlite3",
@@ -123,15 +123,17 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = "static/"
-MEDIA_URL = "media/"
+STATIC_URL = "/static/"
+MEDIA_URL = "/media/"
 
 STATICFILES_FINDERS = (
     "django.contrib.staticfiles.finders.FileSystemFinder",
     "django.contrib.staticfiles.finders.AppDirectoriesFinder",
 )
 
-STATICFILES_DIRS = (BASE_DIR / 'static',)
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+    ]
 
 STATIC_ROOT = BASE_DIR / "static_root"  # пока не используется
 MEDIA_ROOT = BASE_DIR / "media"

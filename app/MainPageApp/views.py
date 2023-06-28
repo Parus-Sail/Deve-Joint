@@ -59,4 +59,6 @@ class NewsUpdateView(PermissionRequiredMixin, UpdateView):
 class NewsDeleteView(PermissionRequiredMixin, DeleteView):
     model = models.News
     success_url = reverse_lazy("MainPageApp:news")
-    permission_required = ("MainPageApp.delete_news",)
+    # Пока не появятся полноценные пользователи
+    permission_required = ()
+    # permission_required = ("MainPageApp.delete_news",)

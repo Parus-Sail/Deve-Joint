@@ -6,6 +6,13 @@ DEBUG=True
 SECRET_KEY="django-insecure--9y3n9l!#_)-eubj@8-3&vie@p-#(c-hesl2vjwf3=(yuxl9#6"
 DJANGO_ALLOWED_HOSTS=*
 
+# ====== email setup ======
+EMAIL_HOST=smtp.gmail.com
+EMAIL_PORT=587
+EMAIL_USE_TLS=True
+EMAIL_HOST_USER=devejointcompany@gmail.com
+EMAIL_HOST_PASSWORD=put_password_here
+
 # ====== Docker-Compose ======
 
 PROJECT_NAME="devejoint"
@@ -17,11 +24,3 @@ POSTGRES_USER="postgres"
 POSTGRES_PASSWORD="passw0rd"
 POSTGRES_HOST="devejoint-db"
 PG_EXT_PORT=16432
-
-# email setup
-EMAIL_HOST=smtp.gmail.com
-EMAIL_PORT=587
-EMAIL_USE_TLS=True
-EMAIL_HOST_USER=devejointcompany@gmail.com
-EMAIL_HOST_PASSWORD=put_password_here
-

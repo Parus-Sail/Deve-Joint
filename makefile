@@ -23,7 +23,7 @@ go_db: down
 	./app/manage.py shell < ./dev_tools/create_superuser.py
 	# ✨✨ superuser is created ✨✨ 
 	# 👤 login: admin@mail.ru 
-	# 🔒 password: admin
+	# 🔒 password: pass
 
 	
 

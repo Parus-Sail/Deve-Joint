@@ -1,5 +1,4 @@
 #!/bin/bash
-# ./.git/hooks/pre-commit
 
 is_venv_activated() {
     [[ "$VIRTUAL_ENV" != "" ]]
@@ -7,9 +6,9 @@ is_venv_activated() {
 
 # Call the function to check if the virtual environment is activated
 if is_venv_activated; then
-    echo "🚨 Virtual environment is activated."
+    echo "✅ Virtual environment is activated: $VIRTUAL_ENV"
 else
-    echo "✅ Virtual environment is not activated."
+    echo "🚨 Virtual environment is not activated."
     exit 1
 fi
 

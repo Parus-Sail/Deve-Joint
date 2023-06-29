@@ -14,7 +14,7 @@ down:
 	docker-compose --file ./docker-compose.dev.yml down --remove-orphans
 
 go_db: down
-	docker-compose --file ./docker-compose.dev.yml up db -d;
+	docker-compose --file ./docker-compose.dev.yml up db;
 	docker exec -it devejoint-db psql -U postgres -d postgres -c "DROP DATABASE deve_joint;"
 	docker exec -it devejoint-db psql -U postgres -d postgres -c "CREATE DATABASE deve_joint;"
 	chmod +x ./dev_tools/delete_migrations_files.sh & ./dev_tools/delete_migrations_files.sh

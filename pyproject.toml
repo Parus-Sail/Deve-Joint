@@ -10,8 +10,8 @@ authors = [
     "LaseStar",
     "segonaz",
     "Sergiusz2try",
-    "Zhdanov-Vyacheslav"
-    ]
+    "Zhdanov-Vyacheslav",
+]
 readme = "README.md"
 repository = "https://github.com/Parus-Sail/Deve-Joint"
 
@@ -26,6 +26,7 @@ crispy-bootstrap5 = "^0.7"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^7.3.2"
+pytest-django = "^4.5.2"
 yapf = "^0.40.1"
 isort = "^5.12.0"
 autoflake = "^2.1.1"
@@ -54,3 +55,12 @@ indent_width = 4
 
 [tool.yapfignore]
 ignore_patterns = [".venv/*"]
+
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "DeveJoint.settings_test"
+addopts = "-v --tb=short"
+
+[tool.pytest]
+testpaths = "tests"
+python_files = ["test_*.py", "*_test.py"]

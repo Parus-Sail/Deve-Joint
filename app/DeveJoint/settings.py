@@ -44,8 +44,8 @@ INSTALLED_APPS = [
     "authapp.apps.AuthappConfig",
     ################
     # for test with bootstrap start
-    # "crispy_forms",
-    # "crispy_bootstrap5",
+    "crispy_forms",
+    "crispy_bootstrap5",
     # for test with bootstrap end
     ################
 ]
@@ -150,8 +150,8 @@ MEDIA_ROOT = BASE_DIR / "media"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # Boostrap for test
-# CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
-# CRISPY_TEMPLATE_PACK = "bootstrap5"
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 # Sending Email
 if DEBUG:

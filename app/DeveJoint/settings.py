@@ -39,15 +39,10 @@ INSTALLED_APPS = [
     ################
     "debug_toolbar",
     ################
-    "MainPageApp",
-    ################
-    "authapp.apps.AuthappConfig",
-    ################
-    # for test with bootstrap start
-    # "crispy_forms",
-    # "crispy_bootstrap5",
-    # for test with bootstrap end
-    ################
+    "mainapp",
+    "authapp",
+    "projectapp",
+    "vacancyapp",
 ]
 
 MIDDLEWARE = [
@@ -60,6 +55,8 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "debug_toolbar.middleware.DebugToolbarMiddleware",
 ]
+
+AUTH_USER_MODEL = 'authapp.BaseOpenSailUser'
 
 ROOT_URLCONF = "DeveJoint.urls"
 
@@ -85,18 +82,18 @@ WSGI_APPLICATION = "DeveJoint.wsgi.application"
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": os.getenv("POSTGRES_DB") or "deve_joint",
-        "USER": os.getenv("POSTGRES_USER") or "postgres",
-        "PASSWORD": os.getenv("POSTGRES_PASSWORD") or "passw0rd",
-        "HOST": os.getenv("POSTGRES_HOST") or "localhost",
-        "PORT": os.getenv("PG_PORT") or "16432",
-    },
     # "default": {
-    #     "ENGINE": "django.db.backends.sqlite3",
-    #     "NAME": "test_db.sqlite3",
+    #     "ENGINE": "django.db.backends.postgresql",
+    #     "NAME": os.getenv("POSTGRES_DB"),
+    #     "USER": os.getenv("POSTGRES_USER"),
+    #     "PASSWORD": os.getenv("POSTGRES_PASSWORD"),
+    #     "HOST": os.getenv("POSTGRES_HOST"),
+    #     "PORT": os.getenv("PG_PORT"),
     # },
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": "test_db.sqlite3",
+    },
 }
 
 # Password validation
@@ -104,16 +101,16 @@ DATABASES = {
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"
+        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
     },
     {
         "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
     },
     {
-        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator"
+        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
     },
     {
-        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"
+        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
     },
 ]
 
@@ -148,23 +145,3 @@ MEDIA_ROOT = BASE_DIR / "media"
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
-
-# Boostrap for test
-# CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
-# CRISPY_TEMPLATE_PACK = "bootstrap5"
-
-# Sending Email
-if DEBUG:
-    # Sending Email to console
-    EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
-else:
-    # Sending Email to user
-    EMAIL_HOST = os.environ.get("EMAIL_HOST")
-    EMAIL_PORT = int(os.environ.get("EMAIL_PORT"))
-    EMAIL_USE_TLS = os.environ.get("EMAIL_USE_TLS")
-    EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER")
-    EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD")
-    EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-
-# Custom user model
-AUTH_USER_MODEL = "authapp.BaseOpenSailUser"

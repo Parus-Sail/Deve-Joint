@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class MainpageappConfig(AppConfig):
+class VacancyappConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'MainPageApp'
+    name = 'vacancyapp'

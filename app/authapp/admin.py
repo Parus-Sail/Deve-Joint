@@ -24,4 +24,5 @@ class CustomUserAdmin(UserAdmin):
     )
 
 
+# admin.site.unregister(User)
 admin.site.register(User, CustomUserAdmin)

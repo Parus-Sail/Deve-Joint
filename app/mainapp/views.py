@@ -4,20 +4,20 @@ from django.views.generic import TemplateView
 
 
 class MainPageView(TemplateView):
-    template_name: str = "MainPageApp/index.html"
+    template_name: str = "mainapp/index.html"
 
 
 class ContactsPageView(TemplateView):
-    template_name: str = "MainPageApp/contacts.html"
+    template_name: str = "mainapp/contacts.html"
 
 
 class AboutPageView(TemplateView):
-    template_name: str = "MainPageApp/about.html"
+    template_name: str = "mainapp/about.html"
 
 
 class JobsListingView(TemplateView):
-    template_name: str = "MainPageApp/job_listing.html"
+    template_name: str = "mainapp/job_listing.html"
 
 
 class JobsDetailView(TemplateView):
-    template_name: str = "MainPageApp/job_details.html"
+    template_name: str = "mainapp/job_details.html"

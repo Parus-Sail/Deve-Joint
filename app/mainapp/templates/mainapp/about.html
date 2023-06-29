@@ -12,11 +12,11 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-12 col-12 text-center">
-          <h1 class="text-white">Job Listings</h1>
+          <h1 class="text-white">About Deve-Joint</h1>
           <nav aria-label="breadcrumb">
             <ol class="breadcrumb justify-content-center">
               <li class="breadcrumb-item"><a href="{% url 'main:index' %}">Home</a></li>
-              <li class="breadcrumb-item active" aria-current="page">Job Details</li>
+              <li class="breadcrumb-item active" aria-current="page">About</li>
             </ol>
           </nav>
         </div>
@@ -24,7 +24,8 @@
     </div>
   </header>
 
-  {% include 'MainPageApp/includes/job_details/job_details_section.html' %}
-  {% include 'MainPageApp/includes/job_details/similar_jobs_section.html' %}
+  {% include 'mainapp/includes/about/about_section.html' %}
+  {% include 'mainapp/includes/common/reviews_section.html' %}
+  {% include 'mainapp/includes/common/cta-section.html' %}
 
 {% endblock content %}

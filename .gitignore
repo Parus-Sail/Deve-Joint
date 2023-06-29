@@ -1,8 +1,13 @@
-/db/*
-/**/migrations/
+# django project
+**/static_root/
+
+#  migrations folder
+/**/migrations/*
+!/**/migrations/__init__.py
 
 .idea/
 *.sqlite3
+/db/*
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

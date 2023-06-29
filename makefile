@@ -20,6 +20,7 @@ go_db: down
 	chmod +x ./dev_tools/delete_migrations_files.sh & ./dev_tools/delete_migrations_files.sh
 	./app/manage.py makemigrations	
 	./app/manage.py migrate
+	./app/manage.py migrate --run-syncdb
 	./app/manage.py shell < ./dev_tools/create_superuser.py
 	# ✨✨ superuser is created ✨✨ 
 	# 👤 login: admin@mail.ru 
@@ -27,9 +28,12 @@ go_db: down
 
 	
 
-go_local: go_db
+go_local: down go_db
 	python app/manage.py runserver localhost:8000
 	
+
+local:
+	python app/manage.py runserver localhost:8000
 
 build:
 	docker-compose --file ./docker-compose.dev.yml build 
@@ -39,6 +43,12 @@ up:
 	docker-compose --file ./docker-compose.dev.yml up
 
 
+test:
+	chmod +x ./dev_tools/delete_migrations_files.sh & ./dev_tools/delete_migrations_files.sh
+	./app/manage.py makemigrations	
+	./app/manage.py migrate
+	./app/manage.py migrate --run-syncdb	
+	pytest
 
 
 ff:

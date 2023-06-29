@@ -1,3 +1,4 @@
+from auth_app import forms as auth_app_forms
 from django.contrib import admin
 from django.contrib.auth import get_user_model
 from django.contrib.auth.admin import UserAdmin

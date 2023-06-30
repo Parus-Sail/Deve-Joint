@@ -91,7 +91,7 @@ DATABASES = {
         "USER": os.getenv("POSTGRES_USER") or "postgres",
         "PASSWORD": os.getenv("POSTGRES_PASSWORD") or "passw0rd",
         "HOST": os.getenv("POSTGRES_HOST") or "localhost",
-        "PORT": os.getenv("PG_PORT") or "5432   ",
+        "PORT": os.getenv("PG_PORT") or "16432",
     },
     # "default": {
     #     "ENGINE": "django.db.backends.sqlite3",

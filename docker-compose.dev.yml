@@ -33,6 +33,6 @@ services:
     volumes:
       - pgdata:/data/postgres
     ports:
-      - "${PG_EXT_PORT}:5432"
+      - "${PG_EXT_PORT}:16432"
     networks:
       - default

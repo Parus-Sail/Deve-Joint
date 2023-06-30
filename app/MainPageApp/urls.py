@@ -2,7 +2,8 @@ from django.urls import path
 from django.views.generic import RedirectView
 
 from .apps import MainpageappConfig
-from .views import *
+from .views import MainPageView, AboutPageView, ContactsPageView, JobsDetailView, JobsListingView,\
+                    NewsCreateView, NewsDeleteView, NewsDetailView, NewsListView, NewsUpdateView
 
 app_name = MainpageappConfig.name
 

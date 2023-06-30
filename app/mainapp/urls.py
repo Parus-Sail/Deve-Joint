@@ -1,10 +1,10 @@
 from django.urls import path
 from django.views.generic import RedirectView
 
-from .apps import MainpageappConfig
+from .apps import MainAppConfig
 from .views import AboutPageView, ContactsPageView, JobsDetailView, JobsListingView, MainPageView
 
-app_name = MainpageappConfig.name
+app_name = MainAppConfig.name
 
 urlpatterns = [
     path("", RedirectView.as_view(url="index")),

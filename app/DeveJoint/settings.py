@@ -90,11 +90,11 @@ WSGI_APPLICATION = "DeveJoint.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": os.getenv("POSTGRES_DB"),
-        "USER": os.getenv("POSTGRES_USER"),
-        "PASSWORD": os.getenv("POSTGRES_PASSWORD"),
-        "HOST": os.getenv("POSTGRES_HOST"),
-        "PORT": os.getenv("PG_PORT"),
+        "NAME": os.getenv("POSTGRES_DB") or "deve_joint",
+        "USER": os.getenv("POSTGRES_USER") or "postgres",
+        "PASSWORD": os.getenv("POSTGRES_PASSWORD") or "passw0rd",
+        "HOST": os.getenv("POSTGRES_HOST") or "localhost",
+        "PORT": os.getenv("PG_PORT") or "16432",
     },
     # "default": {
     #     "ENGINE": "django.db.backends.sqlite3",

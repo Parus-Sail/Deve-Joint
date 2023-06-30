@@ -21,10 +21,11 @@ from django.urls import include, path
 from django.views.generic import RedirectView
 
 urlpatterns = [
-    path("admin/", admin.site.urls),
-    path("main/", include("MainPageApp.urls", namespace="main")),
     path("", RedirectView.as_view(url="main/")),
+    path("main/", include("MainPageApp.urls", namespace="main")),
+    path("admin/", admin.site.urls),
     path("auth/", include("authapp.urls", namespace="authapp")),
+    path('projects/', include('projectapp.urls', namespace='projectapp')),
 ]
 
 if settings.DEBUG:

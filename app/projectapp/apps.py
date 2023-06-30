@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class RolesAppConfig(AppConfig):
+class ProjectsAppConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'roles_app'
+    name = 'projectapp'

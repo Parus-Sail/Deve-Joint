@@ -1,6 +1,6 @@
 from django.db import transaction
-from projects_app.models import Membership, Project
-from roles_app.models import Role
+from projectapp.models import Membership, Project
+from roleapp.models import Role
 
 from .models import Membership, Project
 

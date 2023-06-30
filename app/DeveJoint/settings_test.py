@@ -40,8 +40,8 @@ INSTALLED_APPS = [
     "debug_toolbar",
     ################
     "MainPageApp",
-    "projects_app",
-    "roles_app",
+    "projectapp",
+    "roleapp",
     ################
     "authapp.apps.AuthappConfig",
     ################

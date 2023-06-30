@@ -42,7 +42,7 @@ class Membership(models.Model):
                                 related_name="memberships",
                                 on_delete=models.CASCADE)
 
-    role = models.ForeignKey("roles_app.Role",
+    role = models.ForeignKey("roleapp.Role",
                              null=False,
                              blank=False,
                              related_name="memberships",

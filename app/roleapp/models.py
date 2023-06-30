@@ -5,7 +5,7 @@ from django.utils.translation import gettext_lazy as _
 class Role(models.Model):
     name = models.CharField(max_length=255)
     project = models.ForeignKey(
-        "projects_app.Project",
+        "projectapp.Project",
         null=True,
         blank=False,
         related_name="roles",

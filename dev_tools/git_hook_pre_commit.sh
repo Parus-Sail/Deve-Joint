@@ -24,6 +24,3 @@ yapf --in-place --recursive .
 
 # ➕ Readd all changed files
 git add .
-
-# execute test before commit
-make test

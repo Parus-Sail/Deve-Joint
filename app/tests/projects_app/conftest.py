@@ -1,8 +1,8 @@
 # #todo why not working: from django.contrib.auth import get_user_model
-from authapp.models import BaseOpenSailUser as User
-from projectapp.models import Project
+from auth_app.models import BaseOpenSailUser as User
+from project_app.models import Project
 import pytest
-from roleapp.models import Role
+from role_app.models import Role
 
 
 @pytest.fixture

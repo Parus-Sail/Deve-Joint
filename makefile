@@ -24,10 +24,10 @@ go_db: down
 	# 👤 login: admin@mail.ru 
 	# 🔒 password: pass
 	# 📦 add fake datas:
-	./app/manage.py loaddata ./dev_tools/fixtures/authapp_user.yaml
-	./app/manage.py loaddata ./dev_tools/fixtures/projectapp_project.yaml
-	./app/manage.py loaddata ./dev_tools/fixtures/roleapp_role.yaml
-	./app/manage.py loaddata ./dev_tools/fixtures/projectapp_membership.yaml
+	./app/manage.py loaddata ./dev_tools/fixtures/auth_app_user.yaml
+	./app/manage.py loaddata ./dev_tools/fixtures/project_app_project.yaml
+	./app/manage.py loaddata ./dev_tools/fixtures/role_app_role.yaml
+	./app/manage.py loaddata ./dev_tools/fixtures/project_app_membership.yaml
 
 go_docker: down build up
 

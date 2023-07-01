@@ -58,7 +58,7 @@ ignore_patterns = [".venv/*"]
 
 
 [tool.pytest.ini_options]
-DJANGO_SETTINGS_MODULE = "DeveJoint.settings_test"
+DJANGO_SETTINGS_MODULE = "config.settings_test"
 addopts = "-v --tb=short"
 
 [tool.pytest]

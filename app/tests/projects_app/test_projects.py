@@ -1,5 +1,5 @@
-from projectapp.models import Membership, Project
-from projectapp.service import create_project, delete_project, exclude_member, include_member, update_project
+from project_app.models import Membership, Project
+from project_app.service import create_project, delete_project, exclude_member, include_member, update_project
 import pytest
 
 

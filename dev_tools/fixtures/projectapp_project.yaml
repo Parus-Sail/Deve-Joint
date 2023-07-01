@@ -1,11 +1,11 @@
-- model: projectapp.project
+- model: project_app.project
   pk: 1
   fields:
     title: Project 1
     description: Description 1
     owner: 1
 
-- model: projectapp.project
+- model: project_app.project
   pk: 2
   fields:
     title: Project 2

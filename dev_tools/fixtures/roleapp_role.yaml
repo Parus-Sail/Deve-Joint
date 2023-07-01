@@ -1,0 +1,17 @@
+- model: roleapp.role
+  pk: 1
+  fields:
+    name: Role 1
+    project: 1
+
+- model: roleapp.role
+  pk: 2
+  fields:
+    name: Role 2
+    project: 1
+
+- model: roleapp.role
+  pk: 3
+  fields:
+    name: Role 3
+    project: 2

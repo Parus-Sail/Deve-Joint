@@ -1,0 +1,20 @@
+- model: projectapp.membership
+  pk: 2
+  fields:
+    user: 2
+    project: 1
+    role: 1
+
+- model: projectapp.membership
+  pk: 3
+  fields:
+    user: 2
+    project: 2
+    role: 1
+
+- model: projectapp.membership
+  pk: 3
+  fields:
+    user: 3
+    project: 1
+    role: 2

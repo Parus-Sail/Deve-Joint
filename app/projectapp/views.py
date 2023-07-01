@@ -44,7 +44,7 @@ class ProjectCreateView(LoginRequiredMixin, generic.CreateView):
 # STUB
 class ProjectUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = models.Project
-    template_name = 'projectapp/update_project.html'
+    template_name = 'projectapp/project_update.html'
     context_object_name = 'project'
     fields = 'title', 'description'
 
@@ -59,7 +59,7 @@ class ProjectUpdateView(LoginRequiredMixin, generic.UpdateView):
 # STUB
 class ProjectDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = models.Project
-    template_name = 'projectapp/delete_project.html'
+    template_name = 'projectapp/project_delete.html'
     success_url = reverse_lazy('list_projects')
 
     def delete(self, request, *args, **kwargs):

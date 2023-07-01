@@ -1,12 +1,17 @@
 from django.db import transaction
+from django.db.models import QuerySet
 from projectapp.models import Membership, Project
 from roleapp.models import Role
 
 from .models import Membership, Project
 
 
+def project_list() -> QuerySet:
+    return Project.objects.all()
+
+
 @transaction.atomic
-def create_project(title: str, description: str, owner):
+def create_project(title: str, description: str, owner) -> Project:
 
     project = Project.objects.create(
         title=title,
@@ -26,12 +31,13 @@ def create_project(title: str, description: str, owner):
 
 
 @transaction.atomic
-def delete_project(project):
-    project.delete()
+def delete_project(project_pk: int):
+    Project.objects.get(project_pk=project_pk).delete()
 
 
 @transaction.atomic
-def update_project(project, **kwargs):
+def update_project(project_pk: int, **kwargs):
+    project = Project.objects.get(project_pk=project_pk)
     for key, value in kwargs.items():
         setattr(project, key, value)
     project.save()

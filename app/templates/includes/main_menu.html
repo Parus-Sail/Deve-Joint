@@ -31,8 +31,8 @@
           <a class="nav-link dropdown-toggle" href="{% url 'main:index' %}" id="navbarLightDropdownMenuLink"
               role="button" data-bs-toggle="dropdown" aria-expanded="false">Pages</a>
           <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="navbarLightDropdownMenuLink">
-            <li><a class="dropdown-item" href="{% url 'main:job-listing' %}">Job Listings</a></li>
-            <li><a class="dropdown-item" href="{% url 'main:job-details' %}">Job Details</a></li>
+            <li><a class="dropdown-item" href="{% url 'vacancy:job-listing' %}">Job Listings</a></li>
+            <li><a class="dropdown-item" href="{% url 'vacancy:job-details' %}">Job Details</a></li>
           </ul>
         </li>
 
@@ -46,21 +46,21 @@
                   <a class="nav-link dropdown-toggle" href="{% url 'main:index' %}" id="navbarLightDropdownMenuLink"
                      role="button" data-bs-toggle="dropdown" aria-expanded="false">User Menu</a>
                   <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="navbarLightDropdownMenuLink">
-                      <li><a class="dropdown-item" href="{% url 'authapp:profile' %}">Profile</a></li>
-                      <li><a class="dropdown-item" href="{% url 'authapp:logout' %}">Logout</a></li>
+                      <li><a class="dropdown-item" href="{% url 'auth_app:profile' %}">Profile</a></li>
+                      <li><a class="dropdown-item" href="{% url 'auth_app:logout' %}">Logout</a></li>
                   </ul>
               </li>
                <li class="nav-item ms-lg-auto">
-                  <a class="nav-link custom-btn btn" href="{% url 'authapp:logout' %}">Logout</a>
+                  <a class="nav-link custom-btn btn" href="{% url 'auth_app:logout' %}">Logout</a>
               </li>
 
           {% else %}
               <li class="nav-item ms-lg-auto">
-                  <a class="nav-link" href="{% url 'authapp:register' %}">Register</a>
+                  <a class="nav-link" href="{% url 'auth_app:register' %}">Register</a>
               </li>
 
               <li class="nav-item">
-                  <a class="nav-link custom-btn btn" href="{% url 'authapp:login' %}">Login</a>
+                  <a class="nav-link custom-btn btn" href="{% url 'auth_app:login' %}">Login</a>
               </li>
 
           {% endif %}

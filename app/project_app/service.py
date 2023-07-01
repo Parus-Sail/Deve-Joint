@@ -32,12 +32,12 @@ def create_project(title: str, description: str, owner) -> Project:
 
 @transaction.atomic
 def delete_project(project_pk: int):
-    Project.objects.get(project_pk=project_pk).delete()
+    Project.objects.get(id=project_pk).delete()
 
 
 @transaction.atomic
 def update_project(project_pk: int, **kwargs):
-    project = Project.objects.get(project_pk=project_pk)
+    project = Project.objects.get(id=project_pk)
     for key, value in kwargs.items():
         setattr(project, key, value)
     project.save()

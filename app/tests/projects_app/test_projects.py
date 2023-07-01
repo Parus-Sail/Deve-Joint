@@ -14,13 +14,13 @@ def test_create_project(user):
 
 @pytest.mark.django_db
 def test_delete_project(project):
-    delete_project(project)
+    delete_project(project.id)
     assert not Project.objects.filter(pk=project.pk).exists()
 
 
 @pytest.mark.django_db
 def test_update_project(project):
-    update_project(project, title='Updated Title', description='Updated Description')
+    update_project(project.id, title='Updated Title', description='Updated Description')
     project.refresh_from_db()
     assert project.title == 'Updated Title'
     assert project.description == 'Updated Description'

@@ -40,7 +40,7 @@ test:
 	chmod +x ./dev_tools/delete_migrations_files.sh & ./dev_tools/delete_migrations_files.sh
 	./app/manage.py makemigrations	
 	./app/manage.py migrate
-	# ./app/manage.py migrate --run-syncdb	
+	./app/manage.py migrate --run-syncdb
 	pytest
 
 ff:

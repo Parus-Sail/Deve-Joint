@@ -39,11 +39,10 @@ INSTALLED_APPS = [
     ################
     "debug_toolbar",
     ################
+    "auth_app",
     "main_app",
     "project_app",
     "role_app",
-    ################
-    "auth_app.apps.auth_appConfig",
     ################
     # for test with bootstrap start
     # "crispy_forms",

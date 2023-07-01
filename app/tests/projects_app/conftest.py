@@ -25,7 +25,8 @@ def user_second():
 
 @pytest.fixture
 def project(user):
-    return Project.objects.create(title='Test Project', description='Test Description', owner=user)
+    project = Project.objects.create(title='Test Project', description='Test Description', owner=user)
+    return project
 
 
 @pytest.fixture

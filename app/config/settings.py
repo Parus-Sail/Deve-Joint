@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     ################
     "debug_toolbar",
     ################
-    "auth_app.apps.AuthAppConfig",
+    "auth_app",
     "role_app",
     ################
     "main_app",

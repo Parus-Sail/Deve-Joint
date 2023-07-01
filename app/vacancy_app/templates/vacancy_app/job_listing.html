@@ -16,7 +16,7 @@
           <nav aria-label="breadcrumb">
             <ol class="breadcrumb justify-content-center">
               <li class="breadcrumb-item"><a href="{% url 'main:index' %}">Home</a></li>
-              <li class="breadcrumb-item active" aria-current="page">Job Details</li>
+              <li class="breadcrumb-item active" aria-current="page">Job listings</li>
             </ol>
           </nav>
         </div>
@@ -24,7 +24,7 @@
     </div>
   </header>
 
-  {% include 'mainapp/includes/job_details/job_details_section.html' %}
-  {% include 'mainapp/includes/job_details/similar_jobs_section.html' %}
+  {% include 'vacancy_app/includes/job_listings/search_section.html' %}
+  {% include 'vacancy_app/includes/job_listings/job_list_section.html' %}
 
 {% endblock content %}

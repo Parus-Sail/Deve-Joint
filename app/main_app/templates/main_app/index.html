@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+  {% include 'main_app/includes/index/hero_section.html' %}
+  {% include 'main_app/includes/index/categories_section.html' %}
+  {% include 'main_app/includes/index/about_section.html' %}
+  {% include 'main_app/includes/index/job_featured_section.html' %}
+  {% include 'main_app/includes/index/banner_section.html' %}
+  {% include 'main_app/includes/index/recent_jobs_section.html' %}
+  {% include 'main_app/includes/common/reviews_section.html' %}
+  {% include 'main_app/includes/common/cta-section.html' %}
+{% endblock content %}

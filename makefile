@@ -2,16 +2,14 @@
 # 
 # Example:
 # > make go_local
+# > make go_docker
 
 
 # these will speed up builds, for docker-compose >= 1.25
 export COMPOSE_DOCKER_CLI_BUILD=1
 export DOCKER_BUILDKIT=1
 
-go: down build up
 
-down: 
-	docker-compose --file ./docker-compose.dev.yml down --remove-orphans
 
 go_db: down
 	docker-compose --file ./docker-compose.dev.yml up db -d;
@@ -26,22 +24,12 @@ go_db: down
 	# 👤 login: admin@mail.ru 
 	# 🔒 password: pass
 
-	
+go_docker: down build up
 
-go_local: down go_db
-	python app/manage.py runserver localhost:8000
-	
+go_local: down go_db local
 
 local:
 	python app/manage.py runserver localhost:8000
-
-build:
-	docker-compose --file ./docker-compose.dev.yml build 
-
-
-up:
-	docker-compose --file ./docker-compose.dev.yml up
-
 
 test:
 	chmod +x ./dev_tools/delete_migrations_files.sh & ./dev_tools/delete_migrations_files.sh
@@ -50,7 +38,19 @@ test:
 	# ./app/manage.py migrate --run-syncdb	
 	pytest
 
-
 ff:
 	yapf --in-place --recursive .
+
+# ============ Docker ============
+
+down: 
+	docker-compose --file ./docker-compose.dev.yml down --remove-orphans
+
+
+build:
+	docker-compose --file ./docker-compose.dev.yml build 
+
+
+up:
+	docker-compose --file ./docker-compose.dev.yml up
 

@@ -1,5 +1,5 @@
 """
-URL configuration for DeveJoint project.
+URL configuration for config project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/4.2/topics/http/urls/
@@ -24,7 +24,10 @@ urlpatterns = [
     path("", RedirectView.as_view(url="main/")),
     path("main/", include("main_app.urls", namespace="main")),
     path("admin/", admin.site.urls),
+    path("", RedirectView.as_view(url="main/")),
+    path("main/", include("main_app.urls", namespace="main")),
     path("auth/", include("auth_app.urls", namespace="auth_app")),
+    path("vacancy/", include("vacancy_app.urls", namespace="vacancy")),
     path('projects/', include('project_app.urls', namespace='project_app')),
 ]
 

@@ -1,8 +1,9 @@
-from auth_app import views
-from auth_app.apps import auth_appConfig
 from django.urls import path
 
-app_name = auth_appConfig.name
+from . import views
+from .apps import AuthAppConfig
+
+app_name = AuthAppConfig.name
 urlpatterns = [
     path("login/", views.LoginUser.as_view(), name="login"),
     path("logout/", views.logout_user, name="logout"),

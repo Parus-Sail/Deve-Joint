@@ -1,4 +1,3 @@
-from auth_app import forms as auth_app_forms
 from django.contrib.auth import get_user_model, login, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.tokens import default_token_generator as token_generator
@@ -16,13 +15,14 @@ from django.utils.http import urlsafe_base64_decode
 from django.views import View
 from django.views.generic import CreateView, TemplateView, UpdateView
 
+from . import forms as authapp_forms
 from .utils import SendEmailForVerify
 
 User = get_user_model()
 
 
 class RegisterUser(SendEmailForVerify, CreateView):
-    form_class = auth_app_forms.CustomUserCreationForm
+    form_class = authapp_forms.CustomUserCreationForm
     template_name = "auth_app/registration/registration.html"
     success_url = reverse_lazy("auth_app:login")
 
@@ -36,7 +36,7 @@ class RegisterUser(SendEmailForVerify, CreateView):
 
 
 class LoginUser(LoginView):
-    form_class = auth_app_forms.CustomUserLoginForm
+    form_class = authapp_forms.CustomUserLoginForm
     template_name = "auth_app/registration/login.html"
 
     def get_success_url(self):
@@ -45,7 +45,7 @@ class LoginUser(LoginView):
 
 class UserUpdateView(LoginRequiredMixin, UpdateView):
     model = User
-    form_class = auth_app_forms.CustomUserChangeForm
+    form_class = authapp_forms.CustomUserChangeForm
     template_name = "auth_app/registration/profile.html"
     success_url = reverse_lazy("main:index")
 
@@ -64,7 +64,7 @@ class UserPasswordResetDone(PasswordResetDoneView):
 
 
 class UserPasswordResetConfirm(PasswordResetConfirmView):
-    form_class = auth_app_forms.CustomUserPasswordConfirmForm
+    form_class = authapp_forms.CustomUserPasswordConfirmForm
     template_name = "auth_app/registration/password_reset_confirm.html"
     success_url = reverse_lazy("auth_app:password_reset_complete")
 

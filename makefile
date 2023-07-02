@@ -10,7 +10,6 @@ export COMPOSE_DOCKER_CLI_BUILD=1
 export DOCKER_BUILDKIT=1
 
 
-
 go_db: down
 	docker-compose --file ./docker-compose.dev.yml up db -d;
 	docker exec -it devejoint-db psql -U postgres -d postgres -c "DROP DATABASE deve_joint;"
@@ -39,8 +38,6 @@ local:
 test:
 	chmod +x ./dev_tools/delete_migrations_files.sh & ./dev_tools/delete_migrations_files.sh
 	./app/manage.py makemigrations	
-	./app/manage.py migrate
-	./app/manage.py migrate --run-syncdb
 	pytest
 
 ff:
@@ -49,16 +46,13 @@ ff:
 	yapf --in-place --recursive .
 	djlint --reformat ./app
 
-
 # ============ Docker ============
 
 down: 
 	docker-compose --file ./docker-compose.dev.yml down --remove-orphans
 
-
 build:
 	docker-compose --file ./docker-compose.dev.yml build 
-
 
 up:
 	docker-compose --file ./docker-compose.dev.yml up

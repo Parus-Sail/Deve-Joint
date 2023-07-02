@@ -12,17 +12,7 @@ else
     exit 1
 fi
 
-# 🗑️ Delete unused imports
-autoflake .
-
-# 🚦 Sort imports
-isort .
-
-# 👔 Code formatting
-yapf --in-place --recursive .
-
-# 👔 HTML formatting
-djlint --reformat ./app
+make ff
 
 # ➕ Readd all changed files
 git add .

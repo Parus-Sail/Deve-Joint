@@ -36,7 +36,7 @@ WORKDIR ${APP_DIR} /
 COPY app .
 
 RUN chmod +x ./entrypoint.sh
-CMD ["gunicorn", "DeveJoint.wsgi", "-b 0.0.0.0:8080"]
+CMD ["gunicorn", "config.wsgi", "-b 0.0.0.0:8080"]
 ENTRYPOINT [ "sh", "./entrypoint.sh" ]
 
 

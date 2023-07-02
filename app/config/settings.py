@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
+from audioop import reverse
 import os
 from pathlib import Path
 
@@ -171,3 +172,5 @@ else:
 
 # Custom user model
 AUTH_USER_MODEL = "auth_app.BaseOpenSailUser"
+
+LOGIN_URL = 'auth_app:login'

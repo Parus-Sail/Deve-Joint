@@ -44,7 +44,11 @@ test:
 	pytest
 
 ff:
+	autoflake .
+	isort .
 	yapf --in-place --recursive .
+	djlint --reformat ./app
+
 
 # ============ Docker ============
 

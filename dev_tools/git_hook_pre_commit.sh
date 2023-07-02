@@ -13,14 +13,16 @@ else
 fi
 
 # 🗑️ Delete unused imports
-autoflake -i -r --remove-all-unused-imports .
+autoflake .
 
 # 🚦 Sort imports
 isort .
 
 # 👔 Code formatting
 yapf --in-place --recursive .
-# black -l 120 .
+
+# 👔 HTML formatting
+djlint --reformat ./app
 
 # ➕ Readd all changed files
 git add .

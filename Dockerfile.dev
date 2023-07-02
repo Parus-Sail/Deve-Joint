@@ -19,7 +19,7 @@ ENV PATH="$POETRY_HOME/bin:$VENV_PATH/bin:$PATH"
 FROM python-base as poetry
 # вторая стадия - поставим poetry и no-dev зависисмости (все долгоиграющие), закешировали слой
 RUN pip install poetry
-WORKDIR $PYSETUP_PATH
+WORKDIR $PYSETUP_PATH /
 COPY poetry.lock pyproject.toml /
 # т.к. мы используем докер, нужно отключить виртуальное окружение (масло масленное),
 # затем ставим зависимости, если BUILD "production", пакеты для разработки не ставим
@@ -29,7 +29,7 @@ RUN poetry config virtualenvs.create false && \
 
 FROM poetry as ready
 # третья стадия, за счет того что большинство пакетов уже установлено, доустановка dev либ будет быстрая
-WORKDIR $PYSETUP_PATH
+WORKDIR $PYSETUP_PATH /
 RUN poetry install
 
 WORKDIR ${APP_DIR}

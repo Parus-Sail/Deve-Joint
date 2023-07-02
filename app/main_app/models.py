@@ -30,15 +30,37 @@ class MainappBaseModel(models.Model):
         abstract = True
 
 
-class News(MainappBaseModel):
-    title = models.CharField(max_length=256, verbose_name=_("Title"))
-    preamble = models.CharField(max_length=1024, verbose_name=_("Preamble"))
-    body = models.TextField(blank=True, null=True, verbose_name=_("Body"))
+class NewsManager(models.Manager):
 
-    def __str__(self) -> str:
-        return f"{self.pk} {self.title}"
+    def get_queryset(self):
+        return super().get_queryset().filter(deleted=False)
+
+
+class News(models.Model):
+    objects = NewsManager()
+
+    title = models.CharField(max_length=256, verbose_name='title')
+    preamble = models.CharField(max_length=1024, blank=True, null=True, verbose_name='preamble')
+    body = models.TextField(blank=False, null=False, verbose_name='body')
+    created = models.DateTimeField(
+        auto_now_add=True,
+        verbose_name='date of creating',
+        editable=False
+    )
+    updated = models.DateTimeField(
+        auto_now=True,
+        verbose_name='date of editing',
+        editable=False
+    )
+    deleted = models.BooleanField(default=False)
 
     class Meta:
         verbose_name = _("News")
         verbose_name_plural = _("News")
-        ordering = ("-created",)
+
+    def __str__(self):
+        return self.title
+
+    def delete(self, *args):
+        self.deleted = True
+        self.save()

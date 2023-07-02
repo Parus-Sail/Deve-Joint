@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.utils.translation import gettext_lazy as _
 
-from MainPageApp import models as mainpage_models
+from main_app import models as mainpage_models
 
 
 @admin.register(mainpage_models.News)

@@ -25,8 +25,8 @@ urlpatterns = [
     path("", RedirectView.as_view(url="main/")),
     path("main/", include("main_app.urls", namespace="main")),
     path("auth/", include("auth_app.urls", namespace="auth_app")),
-    path("project/", include("project_app.urls", namespace="project")),
     path("vacancy/", include("vacancy_app.urls", namespace="vacancy")),
+    path('projects/', include('project_app.urls', namespace='project_app')),
 ]
 
 if settings.DEBUG:

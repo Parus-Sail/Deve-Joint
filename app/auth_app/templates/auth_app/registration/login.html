@@ -1,9 +1,7 @@
 {% extends 'base.html' %}
-
 {% block title %}
     Log In
 {% endblock title %}
-
 {% block content %}
     <div class="container">
         <div class="col-lg-8 col-12 mx-auto">
@@ -13,24 +11,24 @@
                 <div class="row justify-content-center">
                     <div class="col-lg-6 col-md-6 col-12">
                         {% if  form.non_field_errors %}
-                            {% for error in form.non_field_errors %}
-                                <div class="newsletter-form text-danger mb-2">
-                                   {{ error }}
-                                </div>
-                            {% endfor %}
+                            {% for error in form.non_field_errors %}<div class="newsletter-form text-danger mb-2">{{ error }}</div>{% endfor %}
                         {% endif %}
                         {% csrf_token %}
-                        <label for="id_username" class="form-label requiredField"> Email address*
-                        </label>
-                        <input type="email" class="form-control" name="username" id="id_username" autocomplete="email"
+                        <label for="id_username" class="form-label requiredField">Email address*</label>
+                        <input type="email"
+                               class="form-control"
+                               name="username"
+                               id="id_username"
+                               autocomplete="email"
                                required>
                         {{ form.username.errors }}
-
-                        <label for="id_password" class="form-label requiredField"> Password*
-                        </label>
-                        <input type="password" class="form-control" name="password" id="id_password" required>
+                        <label for="id_password" class="form-label requiredField">Password*</label>
+                        <input type="password"
+                               class="form-control"
+                               name="password"
+                               id="id_password"
+                               required>
                         {{ form.username.errors }}
-
                         <button type="submit" class="form-control">Log In</button>
                         <br>
                     </div>
@@ -38,11 +36,13 @@
             </form>
             <div class="row justify-content-center">
                 <div class="col-lg-3 col-md-3 col-6">
-                    <a class="custom-btn custom-border-btn btn" href="{% url 'auth_app:register' %}">Create an account</a>
+                    <a class="custom-btn custom-border-btn btn"
+                       href="{% url 'auth_app:register' %}">Create an account</a>
                 </div>
                 <div class="col-lg-3 col-md-3 col-6">
-                    <a href="{% url 'auth_app:password_reset' %}" class="custom-btn custom-border-btn btn">Forgot your
-                        password?</a>
+                    <a href="{% url 'auth_app:password_reset' %}"
+                       class="custom-btn custom-border-btn btn">Forgot your
+                    password?</a>
                 </div>
             </div>
         </div>

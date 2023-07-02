@@ -1,0 +1,13 @@
+- model: project_app.project
+  pk: 1
+  fields:
+    title: Project 1
+    description: Description 1
+    owner: 1
+
+- model: project_app.project
+  pk: 2
+  fields:
+    title: Project 2
+    description: Description 2
+    owner: 2

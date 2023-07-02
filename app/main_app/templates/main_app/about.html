@@ -1,11 +1,8 @@
 {% extends 'base.html' %}
-
 {% load static %}
-
 {% block title %}
   About
 {% endblock title %}
-
 {% block content %}
   <header class="site-header">
     <div class="section-overlay"></div>
@@ -15,7 +12,9 @@
           <h1 class="text-white">About Deve-Joint</h1>
           <nav aria-label="breadcrumb">
             <ol class="breadcrumb justify-content-center">
-              <li class="breadcrumb-item"><a href="{% url 'main:index' %}">Home</a></li>
+              <li class="breadcrumb-item">
+                <a href="{% url 'main:index' %}">Home</a>
+              </li>
               <li class="breadcrumb-item active" aria-current="page">About</li>
             </ol>
           </nav>
@@ -23,9 +22,7 @@
       </div>
     </div>
   </header>
-
   {% include 'main_app/includes/about/about_section.html' %}
   {% include 'main_app/includes/common/reviews_section.html' %}
   {% include 'main_app/includes/common/cta-section.html' %}
-
 {% endblock content %}

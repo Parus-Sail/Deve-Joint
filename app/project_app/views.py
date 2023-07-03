@@ -5,6 +5,7 @@ from django.urls import reverse_lazy
 from django.views import generic
 
 from . import models, service
+from .forms import ProjectCreationForm
 
 User = get_user_model()
 
@@ -24,7 +25,9 @@ class ProjectDetailView(generic.DetailView):
 class ProjectCreateView(LoginRequiredMixin, generic.CreateView):
     model = models.Project
     template_name = 'project_app/create_project.html'
-    fields = 'title', 'description'
+    form_class = ProjectCreationForm
+
+    # fields = 'title', 'description'
 
     def form_valid(self, form):
         project = service.create_project(

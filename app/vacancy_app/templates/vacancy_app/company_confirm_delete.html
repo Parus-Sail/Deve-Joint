@@ -1,11 +1,8 @@
 {% extends 'base.html' %}
 {% load vacancy_app_tags %}
-
-
 {% block title %}
     Confirm Delete
 {% endblock title %}
-
 {% block content %}
     <div class="container">
         <div class="row justify-content-center pt-3">
@@ -26,10 +23,11 @@
                 </p>
                 <div class="row">
                     <div class="col-6">
-                        <form action="{% url 'vacancy:company_delete' pk=object.pk %}" method="post">
+                        <form action="{% url 'vacancy:company_delete' pk=object.pk %}"
+                              method="post">
                             {% csrf_token %}
                             <div class="d-flex align-items-center mt-2">
-                               <button class="custom-btn custom-border-btn btn me-4" type="submit">Delete company</button>
+                                <button class="custom-btn custom-border-btn btn me-4" type="submit">Delete company</button>
                                 <a href="{% url 'vacancy:company_list' %}" class="custom-btn btn me-4">Cancel</a>
                             </div>
                         </form>

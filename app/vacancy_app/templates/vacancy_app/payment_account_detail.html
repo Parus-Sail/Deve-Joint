@@ -1,40 +1,41 @@
 {% extends 'base.html' %}
 {% load vacancy_app_tags %}
-
 {% block title %}
     Payment Account Detail
 {% endblock title %}
-
 {% block content %}
-<div class="row justify-content-center pt-3">
-    <div class="col-md-12 col-lg-8">
-        <div class="card shadow">
-            <div class="card-body">
-                <h5 class="card-title logo-text"><strong>Name: </strong> {{ object.name }}</h5>
-                <p class="card-text">
-                    <strong>Owner: </strong> {{ object.owner }}
-                    <br>
-                    <strong>Description:</strong> {{ object.description }}
-                    <br>
-                    <strong>Address:</strong> {{ object.address }}
-                    <br>
-                    <strong>Email address:</strong> {{ object.email }}
-                    <br>
-                    <strong>Type :</strong> {{ object.type }}
-                    <br>
-                    <strong>Director name :</strong> {{ object.director_name }}
-                    <br>
-                    <strong>Bank :</strong> {{ object.bank }}
-                    <br>
-                    <strong>Tax number :</strong> {{ object.tax_number }}
-                    <br>
-                    <strong>Last update :</strong> {% get_user_date_time object.update_at %}
-                    <br>
-                    <strong>Status :</strong> {{ object.get_status_display }}
-                </p>
-                <a href="{% url 'vacancy:payment_account_list' %}" class="custom-btn btn">Back</a>
+    <div class="row justify-content-center pt-3">
+        <div class="col-md-12 col-lg-8">
+            <div class="card shadow">
+                <div class="card-body">
+                    <h5 class="card-title logo-text">
+                        <strong>Name:</strong> {{ object.name }}
+                    </h5>
+                    <p class="card-text">
+                        <strong>Owner:</strong> {{ object.owner }}
+                        <br>
+                        <strong>Description:</strong> {{ object.description }}
+                        <br>
+                        <strong>Address:</strong> {{ object.address }}
+                        <br>
+                        <strong>Email address:</strong> {{ object.email }}
+                        <br>
+                        <strong>Type :</strong> {{ object.type }}
+                        <br>
+                        <strong>Director name :</strong> {{ object.director_name }}
+                        <br>
+                        <strong>Bank :</strong> {{ object.bank }}
+                        <br>
+                        <strong>Tax number :</strong> {{ object.tax_number }}
+                        <br>
+                        <strong>Last update :</strong> {% get_user_date_time object.update_at %}
+                        <br>
+                        <strong>Status :</strong> {{ object.get_status_display }}
+                    </p>
+                    <a href="{% url 'vacancy:payment_account_list' %}"
+                       class="custom-btn btn">Back</a>
+                </div>
             </div>
         </div>
     </div>
-</div>
 {% endblock content %}

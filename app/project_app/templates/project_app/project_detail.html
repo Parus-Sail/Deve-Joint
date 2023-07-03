@@ -13,4 +13,5 @@
     <h3>Actions:</h3>
     <a href="{% url 'project_app:update' project.pk %}">Update</a>
     <a href="{% url 'project_app:delete' project.pk %}">Delete</a>
+    <a href="{% url 'favorite_app:favorite_projects_add' project.pk %}">Add to Favorites</a>
 {% endblock %}

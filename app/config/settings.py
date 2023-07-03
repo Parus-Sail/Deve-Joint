@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     "main_app",
     "project_app",
     "vacancy_app",
+    "favorite_app",
     ################
     # for test with bootstrap start
     "crispy_forms",

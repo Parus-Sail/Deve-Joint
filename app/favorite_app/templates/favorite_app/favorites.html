@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Favorites
+{% endblock title %}
+
+{% block content %}
+    <div class="container">
+        <div class="col-lg-8 col-12 mx-auto">
+            <h2 class="text-center mb-4 logo-text">Favorites</h2>
+        </div>
+    </div>
+
+    {% if favorite_projects_items %}
+        <h5>Your favorite projects:</h5>
+        <ul>
+            {% for item in favorite_projects_items %}
+                <li>
+                    <a href="{% url 'project_app:detail' pk=item.project.pk %}">{{ item.project.title }} </a> - добавлено в избранное {{ item.add_datetime }}
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Your favorites list is empty.</p>
+    {% endif %}
+
+
+{% endblock content %}

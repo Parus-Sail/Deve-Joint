@@ -12,15 +12,7 @@ else
     exit 1
 fi
 
-# 🗑️ Delete unused imports
-autoflake -i -r --remove-all-unused-imports .
-
-# 🚦 Sort imports
-isort .
-
-# 👔 Code formatting
-yapf --in-place --recursive .
-# black -l 120 .
+make ff
 
 # ➕ Readd all changed files
 git add .

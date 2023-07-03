@@ -42,16 +42,8 @@ class News(models.Model):
     title = models.CharField(max_length=256, verbose_name='title')
     preamble = models.CharField(max_length=1024, blank=True, null=True, verbose_name='preamble')
     body = models.TextField(blank=False, null=False, verbose_name='body')
-    created = models.DateTimeField(
-        auto_now_add=True,
-        verbose_name='date of creating',
-        editable=False
-    )
-    updated = models.DateTimeField(
-        auto_now=True,
-        verbose_name='date of editing',
-        editable=False
-    )
+    created = models.DateTimeField(auto_now_add=True, verbose_name='date of creating', editable=False)
+    updated = models.DateTimeField(auto_now=True, verbose_name='date of editing', editable=False)
     deleted = models.BooleanField(default=False)
 
     class Meta:

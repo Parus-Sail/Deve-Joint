@@ -29,15 +29,19 @@ RUN poetry config virtualenvs.create false && \
 
 FROM poetry as ready
 # третья стадия, за счет того что большинство пакетов уже установлено, доустановка dev либ будет быстрая
-WORKDIR $PYSETUP_PATH /
+WORKDIR $PYSETUP_PATH 
 RUN poetry install
 
-WORKDIR ${APP_DIR} /
+WORKDIR ${APP_DIR} 
 COPY app .
 
 RUN chmod +x ./entrypoint.sh
-CMD ["gunicorn", "config.wsgi", "-b 0.0.0.0:8080"]
 ENTRYPOINT [ "sh", "./entrypoint.sh" ]
+# запуск в режиме develop (автоматическая раздача статики без nginx при запуске через docker)
+CMD ["python", "/app/manage.py", "runserver", "0.0.0.0:8080"]
+# запуск для прода 
+# CMD ["gunicorn", "config.wsgi", "-b 0.0.0.0:8080"]
+
 
 
 

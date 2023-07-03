@@ -64,3 +64,18 @@ addopts = "-v --tb=short"
 [tool.pytest]
 testpaths = "tests"
 python_files = ["test_*.py", "*_test.py"]
+
+[tool.djlint]
+exclude = ".venv,venv,.tox,.eggs"
+profile = "django"
+format_css = true
+format_js = true
+extension = "html"
+extend_exclude = ".py"
+
+[tool.autoflake]
+verbose = 'true'
+in-place = true
+check = true
+exclude = ['settings_test.py', 'settings.py']
+remove-all-unused-imports = true

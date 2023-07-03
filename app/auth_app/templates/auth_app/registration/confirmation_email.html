@@ -1,20 +1,18 @@
 {% extends 'base.html' %}
-
 {% block title %}
     Confirmation Email
 {% endblock title %}
-
 {% block content %}
     <div class="container">
         <div class="jumbotron">
             <p class="lead newsletter-form logo-text text-center">Activation link sent</p>
             <hr class="my-4">
-            <p class="text-center">
-                Please check your email to complete your registration.
-            </p>
+            <p class="text-center">Please check your email to complete your registration.</p>
             <div class="row justify-content-center">
                 <div class="col-lg-3 col-md-3 col-12">
-                    <form class="custom-form contact-form" method="get" action="{% url 'main:index' %}">
+                    <form class="custom-form contact-form"
+                          method="get"
+                          action="{% url 'main:index' %}">
                         <button type="submit" class="form-control">Main Page</button>
                     </form>
                 </div>

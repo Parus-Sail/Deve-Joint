@@ -10,11 +10,12 @@ services:
     container_name: ${PROJECT_NAME}-web
     build:
       context: .
-      dockerfile: Dockerfile.dev
+      dockerfile: Dockerfile
     env_file:
       - .env
     volumes:
       - ./app:/app
+      # как понимаю это путь для nginx в проде?
       - static:/usr/src/app/static
     ports:
       - "8181:8080"
@@ -33,6 +34,6 @@ services:
     volumes:
       - pgdata:/data/postgres
     ports:
-      - "${PG_EXT_PORT}:16432"
+      - "${PG_EXT_PORT}:5432"
     networks:
       - default

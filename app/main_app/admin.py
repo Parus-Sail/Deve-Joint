@@ -3,7 +3,6 @@
 
 # from main_app import models as mainpage_models
 
-
 # @admin.register(mainpage_models.News)
 # class NewsAdmin(admin.ModelAdmin):
 #     list_display = ["title", "created", "deleted"]

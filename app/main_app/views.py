@@ -1,8 +1,6 @@
-from django.views.generic import TemplateView
-from django.views.generic import TemplateView, ListView, CreateView, DetailView, UpdateView, DeleteView
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.urls import reverse_lazy
-
+from django.views.generic import CreateView, DeleteView, DetailView, ListView, TemplateView, UpdateView
 from main_app import models
 
 

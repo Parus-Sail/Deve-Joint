@@ -1,9 +1,7 @@
 {% extends 'base.html' %}
-
 {% block title %}
     Create Payment Account
 {% endblock title %}
-
 {% block content %}
     <div class="container">
         <div class="col-lg-8 col-12 mx-auto">
@@ -16,9 +14,11 @@
                         {{ form }}
                         <button type="submit" class="form-control">Save</button>
                         <br>
-                         <a href="{% url 'vacancy:user_profile_detail' object.owner.id %}" class="custom-btn custom-border-btn btn mb-4">View Owner Profile: {{ object.owner }}</a>
+                        <a href="{% url 'vacancy:user_profile_detail' object.owner.id %}"
+                           class="custom-btn custom-border-btn btn mb-4">View Owner Profile: {{ object.owner }}</a>
                         <br>
-                        <a href="{% url 'vacancy:payment_account_moderation_list' %}" class="custom-btn custom-border-btn btn me-4">Back</a>
+                        <a href="{% url 'vacancy:payment_account_moderation_list' %}"
+                           class="custom-btn custom-border-btn btn me-4">Back</a>
                     </div>
                 </div>
             </form>

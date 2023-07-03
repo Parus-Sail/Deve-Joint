@@ -71,7 +71,8 @@
                 <!-- Login section START -->
                 {% if user.is_authenticated %}
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="{% url 'auth_app:profile' %}"
+                        <a class="nav-link dropdown-toggle"
+                           href="{% url 'auth_app:profile' %}"
                            id="navbarLightDropdownMenuLink"
                            role="button"
                            data-bs-toggle="dropdown"
@@ -109,3 +110,6 @@
         </div>
     </div>
 </nav>
+
+
+

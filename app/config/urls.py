@@ -27,6 +27,7 @@ urlpatterns = [
     path("auth/", include("auth_app.urls", namespace="auth_app")),
     path("vacancy/", include("vacancy_app.urls", namespace="vacancy")),
     path('projects/', include('project_app.urls', namespace='project_app')),
+    path("favorites/", include("favorite_app.urls", namespace="favorite_app")),
 ]
 
 if settings.DEBUG:

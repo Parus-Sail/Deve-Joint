@@ -66,6 +66,8 @@
                            class="custom-btn btn mt-2 ms-lg-4 ms-3">Update</a>
                         <a href="{% url 'project_app:delete' project.pk %}"
                            class="custom-btn btn mt-2  ms-lg-4 ms-3">Delete</a>
+                        <a href="{% url 'favorite_app:favorite_projects_add' project.pk %}"
+                           class="custom-btn btn mt-2 ms-lg-4 ms-3">Add to Favorites</a>
                         <div class="job-detail-share d-flex align-items-center">
                             <p class="mb-0 me-lg-4 me-3">Share:</p>
                             <a href="#" class="bi-facebook"></a>

@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% block content %}
+    <header class="site-header">
+        <div class="section-overlay"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-12 text-center">
+                    <h1 class="text-white">My projects</h1>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb justify-content-center">
+                            <li class="breadcrumb-item">
+                                <a href="{% url 'main:index' %}">Home</a>
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">My projects</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- End Header -->
+    <!-- Start Projects Section -->
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-12">
+                {% if projects %}
+                    {% for project in projects %}
+                        <div class="job-thumb d-flex">
+                            <div class="job-body d-flex flex-wrap flex-auto align-items-center ms-4">
+                                <div class="mb-3">
+                                    <h4 class="job-title mb-lg-0">
+                                        <a href="{% url 'project_app:detail' pk=project.pk %}"
+                                           class="job-title-link">{{ project.title }}</a>
+                                    </h4>
+                                    <div class="d-flex">
+                                        {% if user.is_authenticated %}
+                                            <p class="mb-0">
+                                                <a href="{% url 'project_app:update' project.pk %}"
+                                                   class="badge badge-level">Edit</a>
+                                            </p>
+                                            <p class="mb-0">
+                                                <a href="{% url 'project_app:delete' project.pk %}" class="badge">Delete</a>
+                                            </p>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="job-section-btn-wrap">
+                                    <a href="{% url 'project_app:detail' pk=project.pk %}"
+                                       class="custom-btn btn">More</a>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <p>No yours projects yet.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

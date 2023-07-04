@@ -1,9 +1,10 @@
+from typing import Any
 from django.contrib import messages
 from django.contrib.auth import get_user, get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db.models.query import QuerySet
 from django.urls import reverse_lazy
 from django.views import generic
-from django.shortcuts import render
 
 from . import models, service
 
@@ -71,6 +72,8 @@ class ProjectDeleteView(LoginRequiredMixin, generic.DeleteView):
 
 # Owner's projects
 class MyProjectsView(generic.ListView):
-    def get(self, request):
-        projects = models.Project.objects.filter(owner=get_user(self.request))
-        return render(request, 'project_app/my_projects.html', {'projects': projects})
+    template_name = 'project_app/my_projects.html'
+    context_object_name = 'projects'
+
+    def get_queryset(self):
+        return models.Project.objects.filter(owner=get_user(self.request))

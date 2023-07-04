@@ -1,4 +1,5 @@
 /db/*
+.vscode/
 
 # django project
 **/static_root/

@@ -1,0 +1,114 @@
+{% load static %}
+<section class="job-section section-padding pb-0">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-12">
+                <!-- About project START -->
+                <h2 class="job-title mb-0">{{ project.title }}</h2>
+                <div class="job-thumb job-thumb-detail">
+                    <div class="d-flex flex-wrap align-items-center border-bottom pt-lg-3 pt-2 pb-3 mb-4">
+                        <p class="job-location mb-0">
+                            <i class="custom-icon bi-geo-alt me-1"></i>
+                            Kuala, Malaysia
+                        </p>
+                        <p class="job-date mb-0">
+                            <i class="custom-icon bi-clock me-1"></i>
+                            10 hours ago
+                        </p>
+                        <p class="job-price mb-0">
+                            <i class="custom-icon bi-cash me-1"></i>
+                            $20k
+                        </p>
+                        <div class="d-flex">
+                            <p class="mb-0">
+                                <a href="{% url 'vacancy:job-listing' %}" class="badge badge-level">Internship</a>
+                            </p>
+                            <p class="mb-0">
+                                <a href="{% url 'vacancy:job-listing' %}" class="badge">Freelance</a>
+                            </p>
+                        </div>
+                    </div>
+                    <h4 class="mt-4 mb-2">Project Description</h4>
+                    <p>{{ project.description }}</p>
+                    <!-- About project FINISH -->
+                    <!-- Roles START -->
+                    <h5 class="mt-4 mb-3">The Roles</h5>
+                    <p class="mb-1">
+                        <strong>Benefits:</strong> Lorem Ipsum dolor sit amet, consectetur adipsicing kengan omeg kohm tokito adipcingi elit
+                    </p>
+                    <p>
+                        <strong>Good salary:</strong> Lorem Ipsum dolor sit amet, consectetur adipsicing kengan omeg kohm tokito
+                    </p>
+                    <!-- Roles FINISH -->
+                    <!-- Requirements FINISH -->
+                    <h5 class="mt-4 mb-3">Requirements</h5>
+                    <ul>
+                        <li>Strong knowledge in computing skill</li>
+                        <li>Minimum 5 years of working experiences consectetur omeg</li>
+                        <li>Excellent interpersonal skills</li>
+                    </ul>
+                    <!-- Requirements FINISH -->
+                    <!-- Members START -->
+                    <h5 class="mt-4 mb-3">Members</h5>
+                    <ul>
+                        {% for membership in project.memberships.all %}
+                            <li>{{ membership.user.username }} - {{ membership.role }}</li>
+                        {% empty %}
+                            <li>No members found.</li>
+                        {% endfor %}
+                    </ul>
+                    <!-- Members FINISH -->
+                    <!-- Buttons START -->
+                    <div class="d-flex justify-content-center flex-wrap mt-5 border-top pt-4">
+                        <a href="#" class="custom-btn btn mt-2">Apply now</a>
+                        <a href="#" class="custom-btn custom-border-btn btn mt-2 ms-lg-4 ms-3">Save this job</a>
+                        <a href="{% url 'project_app:update' project.pk %}"
+                           class="custom-btn btn mt-2 ms-lg-4 ms-3">Update</a>
+                        <a href="{% url 'project_app:delete' project.pk %}"
+                           class="custom-btn btn mt-2  ms-lg-4 ms-3">Delete</a>
+                        <a href="{% url 'favorite_app:favorite_projects_add' project.pk %}"
+                           class="custom-btn btn mt-2 ms-lg-4 ms-3">Add to Favorites</a>
+                        <div class="job-detail-share d-flex align-items-center">
+                            <p class="mb-0 me-lg-4 me-3">Share:</p>
+                            <a href="#" class="bi-facebook"></a>
+                            <a href="#" class="bi-twitter mx-3"></a>
+                            <a href="#" class="bi-share"></a>
+                        </div>
+                    </div>
+                    <!-- Buttons FINISH -->
+                </div>
+            </div>
+            <!-- Side panel contacts START -->
+            <div class="col-lg-4 col-12 mt-5 mt-lg-0">
+                <div class="job-thumb job-thumb-detail-box bg-white shadow-lg">
+                    <div class="d-flex align-items-center">
+                        <div class="job-image-wrap d-flex align-items-center bg-white shadow-lg mb-3">
+                            <img src="{% static 'img/logos/google.png' %}"
+                                 class="job-image me-3 img-fluid"
+                                 alt="">
+                            <p class="mb-0">Google</p>
+                        </div>
+                        <a href="#" class="bi-bookmark ms-auto me-2"></a>
+                        <a href="#" class="bi-heart"></a>
+                    </div>
+                    <h6 class="mt-3 mb-2">About the Company</h6>
+                    <p>Lorem ipsum dolor sit amet, consectetur elit sed do eiusmod tempor incididunt labore.</p>
+                    <h6 class="mt-4 mb-3">Contact Information</h6>
+                    <p class="mb-2">
+                        <i class="custom-icon bi-globe me-1"></i>
+                        <a href="#" class="site-footer-link">www.jobbportal.com</a>
+                    </p>
+                    <p class="mb-2">
+                        <i class="custom-icon bi-telephone me-1"></i>
+                        <a href="tel: 305-240-9671" class="site-footer-link">305-240-9671</a>
+                    </p>
+                    <p>
+                        <i class="custom-icon bi-envelope me-1"></i>
+                        <a href="mailto:info@yourgmail.com" class="site-footer-link">info@jobportal.co</a>
+                    </p>
+                </div>
+            </div>
+            <!-- Side panel contacts FINISH -->
+        </div>
+    </div>
+</section>

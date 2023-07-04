@@ -9,22 +9,15 @@ class FavoriteBase(models.Model):
                              blank=False,
                              on_delete=models.CASCADE,
                              verbose_name="User")
-    add_datetime = models.DateTimeField(auto_now_add=True,
-                                        verbose_name="Time added")
+    add_datetime = models.DateTimeField(auto_now_add=True, verbose_name="Time added")
 
     class Meta:
         abstract = True
 
 
 class FavoriteProjects(FavoriteBase):
-    project = models.ForeignKey(Project,
-                                null=False,
-                                blank=False,
-                                on_delete=models.CASCADE,
-                                verbose_name="Project")
+    project = models.ForeignKey(Project, null=False, blank=False, on_delete=models.CASCADE, verbose_name="Project")
 
     class Meta:
         verbose_name = "Favorite project"
         verbose_name_plural = "Favorite projects"
-
-

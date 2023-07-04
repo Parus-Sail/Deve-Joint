@@ -1,6 +1,6 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.shortcuts import HttpResponseRedirect, get_object_or_404, render
 from django.views import View
-from django.shortcuts import render, get_object_or_404, HttpResponseRedirect
 from favorite_app.models import FavoriteProjects
 from project_app.models import Project
 
@@ -19,6 +19,7 @@ class FavoriteProjectsView(LoginRequiredMixin, View):
 
 
 class FavoriteProjectsAdd(LoginRequiredMixin, View):
+
     def get(self, request, pk):
         project = get_object_or_404(Project, pk=pk)
         favorites = FavoriteProjects.objects.filter(user=request.user, project=project).first()

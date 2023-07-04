@@ -1,12 +1,15 @@
 from typing import Any
+
 from django.contrib import messages
 from django.contrib.auth import get_user, get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models.query import QuerySet
 from django.urls import reverse_lazy
 from django.views import generic
+from django.views.generic.edit import ModelFormMixin
 
 from . import models, service
+from .forms import ProjectCreationForm
 
 User = get_user_model()
 
@@ -26,10 +29,10 @@ class ProjectDetailView(generic.DetailView):
 class ProjectCreateView(LoginRequiredMixin, generic.CreateView):
     model = models.Project
     template_name = 'project_app/create_project.html'
-    fields = 'title', 'description'
+    form_class = ProjectCreationForm
 
     def form_valid(self, form):
-        project = service.create_project(
+        self.object = project = service.create_project(
             title=form.cleaned_data['title'],
             description=form.cleaned_data['description'],
             owner=get_user(self.request),
@@ -38,9 +41,9 @@ class ProjectCreateView(LoginRequiredMixin, generic.CreateView):
         # write message for example
         # messages.success(self.request, 'Project created successfully!')
 
-        # пропоускаем стандарную реализацию сохранения объекта в БД, переходим сразу к редиректу
         self.success_url = reverse_lazy("project_app:detail", kwargs={"pk": project.pk})
-        return super().form_valid(form)
+        # пропоускаем стандарную реализацию сохранения объекта в БД, переходим сразу к редиректу
+        return super(ModelFormMixin, self).form_valid(form)
 
 
 # STUB
@@ -68,7 +71,7 @@ class ProjectDeleteView(LoginRequiredMixin, generic.DeleteView):
         service.delete_project(self.object)
         messages.success(self.request, 'Project deleted successfully!')
         return super().delete(request, *args, **kwargs)
-    
+
 
 # Owner's projects
 class MyProjectsView(generic.ListView):

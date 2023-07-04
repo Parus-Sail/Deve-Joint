@@ -1,5 +1,5 @@
 from django.urls import path
-from favorite_app.views import FavoriteProjectsView, FavoriteProjectsAdd
+from favorite_app.views import FavoriteProjectsAdd, FavoriteProjectsView
 
 app_name = 'favorite_app'
 

@@ -34,22 +34,24 @@ class CustomUserCreationForm(UserCreationForm):
 
 
 class CustomUserChangeForm(UserChangeForm):
+    avatar = forms.ImageField(widget=forms.FileInput())
     password = None
     email = forms.CharField(disabled=True)
     username = forms.CharField(disabled=True)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        fields = ("first_name", "last_name", "email", "username")
+        fields = ("first_name", "last_name", "email", "username", 'age', 'country', 'city', 'about', 'avatar')
         for field in fields:
             # кастомный css для полей
             self.fields[field].widget.attrs.update({"class": "form-control"})
+        self.fields['avatar'].widget.attrs['class'] = 'custom-file-input'
         # кастомный css для ошибок
         self.error_class = DivErrorList
 
     class Meta:
         model = User
-        fields = ("first_name", "last_name", "email", "username")
+        fields = ("first_name", "last_name", "email", "username", 'age', 'country', 'city', 'about', 'avatar')
 
 
 class CustomUserLoginForm(AuthenticationForm, SendEmailForVerify):

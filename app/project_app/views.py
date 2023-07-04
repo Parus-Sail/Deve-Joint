@@ -3,6 +3,7 @@ from django.contrib.auth import get_user, get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.views import generic
+from django.shortcuts import render
 
 from . import models, service
 
@@ -66,3 +67,10 @@ class ProjectDeleteView(LoginRequiredMixin, generic.DeleteView):
         service.delete_project(self.object)
         messages.success(self.request, 'Project deleted successfully!')
         return super().delete(request, *args, **kwargs)
+    
+
+# Owner's projects
+class MyProjectsView(generic.ListView):
+    def get(self, request):
+        projects = models.Project.objects.filter(owner=get_user(self.request))
+        return render(request, 'project_app/my_projects.html', {'projects': projects})

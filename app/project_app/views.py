@@ -67,8 +67,11 @@ class ProjectUpdateView(
         return super(ModelFormMixin, self).form_valid(form)
 
 
-# STUB
-class ProjectDeleteView(LoginRequiredMixin, generic.DeleteView):
+class ProjectDeleteView(
+        LoginRequiredMixin,
+        permissions.OwnerRequiredMixin,
+        generic.DeleteView,
+):
     model = models.Project
     template_name = 'project_app/project_delete.html'
     success_url = reverse_lazy('list_projects')

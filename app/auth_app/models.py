@@ -7,6 +7,11 @@ from django.utils.translation import gettext_lazy as _
 class BaseOpenSailUser(AbstractUser):
     email = models.EmailField(_("email address"), unique=True)
     email_verify = models.BooleanField(default=False)
+    age = models.PositiveIntegerField(blank=True, null=True, verbose_name=_('age'))
+    avatar = models.ImageField(upload_to='user_avatar', blank=True, verbose_name=_('photo'))
+    about = models.TextField(blank=True, null=True, verbose_name=_('about yourself'))
+    country = models.CharField(max_length=50, verbose_name=_('country'), blank=True, null=True)
+    city = models.CharField(max_length=50, verbose_name=_('city'), blank=True, null=True)
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = ["username"]

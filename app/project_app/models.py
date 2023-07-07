@@ -1,25 +1,30 @@
 from django.conf import settings
+from django.contrib.auth.models import Group
 from django.db import models
+from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
+
+User = settings.AUTH_USER_MODEL
 
 
 class Project(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField(blank=True)
 
-    owner = models.ForeignKey(settings.AUTH_USER_MODEL,
+    owner = models.ForeignKey(User,
                               null=True,
-                              blank=True,
-                              related_name="owned_projects",
+                              related_name="projects",
                               verbose_name=_("owner"),
-                              on_delete=models.SET_NULL)
+                              on_delete=models.SET_NULL)  # при удалении проекта не удаляем пользователя
 
-    members = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name="projects",
-                                     through="Membership", verbose_name=_("members"),
-                                     through_fields=("project", "user"))
+    # def __repr__(self):
+    # return f'<Project: {self.title}>'
 
-    def __repr__(self):
-        return f'<Project: {self.title}>'
+    def get_absolute_url(self):
+        return reverse_lazy('project_app:detail', kwargs={'project_id': self.pk})
+
+    def get_all_roles(self):
+        return self.memberships.all()
 
     class Meta:
         verbose_name = _("Project")
@@ -29,7 +34,7 @@ class Project(models.Model):
 
 class Membership(models.Model):
 
-    user = models.ForeignKey(settings.AUTH_USER_MODEL,
+    user = models.ForeignKey(User,
                              null=True,
                              blank=True,
                              default=None,
@@ -42,14 +47,22 @@ class Membership(models.Model):
                                 related_name="memberships",
                                 on_delete=models.CASCADE)
 
-    role = models.ForeignKey("role_app.Role",
-                             null=False,
-                             blank=False,
-                             related_name="memberships",
-                             on_delete=models.CASCADE)
+    waiting_status = models.CharField(
+        max_length=10,
+        default=None,
+        null=True,
+        blank=True,
+        choices=[
+            ('wait_user', 'invited'),  # ждем решение от потенциального участника
+            ('wait_owner', 'applicated'),  # ждем решение от владельца проекта
+        ],
+    )
 
     def __repr__(self):
-        return f'<Membership: {self.user} - {self.project} ({self.role})>'
+        return f'<Membership: {self.user} - {self.project}>'
+
+    def get_absolute_url(self):
+        return reverse_lazy('project_app:members', kwargs={'project_id': self.project, 'member_id': self.id})
 
     class Meta:
         verbose_name = _("Membership")

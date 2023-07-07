@@ -25,7 +25,7 @@ go_db: down
 	# 📦 add fake datas:
 	./app/manage.py loaddata ./dev_tools/fixtures/auth_app_user.yaml
 	./app/manage.py loaddata ./dev_tools/fixtures/project_app_project.yaml
-	./app/manage.py loaddata ./dev_tools/fixtures/role_app_role.yaml
+	# ./app/manage.py loaddata ./dev_tools/fixtures/role_app_role.yaml
 	./app/manage.py loaddata ./dev_tools/fixtures/project_app_membership.yaml
 
 go_docker: down build up

@@ -5,7 +5,7 @@ import pytest
 
 @pytest.mark.django_db
 def test_create_project(user):
-    project = create_project(title='Test Project', description='Test Description', owner=user)
+    project = create_project(owner=user, title='Test Project', description='Test Description')
     assert isinstance(project, Project)
     assert project.title == 'Test Project'
     assert project.description == 'Test Description'
@@ -15,7 +15,7 @@ def test_create_project(user):
 @pytest.mark.django_db
 def test_delete_project(project):
     delete_project(project.id)
-    assert not Project.objects.filter(pk=project.pk).exists()
+    assert not Project.objects.filter(project_id=project.pk).exists()
 
 
 @pytest.mark.django_db

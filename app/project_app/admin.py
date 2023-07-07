@@ -1,11 +1,16 @@
 from django.contrib import admin
-from role_app.models import Role
+# from role_app.models import Role
+from django.contrib.auth.models import Group
 
 from .models import Membership, Project
 
+# class GroupInline(admin.TabularInline):
+# model = Group
+# extra = 0
 
-class RoleInline(admin.TabularInline):
-    model = Role
+
+class MemberInline(admin.TabularInline):
+    model = Membership
     extra = 0
 
 
@@ -16,7 +21,7 @@ class ProjectAdmin(admin.ModelAdmin):
     # list_filter = ('role',)
     # search_fields = ('title',)
     # search_fields = ('user__username', 'project__name', 'role__name')
-    inlines = [RoleInline]
+    inlines = [MemberInline]
 
 
 @admin.register(Membership)

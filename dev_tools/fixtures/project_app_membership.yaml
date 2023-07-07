@@ -1,20 +1,32 @@
 - model: project_app.membership
   pk: 2
   fields:
-    user: 2
     project: 1
-    role: 1
-
-- model: project_app.membership
-  pk: 3
-  fields:
     user: 2
-    project: 2
-    role: 1
+    waiting_status: null
+
+    # role: 1
 
 - model: project_app.membership
   pk: 3
   fields:
+    project: 1
     user: 3
+    waiting_status: "wait_user"
+    # role: 1
+
+- model: project_app.membership
+  pk: 3
+  fields:
     project: 1
-    role: 2
+    user: 4
+    waiting_status: "wait_owner"
+    # role: 2
+
+- model: project_app.membership
+  pk: 3
+  fields:
+    project: 2
+    user: 4
+    waiting_status: null
+    # role: 2

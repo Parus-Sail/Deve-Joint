@@ -50,13 +50,7 @@
                     <!-- Requirements FINISH -->
                     <!-- Members START -->
                     <h5 class="mt-4 mb-3">Members</h5>
-                    <ul>
-                        {% for membership in project.memberships.all %}
-                            <li>{{ membership.user.username }} - {{ membership.role }}</li>
-                        {% empty %}
-                            <li>No members found.</li>
-                        {% endfor %}
-                    </ul>
+                    {% include 'project_app/includes/project_details/project_details_members.html' %}
                     <!-- Members FINISH -->
                     <!-- Buttons START -->
                     <div class="d-flex justify-content-center flex-wrap mt-5 border-top pt-4">

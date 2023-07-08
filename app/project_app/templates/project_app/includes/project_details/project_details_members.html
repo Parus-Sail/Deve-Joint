@@ -1,0 +1,26 @@
+{% load static %}
+<div class="row">
+    <div class="col-lg-12 col-12">
+        {% for membership in project.memberships.all %}
+            <div class="job-thumb d-flex">
+                <div class="job-body d-flex flex-wrap flex-auto align-items-center ms-4">
+                    <div class="mb-3">
+                        <h4 class="job-title mb-lg-0">
+                            <a href=""
+                                class="job-title-link">{{ membership.user.username }}</a>
+                        </h4>
+                        <div class='d-flex flex-wrap align-items-center'>
+                            <p>User role: {{ membership.role.name }}</p>
+                        </div>
+                    </div>
+                    <div class="job-section-btn-wrap">
+                        <a href=""
+                            class="custom-btn btn">More</a>
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <p>No members yet.</p>
+        {% endfor %}
+    </div>
+</div>

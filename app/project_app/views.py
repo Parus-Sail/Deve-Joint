@@ -8,8 +8,7 @@ from django.urls import reverse_lazy
 from django.views import generic
 from django.views.generic.edit import ModelFormMixin
 
-from . import models, service
-from .forms import ProjectCreationForm
+from . import forms, models, permissions, service
 
 User = get_user_model()
 
@@ -28,8 +27,8 @@ class ProjectDetailView(generic.DetailView):
 
 class ProjectCreateView(LoginRequiredMixin, generic.CreateView):
     model = models.Project
-    template_name = 'project_app/create_project.html'
-    form_class = ProjectCreationForm
+    template_name = 'project_app/project_form.html'
+    form_class = forms.ProjectCreateForm
 
     def form_valid(self, form):
         self.object = project = service.create_project(
@@ -41,28 +40,38 @@ class ProjectCreateView(LoginRequiredMixin, generic.CreateView):
         # write message for example
         # messages.success(self.request, 'Project created successfully!')
 
-        self.success_url = reverse_lazy("project_app:detail", kwargs={"pk": project.pk})
+        self.success_url = reverse_lazy("project_app:detail", kwargs={"pk": self.object.pk})
         # пропоускаем стандарную реализацию сохранения объекта в БД, переходим сразу к редиректу
         return super(ModelFormMixin, self).form_valid(form)
 
 
-# STUB
-class ProjectUpdateView(LoginRequiredMixin, generic.UpdateView):
+class ProjectUpdateView(
+        LoginRequiredMixin,
+        permissions.OwnerRequiredMixin,
+        generic.UpdateView,
+):
     model = models.Project
-    template_name = 'project_app/project_update.html'
+    template_name = 'project_app/project_form.html'
     context_object_name = 'project'
     fields = 'title', 'description'
 
     def form_valid(self, form):
-        service.update_project(self.object,
-                               title=form.cleaned_data['title'],
-                               description=form.cleaned_data['description'])
-        messages.success(self.request, 'Project updated successfully!')
-        return super().form_valid(form)
+        self.object = service.update_project(
+            self.object,
+            title=form.cleaned_data['title'],
+            description=form.cleaned_data['description'],
+        )
+
+        self.success_url = reverse_lazy("project_app:detail", kwargs={"pk": self.object.pk})
+        # пропоускаем стандарную реализацию сохранения объекта в БД, переходим сразу к редиректу
+        return super(ModelFormMixin, self).form_valid(form)
 
 
-# STUB
-class ProjectDeleteView(LoginRequiredMixin, generic.DeleteView):
+class ProjectDeleteView(
+        LoginRequiredMixin,
+        permissions.OwnerRequiredMixin,
+        generic.DeleteView,
+):
     model = models.Project
     template_name = 'project_app/project_delete.html'
     success_url = reverse_lazy('list_projects')

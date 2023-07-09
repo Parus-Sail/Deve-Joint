@@ -4,7 +4,7 @@ from django import forms
 from . import models
 
 
-class ProjectCreationForm(forms.ModelForm):
+class ProjectCreateForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -20,3 +20,7 @@ class ProjectCreationForm(forms.ModelForm):
     class Meta:
         model = models.Project
         fields = ("title", "description")
+
+
+class ProjectUpdateForm(ProjectCreateForm):
+    ...

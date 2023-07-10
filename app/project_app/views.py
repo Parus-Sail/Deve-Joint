@@ -4,12 +4,12 @@ from django.contrib import messages
 from django.contrib.auth import get_user, get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
-from django.db.models.query import QuerySet
 from django.urls import reverse_lazy
 from django.views import generic
 from django.views.generic.edit import ModelFormMixin
 from .models import Project
 from auth_app.models import BaseOpenSailUser
+from django.conf import settings
 
 from . import forms, models, permissions, service
 
@@ -17,6 +17,7 @@ User = get_user_model()
 
 
 class ProjectListView(generic.ListView):
+    paginate_by = settings.DEFAULT_PAGINATE_SIZE
     def get_queryset(self):  # новый
         query = self.request.GET.get('q')
         search_user = None

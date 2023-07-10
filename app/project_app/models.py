@@ -6,6 +6,7 @@ from django.utils.translation import gettext_lazy as _
 class Project(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField(blank=True)
+    created = models.DateTimeField(auto_now_add=True, blank=True)
 
     owner = models.ForeignKey(settings.AUTH_USER_MODEL,
                               null=True,

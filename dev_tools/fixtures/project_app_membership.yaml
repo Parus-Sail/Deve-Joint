@@ -3,7 +3,7 @@
   fields:
     project: 1
     user: 2
-    waiting_status: null
+    active: true
 
     # role: 1
 
@@ -12,7 +12,7 @@
   fields:
     project: 1
     user: 3
-    waiting_status: "wait_user"
+    active: true
     # role: 1
 
 - model: project_app.membership
@@ -20,7 +20,7 @@
   fields:
     project: 1
     user: 4
-    waiting_status: "wait_owner"
+    active: false
     # role: 2
 
 - model: project_app.membership
@@ -28,5 +28,5 @@
   fields:
     project: 2
     user: 4
-    waiting_status: null
+    active: true
     # role: 2

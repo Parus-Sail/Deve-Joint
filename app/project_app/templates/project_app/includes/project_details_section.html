@@ -52,7 +52,7 @@
                     <h5 class="mt-4 mb-3">Members</h5>
                     <ul>
                         {% for membership in project.memberships.all %}
-                            <li>{{ membership.user.username }} - {{ membership.waiting_status }}</li>
+                            <li>{{ membership.user.username }} - {{ membership.active }}</li>
                         {% empty %}
                             <li>No members found.</li>
                         {% endfor %}
@@ -68,8 +68,7 @@
                            class="custom-btn btn mt-2  ms-lg-4 ms-3">Delete</a>
                         <a href="{% url 'favorite_app:favorite_projects_add' project.pk %}"
                            class="custom-btn btn mt-2 ms-lg-4 ms-3">Add to Favorites</a>
-                        <a href="{% url 'project_app:members' project.pk %}"
-                           class="custom-btn btn mt-2 ms-lg-4 ms-3">Members</a>
+                        <a href="#" class="custom-btn btn mt-2 ms-lg-4 ms-3">Members</a>
                         <div class="job-detail-share d-flex align-items-center">
                             <p class="mb-0 me-lg-4 me-3">Share:</p>
                             <a href="#" class="bi-facebook"></a>

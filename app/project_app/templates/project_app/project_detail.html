@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% block title %}{{ object.title }}{% endblock %}
 {% block content %}
     <header class="site-header">
         <div class="section-overlay"></div>
@@ -19,5 +20,5 @@
             </div>
         </div>
     </header>
-    {% include 'project_app/includes/project_details/project_details_section.html' %}
+    {% include 'project_app/includes/project_details_section.html' with project=object %}
 {% endblock %}

@@ -7,7 +7,7 @@ from project_app.models import Membership, Project
 
 User = get_user_model()
 import pytest
-from rules import add_perm, remove_perm, rule_exists, set_perm
+from rules import set_perm
 
 
 def permission_factory(permission: str):

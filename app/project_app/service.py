@@ -41,30 +41,6 @@ User: type[AbstractBaseUser] = get_user_model()
 # ================================================================================================================================================================
 
 
-class ProjectService:
-
-    @staticmethod
-    @transaction.atomic
-    def create_project(owner_id: int, **kwargs_from_form) -> Project:
-        owner = get_object_or_404(User, pk=owner_id)
-        project = Project.objects.create(owner=owner, **kwargs_from_form)
-        MembershipService._include_member(owner_id, project.id)
-        return project
-
-    @staticmethod
-    def update_project(project_id: int, **kwargs_from_form) -> Project:
-        project = get_object_or_404(Project, pk=project_id)
-        for key, value in kwargs_from_form.items():
-            setattr(project, key, value)
-        project.save()
-        return project
-
-    @staticmethod
-    def delete_project(project_id: int) -> None:
-        project = get_object_or_404(Project, pk=project_id)
-        project.delete()
-
-
 class MembershipService:
 
     @staticmethod

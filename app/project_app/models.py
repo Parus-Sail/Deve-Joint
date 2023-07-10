@@ -1,30 +1,44 @@
 from django.conf import settings
+from django.contrib.auth import get_user_model
 from django.contrib.auth.models import Group
-from django.db import models
+from django.db import models, transaction
+from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
 
-User = settings.AUTH_USER_MODEL
+User = get_user_model()
 
 
 class Project(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField(blank=True)
 
-    owner = models.ForeignKey(User,
+    owner = models.ForeignKey('Owner',
                               null=True,
                               related_name="projects",
                               verbose_name=_("owner"),
                               on_delete=models.SET_NULL)  # при удалении проекта не удаляем пользователя
 
-    # def __repr__(self):
-    # return f'<Project: {self.title}>'
+    # members = models.ManyToManyField('Member', through='Membership', related_name='projects')
+
+    def __repr__(self):
+        return f'<Project: {self.title}>'
 
     def get_absolute_url(self):
         return reverse_lazy('project_app:detail', kwargs={'project_id': self.pk})
 
-    def get_all_roles(self):
-        return self.memberships.all()
+    # def get_all_roles(self):
+    #     return self.memberships.all()
+
+    def save(self, *args, **kwargs):
+        #  При обновлени проекта — стандартное поведение
+        if self.pk:
+            super().save(*args, **kwargs)
+
+        # При создании проекта — владелец становиться первым участником
+        with transaction.atomic():
+            Membership.objects.create(user=self.owner, project=self, active=True)
+            super().save(*args, **kwargs)
 
     class Meta:
         verbose_name = _("Project")
@@ -34,7 +48,7 @@ class Project(models.Model):
 
 class Membership(models.Model):
 
-    user = models.ForeignKey(User,
+    user = models.ForeignKey('Member',
                              null=True,
                              blank=True,
                              default=None,
@@ -47,16 +61,7 @@ class Membership(models.Model):
                                 related_name="memberships",
                                 on_delete=models.CASCADE)
 
-    waiting_status = models.CharField(
-        max_length=10,
-        default=None,
-        blank=True,
-        null=True,
-        choices=[
-            ('wait_user', 'invited'),  # ждем решение от потенциального участника
-            ('wait_owner', 'applicated'),  # ждем решение от владельца проекта
-        ],
-    )
+    active = models.BooleanField("Active", default=None)
 
     def __repr__(self):
         return f'<Membership: {self.user} - {self.project}>'
@@ -68,3 +73,37 @@ class Membership(models.Model):
         verbose_name = _("Membership")
         verbose_name_plural = _("Membership")
         unique_together = (("project", "user"),)
+
+
+class Owner(User):
+
+    def is_owner(self):
+        pass
+
+    def pass_project(self):
+        pass
+
+    class Meta:
+        proxy = True
+
+
+class Member(User):
+
+    def is_member(self, project: Project) -> bool:
+        """ Проверяет что пользователь является активным участником проекта """
+        return self.objects.select_related('memberships').filter(memberships_project=project).exists(
+            memberships_active=True)
+
+    # filter(id=project.id).exists()
+
+    def is_invited_to_project(self, project: Project) -> bool:
+        return self.projectinvitation_set.filter(project=project).exists()
+
+    def invite_to_project(self):
+        pass
+
+    def leave_project(self):
+        pass
+
+    class Meta:
+        proxy = True

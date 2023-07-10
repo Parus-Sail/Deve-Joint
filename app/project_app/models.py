@@ -15,11 +15,15 @@ class Project(models.Model):
 
     owner = models.ForeignKey('Owner',
                               null=True,
-                              related_name="projects",
+                              related_name="own_projects",
                               verbose_name=_("owner"),
                               on_delete=models.SET_NULL)  # при удалении проекта не удаляем пользователя
 
-    # members = models.ManyToManyField('Member', through='Membership', related_name='projects')
+    members = models.ManyToManyField(
+        'Member',
+        through='Membership',
+        related_name='projects',
+    )
 
     def __repr__(self):
         return f'<Project: {self.title}>'

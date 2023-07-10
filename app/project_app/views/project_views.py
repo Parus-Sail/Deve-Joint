@@ -1,12 +1,13 @@
 from django.contrib.auth import get_user, get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import AbstractBaseUser
+from django.db.models import Prefetch
 from django.db.models.query import QuerySet
 from django.urls import reverse_lazy
 from django.views import generic
 
 # from .. import forms
-from ..models import Project
+from ..models import Membership, Project
 
 User: type[AbstractBaseUser] = get_user_model()
 
@@ -59,7 +60,8 @@ class MembershipMixin:
     def get_queryset(self) -> QuerySet:
         """ Выборка всех участников проекта (с оптимизацией запроса) """
         project_qs: QuerySet = super().get_queryset()
-        return project_qs.prefetch_related('memberships', 'memberships__user')
+        qs = project_qs.prefetch_related('memberships', 'memberships__user')
+        return qs
 
 
 class ActiveMembershipMixin(MembershipMixin):

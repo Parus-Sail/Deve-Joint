@@ -1,3 +1,5 @@
+from typing import Self
+
 from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import Group
@@ -34,15 +36,16 @@ class Project(models.Model):
     # def get_all_roles(self):
     #     return self.memberships.all()
 
-    def save(self, *args, **kwargs):
-        #  При обновлени проекта — стандартное поведение
+    def save(self, *args, **kwargs) -> Self:
         if self.pk:
+            #  При обновлени проекта — стандартное поведение
             super().save(*args, **kwargs)
-
-        # При создании проекта — владелец становиться первым участником
-        with transaction.atomic():
-            super().save(*args, **kwargs)
-            Membership.objects.create(user=self.owner, project=self, active=True)
+        else:
+            # При создании проекта — владелец становиться первым участником
+            with transaction.atomic():
+                super().save(*args, **kwargs)
+                Membership.objects.create(user=self.owner, project=self, active=True)
+        return self
 
     class Meta:
         verbose_name = _("Project")
@@ -57,7 +60,7 @@ class Membership(models.Model):
                              blank=True,
                              default=None,
                              related_name="memberships",
-                             on_delete=models.CASCADE)
+                             on_delete=models.DO_NOTHING)
 
     project = models.ForeignKey("Project",
                                 null=False,

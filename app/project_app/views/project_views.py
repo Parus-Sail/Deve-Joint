@@ -7,7 +7,7 @@ from django.urls import reverse_lazy
 from django.views import generic
 
 # from .. import forms
-from ..models import Membership, Project
+from ..models import Project
 
 User: type[AbstractBaseUser] = get_user_model()
 

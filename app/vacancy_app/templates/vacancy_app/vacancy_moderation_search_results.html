@@ -1,13 +1,15 @@
 {% extends "base.html" %}
+{% load vacancy_app_tags %}
 {% block title %}
-    Payment Account Moderation List
+    Vacancy Moderation List
 {% endblock title %}
 {% block content %}
     <div class="container">
         <form class="custom-form contact-form" method="get">
             <div class="row">
-                <div class="col-lg-3 col-md-3 col-12"></div>
-                <div class="col-lg-3 col-md-3 col-12">{{ filter.form.as_p }}</div>
+                <div class="col-lg-3 col-md-3 col-12">{{ filter.form.status }}</div>
+                <div class="col-lg-3 col-md-3 col-12">{{ filter.form.owner }}</div>
+                <div class="col-lg-3 col-md-3 col-12">{{ filter.form.description }}</div>
                 <div class="col-lg-3 col-md-3 col-12">
                     <button type="submit" class="form-control">Search</button>
                 </div>
@@ -17,7 +19,7 @@
         {% if object_list %}
             <div class="row">
                 <div class="col-lg-6 col-12 text-center mx-auto mb-4">
-                    <h2 class="text-center mb-4 logo-text">Payment Account Moderation List</h2>
+                    <h2 class="text-center mb-4 logo-text">Vacancy Moderation List</h2>
                 </div>
                 <div class="col-lg-12 col-12">
                     {% for item in object_list %}
@@ -25,14 +27,31 @@
                             <div class="job-body d-flex flex-wrap flex-auto align-items-center ms-4">
                                 <div class="mb-3">
                                     <h5 class="job-title mb-lg-0">
-                                        <a href="{% url 'vacancy:payment_account_moderation_update' pk=item.pk %}"
+                                        <a href="{% url 'vacancy:vacancy_moderation_update' pk=item.pk %}"
                                            class="job-title-link">{{ item.name|truncatechars:80 }}</a>
                                     </h5>
                                     <div class="d-flex flex-wrap align-items-center">
-                                        <p class="job-location mb-0">{{ item.description|truncatechars:200 }}</p>
+                                        <p class="job-location mb-0">
+                                            <strong>ID:</strong>{{ item.id }}
+                                        </p>
+                                    </div>
+                                    <div class="d-flex flex-wrap align-items-center">
+                                        <p class="job-location mb-0">
+                                            <strong>Description:</strong>{{ item.description|truncatechars:200 }}
+                                        </p>
+                                    </div>
+                                    <div class="d-flex flex-wrap align-items-center">
+                                        <p class="job-location mb-0">
+                                            <strong>Owner:</strong>{{ item.owner|truncatechars:100 }}
+                                        </p>
+                                    </div>
+                                    <div class="d-flex flex-wrap align-items-center">
+                                        <p class="job-location mb-0">
+                                            <strong>Created:</strong>{% get_user_date_time item.created_at %}
+                                        </p>
                                     </div>
                                     <div class="d-flex mt-2">
-                                        {% if item.get_status_display != 'Approved' %}
+                                        {% if item.get_status_display != 'Active' %}
                                             <p class="mb-0 text-danger">
                                                 <strong>Status: {{ item.get_status_display }}</strong>
                                             </p>
@@ -44,7 +63,7 @@
                                     </div>
                                 </div>
                                 <div class="job-section-btn-wrap">
-                                    <a href="{% url 'vacancy:payment_account_moderation_update' pk=item.pk %}"
+                                    <a href="{% url 'vacancy:vacancy_moderation_update' pk=item.pk %}"
                                        class="custom-btn btn">More</a>
                                 </div>
                             </div>

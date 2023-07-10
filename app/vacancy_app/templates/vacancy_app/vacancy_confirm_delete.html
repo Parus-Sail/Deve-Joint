@@ -7,28 +7,39 @@
     <div class="container">
         <div class="row justify-content-center pt-3">
             <div class="col-md-8 col-lg-6">
-                <h2 class="text-center mb-4 logo-text">Delete company?</h2>
+                <h2 class="text-center mb-4 logo-text">Delete vacancy?</h2>
                 <p>
-                    <strong>Name:</strong> {{ object.name }}
-                    <br>
                     <strong>Description:</strong> {{ object.description }}
                     <br>
                     <strong>location:</strong> {{ object.location }}
                     <br>
-                    <strong>Web address:</strong> {{ object.url }}
+                    <strong>Salary from:</strong> {{ object.salary_from }}
+                    <br>
+                    <strong>Salary to:</strong> {{ object.to }}
+                    <br>
+                    <strong>Company:</strong> {{ object.company }}
+                    <br>
+                    <strong>Applicant level:</strong> {{ object.applicant_level }}
+                    <br>
+                    <strong>Employment type:</strong> {{ object.employment_type }}
+                    <br>
+                    <strong>Job_type:</strong> {{ object.job_type }}
+                    <br>
+                    <strong>Created at:</strong> {% get_user_date_time object.created_at %}
                     <br>
                     <strong>Last update:</strong> {% get_user_date_time object.update_at %}
                     <br>
                     <strong>Status:</strong> {{ object.get_status_display }}
+                    <br>
                 </p>
                 <div class="row">
                     <div class="col-6">
-                        <form action="{% url 'vacancy:company_delete' pk=object.pk %}"
+                        <form action="{% url 'vacancy:vacancy_delete' pk=object.pk %}"
                               method="post">
                             {% csrf_token %}
                             <div class="d-flex align-items-center mt-2">
-                                <a href="{% url 'vacancy:company_list' %}" class="custom-btn btn me-4">Cancel</a>
-                                <button class="custom-btn custom-border-btn btn me-4" type="submit">Delete company</button>
+                                <a href="{% url 'vacancy:vacancy_list' %}" class="custom-btn btn me-4">Cancel</a>
+                                <button class="custom-btn custom-border-btn btn me-4" type="submit">Delete vacancy</button>
                             </div>
                         </form>
                     </div>

@@ -9,7 +9,7 @@
             <div class="card shadow">
                 <div class="card-body">
                     <h5 class="card-title logo-text">
-                        <strong>Name:</strong> {{ object.name }}
+                        <strong>Company:</strong> {{ object.name }}
                     </h5>
                     <p class="card-text">
                         <strong>Owner:</strong> {{ object.owner }}
@@ -22,11 +22,17 @@
                         <br>
                         <strong>Last update:</strong> {% get_user_date_time object.update_at %}
                         <br>
+                        <a href="{% url 'vacancy:payment_account_detail' pk=object.payment_account.pk %}"
+                           class="custom-link smoothscroll">
+                            <strong>Payment Account:</strong> {{ object.payment_account }}
+                        </a>
+                        <br>
                         <strong>Status:</strong> {{ object.get_status_display }}
                         <br>
-                        <strong>Payment Account:</strong> {{ object.payment_account }}
                     </p>
-                    <a href="{% url 'vacancy:company_list' %}" class="custom-btn btn">Back</a>
+                    <a href="javascript:history.go(-1)"
+                       class="custom-btn custom-border-btn btn me-4">Back</a>
+                    <a href="{% url 'vacancy:company_list' %}" class="custom-btn btn">Company list</a>
                 </div>
             </div>
         </div>

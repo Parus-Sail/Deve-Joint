@@ -9,7 +9,7 @@
             <div class="card shadow">
                 <div class="card-body">
                     <h5 class="card-title logo-text">
-                        <strong>Name:</strong> {{ object.name }}
+                        <strong>Account Name:</strong> {{ object.name }}
                     </h5>
                     <p class="card-text">
                         <strong>Owner:</strong> {{ object.owner }}
@@ -32,8 +32,10 @@
                         <br>
                         <strong>Status :</strong> {{ object.get_status_display }}
                     </p>
+                    <a href="javascript:history.go(-1)"
+                       class="custom-btn custom-border-btn btn me-4">Back</a>
                     <a href="{% url 'vacancy:payment_account_list' %}"
-                       class="custom-btn btn">Back</a>
+                       class="custom-btn btn">Payment account list</a>
                 </div>
             </div>
         </div>

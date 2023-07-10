@@ -60,9 +60,6 @@
                         <li>
                             <a class="dropdown-item" href="{% url 'vacancy:job-listing' %}">Job Listings</a>
                         </li>
-                        <li>
-                            <a class="dropdown-item" href="{% url 'vacancy:job-details' %}">Job Details</a>
-                        </li>
                     </ul>
                 </li>
                 <li class="nav-item">
@@ -96,11 +93,18 @@
                             <li>
                                 <a class="dropdown-item" href="{% url 'vacancy:company_list' %}">Company List</a>
                             </li>
+                            <li>
+                                <a class="dropdown-item" href="{% url 'vacancy:vacancy_list' %}">Vacancy List</a>
+                            </li>
                             {% if user.is_staff %}
                                 <li>
                                     <a class="dropdown-item"
                                        href="{% url 'vacancy:payment_account_moderation_list' %}">Payment
                                     Account Moderation</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item"
+                                       href="{% url 'vacancy:vacancy_moderation_list' %}">Vacancy Moderation</a>
                                 </li>
                             {% endif %}
                             <li>

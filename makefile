@@ -27,6 +27,12 @@ go_db: down
 	./app/manage.py loaddata ./dev_tools/fixtures/project_app_project.yaml
 	./app/manage.py loaddata ./dev_tools/fixtures/role_app_role.yaml
 	./app/manage.py loaddata ./dev_tools/fixtures/project_app_membership.yaml
+	./app/manage.py loaddata ./dev_tools/fixtures/vacancy_app_applicant_level.json
+	./app/manage.py loaddata ./dev_tools/fixtures/vacancy_app_employment_type.json
+	./app/manage.py loaddata ./dev_tools/fixtures/vacancy_app_job_type.json
+	./app/manage.py loaddata ./dev_tools/fixtures/vacancy_app_payment_account.json
+	./app/manage.py loaddata ./dev_tools/fixtures/vacancy_app_company.json
+	./app/manage.py loaddata ./dev_tools/fixtures/vacancy_app_vacancy.json
 
 go_docker: down build up
 

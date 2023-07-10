@@ -37,8 +37,8 @@ class Project(models.Model):
 
         # При создании проекта — владелец становиться первым участником
         with transaction.atomic():
-            Membership.objects.create(user=self.owner, project=self, active=True)
             super().save(*args, **kwargs)
+            Membership.objects.create(user=self.owner, project=self, active=True)
 
     class Meta:
         verbose_name = _("Project")

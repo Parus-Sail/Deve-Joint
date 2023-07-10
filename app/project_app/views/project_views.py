@@ -30,7 +30,7 @@ class OwnerEditMixin(LoginRequiredMixin):
 
     def form_valid(self, form):
         # обязательно наличие атрибута owner у модели
-        if not hasattr(form.instance.model, 'owner'):
+        if not hasattr(form.instance, 'owner'):
             raise AttributeError('Model don\'t have owner attribute')
 
         form.instance.owner = get_user(self.request)

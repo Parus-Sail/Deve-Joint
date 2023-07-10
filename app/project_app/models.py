@@ -1,5 +1,3 @@
-from typing import Self
-
 from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import Group
@@ -7,6 +5,7 @@ from django.db import models, transaction
 from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
+from typing_extensions import Self
 
 User = get_user_model()
 

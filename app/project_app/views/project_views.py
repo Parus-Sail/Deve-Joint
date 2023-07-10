@@ -7,7 +7,7 @@ from django.urls import reverse_lazy
 from django.views import generic
 
 # from .. import forms
-from ..models import Project
+from ..models import Membership, Project
 
 User: type[AbstractBaseUser] = get_user_model()
 
@@ -60,16 +60,23 @@ class MembershipMixin:
     def get_queryset(self) -> QuerySet:
         """ Выборка всех участников проекта (с оптимизацией запроса) """
         project_qs: QuerySet = super().get_queryset()
-        qs = project_qs.prefetch_related('memberships', 'memberships__user')
-        return qs
+
+        projects_qs_with_all_members = project_qs.prefetch_related('memberships', 'memberships__user')
+        return projects_qs_with_all_members
 
 
-class ActiveMembershipMixin(MembershipMixin):
+class ActiveMembershipMixin:
 
     def get_queryset(self) -> QuerySet:
         """ Выборка активных участников проекта (с оптимизацией запроса) """
-        project_qs_with_membership_and_user: QuerySet = super().get_queryset()
-        return project_qs_with_membership_and_user.filter(memberships__active=True)
+
+        members_qs = Membership.objects.filter(active=True)
+        members_pre_qs = Prefetch('memberships', queryset=members_qs)
+
+        projects_qs = super().get_queryset()
+        projects_qs_wtih_active_members: QuerySet = projects_qs.prefetch_related(members_pre_qs)
+
+        return projects_qs_wtih_active_members
 
 
 # ============================================= PROJECTS =================================================

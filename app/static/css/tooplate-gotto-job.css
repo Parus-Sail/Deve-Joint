@@ -1555,3 +1555,21 @@ nav[aria-label="breadcrumb"] {
   }
 }
 
+.search-custom-form .search-custom-form-control {
+  position: relative;
+  background-color: lavender;
+  border: 1px solid transparent;
+  border-radius: var(--border-radius-medium);
+  box-shadow: none;
+  color: var(--p-color);
+  padding-top: 12px;
+  padding-bottom: 12px;
+  outline: none;
+}
+
+.placeholder {
+  position: absolute;
+  left: 20px;
+  top: 0px;
+  padding: 0 20px;
+}

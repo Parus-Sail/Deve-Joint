@@ -5,7 +5,6 @@ from django.db import transaction
 from django.db.models import Prefetch, QuerySet
 from django.shortcuts import get_object_or_404
 
-from . import rules
 from .models import Membership, Project
 
 User: type[AbstractBaseUser] = get_user_model()
@@ -49,7 +48,7 @@ class ProjectService:
     def create_project(owner_id: int, **kwargs_from_form) -> Project:
         owner = get_object_or_404(User, pk=owner_id)
         project = Project.objects.create(owner=owner, **kwargs_from_form)
-        project.memberships.create(user=owner)
+        MembershipService._include_member(owner_id, project.id)
         return project
 
     @staticmethod
@@ -73,7 +72,7 @@ class MembershipService:
         user: AbstractBaseUser = get_object_or_404(User, pk=user_id)
         project: Project = get_object_or_404(Project, pk=project_id)
 
-        membership, created: list[Membership, bool] = Membership.objects.get_or_create(user=user, project=project)
+        membership, created = Membership.objects.get_or_create(user=user, project=project)
         if waiting_status:
             membership.waiting_status = waiting_status
             membership.save()

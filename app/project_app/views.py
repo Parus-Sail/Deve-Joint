@@ -9,16 +9,20 @@ from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.views import View, generic
 from django.views.generic.edit import ModelFormMixin
+from rules import is_authenticated
 from rules.contrib.views import PermissionRequiredMixin
 
-from . import permissions
 from .forms import ProjectForm
 from .models import Group, Membership, Project
+from .rules import is_project_owner
 from .service import MembershipService, ProjectService
 
 User: type[AbstractBaseUser] = get_user_model()
 
 # ============================================ PROJECTS =============================================
+
+from django.contrib.auth.mixins import LoginRequiredMixin
+from rules.contrib.views import PermissionRequiredMixin, permission_required
 
 
 class ProjectListView(generic.ListView):
@@ -43,26 +47,33 @@ class ProjectDetailView(generic.DetailView):
 
 
 # LoginRequiredMixin,
-class ProjectCreateView(PermissionRequiredMixin, generic.CreateView):
+class ProjectCreateView(LoginRequiredMixin, generic.CreateView):
     # success_url —> to project_app:detail
     model = Project
     template_name = 'project_app/project_form.html'
     form_class = ProjectForm
-    permission_required = "create_project"
+    permission_required = "auth_user"
 
     def form_valid(self, form):
-        owner_id = int(self.request.user.id)
+        # owner_id = int(self.request.user.id)
+        owner_id = int(get_user(self.request).id)
         self.object: Project = ProjectService.create_project(owner_id, **form.cleaned_data)
         # пропоускаем стандарную реализацию сохранения объекта в БД, переходим сразу к редиректу
         return super(ModelFormMixin, self).form_valid(form)
 
 
+# @permission_required('project_app.change_project', fn=is_project_owner)
 class ProjectUpdateView(PermissionRequiredMixin, generic.UpdateView):
     # success_url —> to project_app:detail
     model = Project
     template_name = 'project_app/project_form.html'
+    pk_url_kwarg = 'project_id'
     form_class = ProjectForm
-    permission_required = "change_project"
+    permission_required = "project_owner"
+    raise_exception = True
+
+    def get_permission_object(self):
+        return self.get_object()
 
     def form_valid(self, form):
         project_id = int(self.kwargs['project_id'])
@@ -76,20 +87,24 @@ class ProjectDeleteView(PermissionRequiredMixin, generic.DeleteView):
     template_name = 'project_app/project_delete.html'
     success_url = reverse_lazy('project_app:list')
     pk_url_kwarg = 'project_id'
-    permission_required = "delete_project"
+    permission_required = "project_owner"
 
-    def delete(self, request, *args, **kwargs):
-        self.pk = int(self.kwargs['project_id'])
-        ProjectService.delete_project(self.pk)
-        return super().delete(request, *args, **kwargs)
+    def form_valid(self, form):
+        project_id = int(self.kwargs[self.pk_url_kwarg])
+        ProjectService.delete_project(project_id)
+        return redirect(self.get_success_url())
+
+    # def form_valid(self, form):
+    # def delete(self, request, *args, **kwargs):
+    #     self.pk = int(self.kwargs['project_id'])
+    #     ProjectService.delete_project(self.pk)
+    #     return super().delete(request, *args, **kwargs)
 
 
-class MyProjectsView(PermissionRequiredMixin, generic.ListView):
-
+class MyProjectsView(generic.ListView):
     template_name = 'project_app/my_projects.html'
     pk_url_kwarg = 'project_id'
     context_object_name = 'projects'
-    permission_required = "view_own_project"
 
     def get_queryset(self):
         """ Owner's projects """
@@ -99,11 +114,10 @@ class MyProjectsView(PermissionRequiredMixin, generic.ListView):
 # ============================================= MEMBERS =============================================
 
 
-class ListProjectMembersView(PermissionRequiredMixin, generic.ListView):
+class ListProjectMembersView(generic.ListView):
     template_name = 'project_app/projects_members.html'
     pk_url_kwarg = 'project_id'
     context_object_name = 'members'
-    permission_required = "change_project_member"
 
     def get_queryset(self) -> QuerySet:
         """ оптимизация запроса (получение всех пользователей за раз)"""
@@ -117,7 +131,7 @@ class ListProjectMembersView(PermissionRequiredMixin, generic.ListView):
 
 
 class InviteToProjectView(PermissionRequiredMixin, View):
-    permission_required = "invite"
+    permission_required = ["project_member", "project_owner"]
 
     def get(self, request, user_id, project_id):
         """ участник предлагает вступить в проект """
@@ -129,7 +143,7 @@ class InviteToProjectView(PermissionRequiredMixin, View):
 
 
 class ApproveMemberView(PermissionRequiredMixin, View):
-    permission_required = "approve_disapprove"
+    permission_required = "project_not_member"
 
     def get(self, request, project_id):
         """ пользователь соглашется вступить в проект """
@@ -141,7 +155,7 @@ class ApproveMemberView(PermissionRequiredMixin, View):
 
 
 class DisapproveMemberView(PermissionRequiredMixin, View):
-    permission_required = "approve_disapprove"
+    permission_required = "project_not_member"
 
     def get(self, request, project_id, user_id):
         """ пользователь отказывается вступить в проект """
@@ -156,7 +170,7 @@ class DisapproveMemberView(PermissionRequiredMixin, View):
 
 
 class ApplicationMemberView(PermissionRequiredMixin, View):
-    permission_required = "application"
+    permission_required = "project_not_member"
 
     def get(self, request, project_id):
         """ пользователь отправляет заявку на участие в проекте """
@@ -168,7 +182,7 @@ class ApplicationMemberView(PermissionRequiredMixin, View):
 
 
 class AcceptMemberView(PermissionRequiredMixin, View):
-    permission_required = "accept_or_reject"
+    permission_required = "project_owner"
 
     def get(self, request, project_id, applicant_id):
         """ руководитель принимает заявку на участие """
@@ -180,7 +194,7 @@ class AcceptMemberView(PermissionRequiredMixin, View):
 
 
 class RejectMemberView(PermissionRequiredMixin, View):
-    permission_required = "accept_or_reject"
+    permission_required = "project_owner"
 
     def get(self, request, project_id, applicant_id):
         """ руководитель отклоняет заявку на участие """

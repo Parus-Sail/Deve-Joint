@@ -4,6 +4,7 @@
     email: user1@example.com
     username: user1
     email_verify: true
+    password: "password"
 
 - model: auth_app.baseopensailuser
   pk: 3
@@ -11,6 +12,7 @@
     email: user2@example.com
     username: user2
     email_verify: false
+    password: "password"
 
 - model: auth_app.baseopensailuser
   pk: 4
@@ -18,3 +20,4 @@
     email: user3@example.com
     username: user3
     email_verify: true
+    password: "password"

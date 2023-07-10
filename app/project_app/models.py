@@ -50,8 +50,8 @@ class Membership(models.Model):
     waiting_status = models.CharField(
         max_length=10,
         default=None,
-        null=True,
         blank=True,
+        null=True,
         choices=[
             ('wait_user', 'invited'),  # ждем решение от потенциального участника
             ('wait_owner', 'applicated'),  # ждем решение от владельца проекта

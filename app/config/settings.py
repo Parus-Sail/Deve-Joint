@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     "debug_toolbar",
     ################
     "auth_app",
-    'rules',
     # "role_app",
     ################
     "main_app",
@@ -122,11 +121,6 @@ AUTH_PASSWORD_VALIDATORS = [
         "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
     },
 ]
-
-AUTHENTICATION_BACKENDS = (
-    'rules.permissions.ObjectPermissionBackend',
-    'django.contrib.auth.backends.ModelBackend',
-)
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/

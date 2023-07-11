@@ -4,7 +4,8 @@
         <div class="row align-items-center">
             <div class="col-lg-6 col-12 mb-lg-4">
             <form class="search-custom-form" action="{% url 'project_app:search_results' %}" method="get">
-                <input class="search-custom-form-control placeholder"  name="q" type="text" placeholder="Search...">
+                <input class="search-custom-form-control placeholder"  name="q" type="text"
+                       placeholder="Search..." value={{ request.query }}>
             </form>
                 <span class="current">
                    Results: page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }} pages

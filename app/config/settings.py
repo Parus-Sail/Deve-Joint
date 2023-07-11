@@ -178,4 +178,4 @@ AUTH_USER_MODEL = "auth_app.BaseOpenSailUser"
 LOGIN_URL = 'auth_app:login'
 
 # pagination params
-DEFAULT_PAGINATE_SIZE = 1
+DEFAULT_PAGINATE_SIZE = 3

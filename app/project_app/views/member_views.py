@@ -16,14 +16,12 @@ from django.views.generic.edit import ModelFormMixin
 from ..models import Candidate, Member, Membership, Owner, Project
 from .mixins import OwnerMixin
 
-# from .service import MembershipService, ProjectService
-
 User: type[AbstractBaseUser] = get_user_model()
 
-# ============================================= MEMBERS ACTIVITIES =======================================
+# ============================================= MEMBERS ACTIVITIES (HARDCODE) ==================================
 
 
-class MakeAppicationView(View):  #todo: implement
+class MakeAppicationView(View):
 
     def post(self, request):
 
@@ -37,7 +35,7 @@ class MakeAppicationView(View):  #todo: implement
         return redirect(reverse('project_app:detail', kwargs={'project_id': project_id}))
 
 
-class LeaveProjectView(View):  #todo: implement
+class LeaveProjectView(View):
 
     def post(self, request):
 
@@ -52,7 +50,7 @@ class LeaveProjectView(View):  #todo: implement
         return redirect(reverse('project_app:detail', kwargs={'project_id': project_id}))
 
 
-class AcceptAppicationView(View):  #todo: implement
+class AcceptAppicationView(View):
 
     def post(self, request):
 
@@ -67,7 +65,7 @@ class AcceptAppicationView(View):  #todo: implement
         return redirect(reverse('project_app:my_project', kwargs={'project_id': project_id}))
 
 
-class RejectApplicationView(View):  #todo: implement
+class RejectApplicationView(View):
 
     def post(self, request):
 
@@ -81,7 +79,7 @@ class RejectApplicationView(View):  #todo: implement
         return redirect(reverse('project_app:my_project', kwargs={'project_id': project_id}))
 
 
-class ExcludeMemberView(View):  #todo: implement
+class ExcludeMemberView(View):
 
     def post(self, request):
 
@@ -94,50 +92,10 @@ class ExcludeMemberView(View):  #todo: implement
 
         return redirect(reverse('project_app:my_project', kwargs={'project_id': project_id}))
 
-
-# ===================================== EXPERIMENTS =====================================================
-
-
-class IncludeToProjectMixit(LoginRequiredMixin):  #todo: implement
-    """
-	реализует логику добавления пользователя в проект, как участника.
-	получает атрибуты в POST request: user_id_to_add и project_id
-	"""
-
-
-class ExcludeFromProjectMixin(LoginRequiredMixin):  #todo: implement
-    """
-	реализует логику исключения пользователя из участников проекта.
-	получает атрибуты в POST request: user_id_to_add и project_id
-	"""
-
-
-class LeaveProjectView(ExcludeFromProjectMixin, View):  #todo: implement
-    """ Участник проекта выходит из него """
-
-
-class KickOutFromProjectView(OwnerMixin, ExcludeFromProjectMixin, View):  #todo: implement
-    """ Участник проекта выходит из него """
-
-
-from django.views.generic.base import ContextMixin
-
-
-class NotMember(LoginRequiredMixin, UserPassesTestMixin):
-
-    def test_func(self) -> bool:
-        """ проверяем является ли текущий пользователь участником проекта """
-        # todo: не поддерживается slug
-        project_pk = self.kwargs.get(self.pk_url_kwarg)
-        if project_pk:
-            user = get_user(self.request)
-            return Owner.is_owning(user, project_pk)
-        return True
-
-
-# ========================================================================================================
 
 # ============================================= Заявление на вступление в проект =========================
+
+from django.views.generic.base import ContextMixin
 
 
 class ApplicationMemberView(UserPassesTestMixin, ContextMixin, View):  #todo: implement
@@ -181,20 +139,24 @@ class ApplicationMemberView(UserPassesTestMixin, ContextMixin, View):  #todo: im
         """ результат выполенения запроса на изменение """
         return JsonResponse(context)
 
-        # candidate = get_user(self.request)
 
-        # user: AbstractBaseUser = get_object_or_404(User, pk=user_id)
-        # project: Project = get_object_or_404(Project, pk=project_id)
+# =======================================================================================
 
-        # membership, created = Membership.objects.get_or_create(user=user, project=project)
-        # if waiting_status:
-        #     membership.waiting_status = waiting_status
-        #     membership.save()
+# candidate = get_user(self.request)
 
-        # MembershipService.application_by_user(applicant_id, project_id)
-        # messages.success(request, "Application submitted")
-        # return redirect('application')
+# user: AbstractBaseUser = get_object_or_404(User, pk=user_id)
+# project: Project = get_object_or_404(Project, pk=project_id)
 
+# membership, created = Membership.objects.get_or_create(user=user, project=project)
+# if waiting_status:
+#     membership.waiting_status = waiting_status
+#     membership.save()
+
+# MembershipService.application_by_user(applicant_id, project_id)
+# messages.success(request, "Application submitted")
+# return redirect('application')
+
+# =======================================================================================
 
 # class DecisionOfApplicationView(View):  #todo: implement
 #     """ руководитель принимает заявку на участие """

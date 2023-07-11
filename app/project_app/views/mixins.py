@@ -90,3 +90,40 @@ class WithActiveMembershipMixin:
         projects_qs_wtih_active_members: QuerySet = projects_qs.prefetch_related(members_pre_qs)
 
         return projects_qs_wtih_active_members
+
+
+# ===================================== EXPERIMENTS =====================================================
+
+
+class IncludeToProjectMixit(LoginRequiredMixin):  #todo: implement
+    """
+	реализует логику добавления пользователя в проект, как участника.
+	получает атрибуты в POST request: user_id_to_add и project_id
+	"""
+
+
+class ExcludeFromProjectMixin(LoginRequiredMixin):  #todo: implement
+    """
+	реализует логику исключения пользователя из участников проекта.
+	получает атрибуты в POST request: user_id_to_add и project_id
+	"""
+
+
+class LeaveProjectView(ExcludeFromProjectMixin, View):  #todo: implement
+    """ Участник проекта выходит из него """
+
+
+class KickOutFromProjectView(OwnerMixin, ExcludeFromProjectMixin, View):  #todo: implement
+    """ Участник проекта выходит из него """
+
+
+class NotMember(LoginRequiredMixin, UserPassesTestMixin):
+
+    def test_func(self) -> bool:
+        """ проверяем является ли текущий пользователь участником проекта """
+        # todo: не поддерживается slug
+        project_pk = self.kwargs.get(self.pk_url_kwarg)
+        if project_pk:
+            user = get_user(self.request)
+            return Owner.is_owning(user, project_pk)
+        return True

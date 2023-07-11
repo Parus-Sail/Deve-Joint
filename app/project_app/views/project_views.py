@@ -1,122 +1,50 @@
-from django.contrib.auth import get_user, get_user_model
-from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin, UserPassesTestMixin
+from django.contrib.auth import get_user_model
 from django.contrib.auth.models import AbstractBaseUser
-from django.db.models import Prefetch
-from django.db.models.query import QuerySet
 from django.urls import reverse_lazy
 from django.views import generic
 
-# from .. import forms
-from ..models import Membership, Owner, Project
+from .mixins import (
+    OwnProjectEditMixin,
+    OwnProjectMixin,
+    ProjectMixin,
+    WithActiveMembershipMixin,
+    WithAllMembershipMixin,
+)
 
 User: type[AbstractBaseUser] = get_user_model()
-
-# ============================================= OWNER MIXINS =============================================
-
-
-class OwnerMixin(LoginRequiredMixin, UserPassesTestMixin):
-
-    def get_queryset(self) -> QuerySet:
-        """ Выборка принадлежащая пользователю """
-        qs: QuerySet = super().get_queryset()
-        # обязательно наличие атрибута owner у модели
-        if not hasattr(qs.model, 'owner'):
-            raise AttributeError('Model don\'t have owner attribute')
-        return qs.filter(owner=get_user(self.request))
-
-    def test_func(self) -> bool:
-        """ проверяем является ли текущий пользователь собственником конкретного объекта """
-        # todo: не поддерживается slug
-        obj_pk = self.kwargs.get(self.pk_url_kwarg)
-        if obj_pk:
-            user = get_user(self.request)
-            return Owner.is_owning(user, obj_pk)
-        return True
-
-
-class OwnerEditMixin(LoginRequiredMixin):
-    """ Перед сохранением экземпляра модели добавляет экземпляр текущего пользователя, как владельца """
-
-    def form_valid(self, form):
-        # обязательно наличие атрибута owner у модели
-        if not hasattr(form.instance, 'owner'):
-            raise AttributeError('Model don\'t have owner attribute')
-
-        form.instance.owner = get_user(self.request)
-        return super().form_valid(form)
-
-
-# ============================================= PROJECTS MIXIN ===========================================
-
-
-class ProjectMixin:
-    model = Project
-    pk_url_kwarg: str = 'project_id'
-
-
-class OwnProjectMixin(OwnerMixin, ProjectMixin):
-    pass
-
-
-class OwnProjectEditMixin(OwnProjectMixin, OwnerEditMixin):
-    # form_class = ProjectForm
-    fields = ['title', 'description']
-
-
-class MembershipMixin:
-
-    def get_queryset(self) -> QuerySet:
-        """ Выборка всех участников проекта (с оптимизацией запроса) """
-        project_qs: QuerySet = super().get_queryset()
-
-        projects_qs_with_all_members = project_qs.prefetch_related('memberships', 'memberships__user')
-        return projects_qs_with_all_members
-
-
-class ActiveMembershipMixin:
-
-    def get_queryset(self) -> QuerySet:
-        """ Выборка активных участников проекта (с оптимизацией запроса) """
-
-        members_qs = Membership.objects.filter(active=True)
-        members_pre_qs = Prefetch('memberships', queryset=members_qs)
-
-        projects_qs = super().get_queryset()
-        projects_qs_wtih_active_members: QuerySet = projects_qs.prefetch_related(members_pre_qs)
-
-        return projects_qs_wtih_active_members
-
 
 # ============================================= PROJECTS =================================================
 
 
 class ProjectListView(ProjectMixin, generic.ListView):
-    pass
+    """ Список всех проектов  """
 
 
-class ProjectDetailView(ProjectMixin, ActiveMembershipMixin, generic.DetailView):
-    """ Имеется возможность просматривать только активных участников """
+class ProjectDetailView(ProjectMixin, WithActiveMembershipMixin, generic.DetailView):
+    """ Конкретный проект с АКТИВНЫМИ (подтвержденными) участникми """
 
 
 # ============================================= OWN PROJECTS =============================================
 
 
 class OwnProjectListView(OwnProjectMixin, generic.ListView):
+    """ Спиосок собтсвеных проектов """
     template_name_suffix = '_own_list'
 
 
-class OwnProjectDetail(OwnProjectMixin, MembershipMixin, generic.DetailView):
-    """ Имеется возможность просматривать всех участников (в том числе и не активных) """
+class OwnProjectDetail(OwnProjectMixin, WithAllMembershipMixin, generic.DetailView):
+    """ Конкретный проект со ВСЕМИ участникми (на рассмотрении) """
     template_name_suffix = '_own_detail'
 
 
 class OwnProjectCreateView(OwnProjectEditMixin, generic.CreateView):
-    pass
+    """ Создаем проект указываем себя как собтсвенника и участника """
 
 
 class OwnProjectUpdateView(OwnProjectEditMixin, generic.UpdateView):
-    pass
+    """ Получаем доступ к редактированию СВОЕГО проекта """
 
 
 class OwnProjectDeleteView(OwnProjectMixin, generic.DeleteView):
+    """ Получаем доступ к удалению СВОЕГО проекта """
     success_url = reverse_lazy('project_app:list')

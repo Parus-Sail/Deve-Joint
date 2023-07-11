@@ -14,7 +14,7 @@ from django.views.generic import FormView
 from django.views.generic.edit import ModelFormMixin
 
 from ..models import Candidate, Member, Membership, Owner, Project
-from .project_views import OwnerMixin
+from .mixins import OwnerMixin
 
 # from .service import MembershipService, ProjectService
 

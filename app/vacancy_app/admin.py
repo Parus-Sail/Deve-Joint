@@ -1,15 +1,25 @@
 from django.contrib import admin
-from django.utils.translation import gettext_lazy as _
-from main_app import models as mainpage_models
+
+from . import models as vacancy_models
 
 
-@admin.register(mainpage_models.News)
-class NewsAdmin(admin.ModelAdmin):
-    list_display = ["title", "created", "deleted"]
-    search_fields = ["title", "preamble", "body"]
-    actions = ["mark_deleted"]
+@admin.register(vacancy_models.ApplicantLevel)
+class ApplicantLevelAdmin(admin.ModelAdmin):
+    list_display = ["name", "sort_order"]
+    search_fields = [
+        "name",
+    ]
 
-    def mark_deleted(self, request, queryset):
-        queryset.update(deleted=True)
 
-    mark_deleted.short_description = _("Mark deleted")
+@admin.register(vacancy_models.EmploymentType)
+class EmploymentTypeAdmin(admin.ModelAdmin):
+    list_display = ["name", "sort_order"]
+    search_fields = [
+        "name",
+    ]
+
+
+@admin.register(vacancy_models.JobType)
+class JobTypeAdmin(admin.ModelAdmin):
+    list_display = ["name", "sort_order"]
+    search_fields = ["name"]

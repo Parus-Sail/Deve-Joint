@@ -1,0 +1,46 @@
+[
+{
+  "model": "vacancy_app.applicantlevel",
+  "pk": 1,
+  "fields": {
+    "name": "Trainee",
+    "description": "Trainee",
+    "sort_order": 1,
+    "created_at": "2023-07-06T21:15:58.053Z",
+    "update_at": "2023-07-06T21:15:58.053Z"
+  }
+},
+{
+  "model": "vacancy_app.applicantlevel",
+  "pk": 2,
+  "fields": {
+    "name": "Junior",
+    "description": "Junior",
+    "sort_order": 2,
+    "created_at": "2023-07-06T21:16:05.817Z",
+    "update_at": "2023-07-06T21:16:05.817Z"
+  }
+},
+{
+  "model": "vacancy_app.applicantlevel",
+  "pk": 3,
+  "fields": {
+    "name": "Middle",
+    "description": "Middle",
+    "sort_order": 3,
+    "created_at": "2023-07-06T21:16:13.944Z",
+    "update_at": "2023-07-06T21:16:13.944Z"
+  }
+},
+{
+  "model": "vacancy_app.applicantlevel",
+  "pk": 4,
+  "fields": {
+    "name": "Senior",
+    "description": "Senior",
+    "sort_order": 4,
+    "created_at": "2023-07-06T21:16:23.726Z",
+    "update_at": "2023-07-06T21:16:23.726Z"
+  }
+}
+]

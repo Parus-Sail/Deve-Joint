@@ -1,0 +1,57 @@
+[
+{
+  "model": "vacancy_app.employmenttype",
+  "pk": 1,
+  "fields": {
+    "name": "Remote",
+    "description": "Remote",
+    "sort_order": 1,
+    "created_at": "2023-07-06T21:16:38.496Z",
+    "update_at": "2023-07-06T21:16:38.496Z"
+  }
+},
+{
+  "model": "vacancy_app.employmenttype",
+  "pk": 2,
+  "fields": {
+    "name": "Full Time",
+    "description": "Full Time",
+    "sort_order": 2,
+    "created_at": "2023-07-06T21:16:47.885Z",
+    "update_at": "2023-07-06T21:16:47.885Z"
+  }
+},
+{
+  "model": "vacancy_app.employmenttype",
+  "pk": 3,
+  "fields": {
+    "name": "Contract",
+    "description": "Contract",
+    "sort_order": 3,
+    "created_at": "2023-07-06T21:17:01.646Z",
+    "update_at": "2023-07-06T21:17:01.646Z"
+  }
+},
+{
+  "model": "vacancy_app.employmenttype",
+  "pk": 4,
+  "fields": {
+    "name": "Part Time",
+    "description": "Part Time",
+    "sort_order": 4,
+    "created_at": "2023-07-06T21:17:12.795Z",
+    "update_at": "2023-07-06T21:17:12.795Z"
+  }
+},
+{
+  "model": "vacancy_app.employmenttype",
+  "pk": 5,
+  "fields": {
+    "name": "Freelance",
+    "description": "Freelance",
+    "sort_order": 5,
+    "created_at": "2023-07-06T21:17:24.513Z",
+    "update_at": "2023-07-06T21:17:24.513Z"
+  }
+}
+]

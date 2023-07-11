@@ -8,9 +8,9 @@ from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
 from django.views import generic
 from django.views.generic.edit import ModelFormMixin
+from favorite_app.models import FavoriteProjects
 
 from . import forms, models, permissions, service
-from favorite_app.models import FavoriteProjects
 
 User = get_user_model()
 

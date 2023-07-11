@@ -127,3 +127,31 @@ class NotMember(LoginRequiredMixin, UserPassesTestMixin):
             user = get_user(self.request)
             return Owner.is_owning(user, project_pk)
         return True
+
+
+# todo: think about events that are suitable for maintaining a single resonant ability
+#
+# def project_application(user: User, project: Project) -> Membership:
+#
+# send_message(project.owner: User, sender: User, title, text)
+# > message: Message = message_factory(title, text)
+# > sender.outbox(recipient: User, message)
+# > recipient.inbox(sender: User, message)
+#
+# or like event
+#
+# application_to_project_event = Application(user, project)
+# ...
+#
+# envent_bus(application_to_project_event: Envet)
+# envent_bus(reject_application_to_project_event: Envet)
+# envent_bus(accept_application_to_project_event: Envet)
+#
+# in envent module:
+# events: dict[Event, list[handlers]]
+# event_bus.handle(event)
+#
+# event_bus.handle(event) — in envent module
+#
+# membership = Membership.objects.create(user=user, project=project)
+# return membership

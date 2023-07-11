@@ -3,6 +3,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.models import AbstractBaseUser
 from django.db.models import Prefetch
 from django.db.models.query import QuerySet
+from django.views import View
 
 from ..models import Membership, Owner, Project
 

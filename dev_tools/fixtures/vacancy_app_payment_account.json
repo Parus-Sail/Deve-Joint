@@ -1,0 +1,110 @@
+[
+{
+  "model": "vacancy_app.paymentaccount",
+  "pk": 1,
+  "fields": {
+    "name": "user1 payment account",
+    "description": "user5 payment account description",
+    "address": "Moscow street 24",
+    "status": "REQ_APP",
+    "type": "Joint Stock Company",
+    "director_name": "Nik",
+    "bank": "Bank of America",
+    "tax_number": "123123",
+    "created_at": "2023-07-06T19:25:40.066Z",
+    "update_at": "2023-07-06T19:26:46.732Z",
+    "email": "company@1.com",
+    "owner": 2
+  }
+},
+{
+  "model": "vacancy_app.paymentaccount",
+  "pk": 2,
+  "fields": {
+    "name": "user 1 payment account 2",
+    "description": "user5 payment account 2 desc",
+    "address": "Moscow street 24",
+    "status": "APP",
+    "type": "Joint Stock Company",
+    "director_name": "Kate",
+    "bank": "Sberbank",
+    "tax_number": "234234",
+    "created_at": "2023-07-06T19:26:43.801Z",
+    "update_at": "2023-07-06T19:34:44.426Z",
+    "email": "company@1.com",
+    "owner": 2
+  }
+},
+{
+  "model": "vacancy_app.paymentaccount",
+  "pk": 5,
+  "fields": {
+    "name": "test",
+    "description": "test",
+    "address": "1",
+    "status": "APP",
+    "type": "1",
+    "director_name": "1",
+    "bank": "11",
+    "tax_number": null,
+    "created_at": "2023-07-08T15:08:13.696Z",
+    "update_at": "2023-07-08T15:14:56.764Z",
+    "email": "company@1.com",
+    "owner": 2
+  }
+},
+{
+  "model": "vacancy_app.paymentaccount",
+  "pk": 7,
+  "fields": {
+    "name": "123",
+    "description": "123",
+    "address": "123",
+    "status": "BLC",
+    "type": "123",
+    "director_name": "123",
+    "bank": "123",
+    "tax_number": "123",
+    "created_at": "2023-07-08T15:16:07.967Z",
+    "update_at": "2023-07-08T15:16:40.710Z",
+    "email": "company@1.com",
+    "owner": 2
+  }
+},
+{
+  "model": "vacancy_app.paymentaccount",
+  "pk": 8,
+  "fields": {
+    "name": "User 2 Payment account",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "address": "GB, London",
+    "status": "NOT_APP",
+    "type": "Joint Stock Company",
+    "director_name": "John",
+    "bank": "Bank of England",
+    "tax_number": "1234-123123-214124",
+    "created_at": "2023-07-09T16:22:43.428Z",
+    "update_at": "2023-07-09T16:25:27.572Z",
+    "email": "company_gb@1.com",
+    "owner": 3
+  }
+},
+{
+  "model": "vacancy_app.paymentaccount",
+  "pk": 9,
+  "fields": {
+    "name": "User 2 Payment Account Bank of America",
+    "description": "Amet tellus cras adipiscing enim eu. Scelerisque viverra mauris in aliquam sem fringilla ut morbi tincidunt. Vitae et leo duis ut. Lacus laoreet non curabitur gravida arcu. Turpis egestas maecenas pharetra convallis posuere morbi. Mauris commodo quis imperdiet massa tincidunt nunc pulvinar. Velit sed ullamcorper morbi tincidunt ornare massa eget egestas purus. Ut faucibus pulvinar elementum integer enim. Egestas sed tempus urna et pharetra pharetra massa. Tellus integer feugiat scelerisque varius morbi. Vitae proin sagittis nisl rhoncus mattis rhoncus urna.",
+    "address": "New York - 100",
+    "status": "APP",
+    "type": "Joint Stock Company",
+    "director_name": "John",
+    "bank": "Bank of America",
+    "tax_number": "15235-2335-2343",
+    "created_at": "2023-07-09T16:24:15.137Z",
+    "update_at": "2023-07-09T20:09:54.025Z",
+    "email": "company_gb@1.com",
+    "owner": 3
+  }
+}
+]

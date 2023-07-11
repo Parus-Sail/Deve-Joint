@@ -1,0 +1,101 @@
+[
+{
+  "model": "vacancy_app.jobtype",
+  "pk": 1,
+  "fields": {
+    "name": "Web Design",
+    "description": "Web Design",
+    "sort_order": 1,
+    "created_at": "2023-07-06T21:17:54.921Z",
+    "update_at": "2023-07-07T20:06:35.906Z"
+  }
+},
+{
+  "model": "vacancy_app.jobtype",
+  "pk": 2,
+  "fields": {
+    "name": "Marketing",
+    "description": "Marketing",
+    "sort_order": 2,
+    "created_at": "2023-07-06T21:18:03.515Z",
+    "update_at": "2023-07-06T21:18:03.515Z"
+  }
+},
+{
+  "model": "vacancy_app.jobtype",
+  "pk": 3,
+  "fields": {
+    "name": "Customer Support",
+    "description": "Customer Support",
+    "sort_order": 4,
+    "created_at": "2023-07-06T21:18:14.708Z",
+    "update_at": "2023-07-06T21:18:36.262Z"
+  }
+},
+{
+  "model": "vacancy_app.jobtype",
+  "pk": 4,
+  "fields": {
+    "name": "Programming",
+    "description": "Programming",
+    "sort_order": 3,
+    "created_at": "2023-07-06T21:18:30.939Z",
+    "update_at": "2023-07-06T21:18:30.939Z"
+  }
+},
+{
+  "model": "vacancy_app.jobtype",
+  "pk": 5,
+  "fields": {
+    "name": "Devops",
+    "description": "Devops",
+    "sort_order": 5,
+    "created_at": "2023-07-06T21:18:45.153Z",
+    "update_at": "2023-07-06T21:18:45.153Z"
+  }
+},
+{
+  "model": "vacancy_app.jobtype",
+  "pk": 6,
+  "fields": {
+    "name": "Engineer",
+    "description": "Engineer",
+    "sort_order": 6,
+    "created_at": "2023-07-06T21:18:56.279Z",
+    "update_at": "2023-07-06T21:18:56.279Z"
+  }
+},
+{
+  "model": "vacancy_app.jobtype",
+  "pk": 7,
+  "fields": {
+    "name": "Testing",
+    "description": "Testing",
+    "sort_order": 7,
+    "created_at": "2023-07-06T21:19:19.195Z",
+    "update_at": "2023-07-06T21:19:19.195Z"
+  }
+},
+{
+  "model": "vacancy_app.jobtype",
+  "pk": 8,
+  "fields": {
+    "name": "HR",
+    "description": "HR",
+    "sort_order": 8,
+    "created_at": "2023-07-08T20:22:13.363Z",
+    "update_at": "2023-07-08T20:22:18.545Z"
+  }
+},
+{
+  "model": "vacancy_app.jobtype",
+  "pk": 9,
+  "fields": {
+    "name": "Education",
+    "description": "Education",
+    "sort_order": 9,
+    "created_at": "2023-07-08T20:22:44.901Z",
+    "update_at": "2023-07-08T20:22:44.901Z"
+  }
+}
+]

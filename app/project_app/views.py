@@ -3,6 +3,8 @@ from typing import Any
 from django.contrib import messages
 from django.contrib.auth import get_user, get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db.models.query import QuerySet
+from django.shortcuts import get_object_or_404
 from django.db.models import Q
 from django.urls import reverse_lazy
 from django.views import generic
@@ -12,6 +14,7 @@ from auth_app.models import BaseOpenSailUser
 from django.conf import settings
 
 from . import forms, models, permissions, service
+from favorite_app.models import FavoriteProjects
 
 User = get_user_model()
 
@@ -43,6 +46,13 @@ class ProjectDetailView(generic.DetailView):
     queryset = service.project_list()
     template_name = 'project_app/project_detail.html'
     context_object_name = 'project'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        project = get_object_or_404(models.Project, pk=self.kwargs['pk'])
+        is_in_favorites = FavoriteProjects.objects.filter(user=self.request.user, project=project)
+        context["is_in_favorites"] = is_in_favorites
+        return context
 
 
 class ProjectCreateView(LoginRequiredMixin, generic.CreateView):

@@ -9,7 +9,7 @@ class FavoriteProjectsView(LoginRequiredMixin, View):
     template_name = "favorite_app/favorites.html"
 
     def get(self, request):
-        title = "favorite_projects"
+        title = "favorite projects"
         favorite_projects_items = FavoriteProjects.objects.filter(user=request.user)
         context = {
             "title": title,
@@ -26,4 +26,14 @@ class FavoriteProjectsAdd(LoginRequiredMixin, View):
         if not favorites:
             favorites = FavoriteProjects(user=request.user, project=project)
         favorites.save()
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+
+class FavoriteProjectsRemove(LoginRequiredMixin, View):
+
+    def get(self, request, pk):
+        project = get_object_or_404(Project, pk=pk)
+        favorites_pk = FavoriteProjects.objects.filter(user=request.user, project=project).first().pk
+        favorites_record = get_object_or_404(FavoriteProjects, pk=favorites_pk)
+        favorites_record.delete()
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))

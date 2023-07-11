@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load vacancy_app_tags %}
+{% block title %}
+    User Profile Detail for Moderation
+{% endblock title %}
+{% block content %}
+    <div class="row justify-content-center pt-3">
+        <div class="col-md-12 col-lg-8">
+            <div class="card shadow">
+                <div class="card-body">
+                    <h5 class="card-title logo-text">
+                        <strong>Username:</strong> {{ object.username }}
+                    </h5>
+                    <p class="card-text">
+                        <strong>ID:</strong> {{ object.id }}
+                        <br>
+                        <strong>First name:</strong> {{ object.first_name }}
+                        <br>
+                        <strong>Last name :</strong> {{ object.last_name }}
+                        <br>
+                        <strong>Email :</strong> {{ object.email }}
+                        <br>
+                        <strong>Is active :</strong> {{ object.is_active }}
+                        <br>
+                        <strong>Age :</strong> {{ object.age }}
+                        <br>
+                        <strong>About :</strong> {{ object.about }}
+                        <br>
+                        <strong>Country :</strong> {{ object.country }}
+                        <br>
+                        <strong>City :</strong> {{ object.city }}
+                        <br>
+                        <strong>Last login :</strong> {% get_user_date_time object.last_login %}
+                        <br>
+                        <strong>Date joined :</strong> {% get_user_date_time object.date_joined %}
+                    </p>
+                    <a href="javascript:history.go(-1)"
+                       class="custom-btn custom-border-btn btn me-4">Back</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

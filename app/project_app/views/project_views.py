@@ -1,5 +1,5 @@
 from django.contrib.auth import get_user, get_user_model
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.models import AbstractBaseUser
 from django.db.models import Prefetch
 from django.db.models.query import QuerySet
@@ -7,23 +7,31 @@ from django.urls import reverse_lazy
 from django.views import generic
 
 # from .. import forms
-from ..models import Membership, Project
+from ..models import Membership, Owner, Project
 
 User: type[AbstractBaseUser] = get_user_model()
 
 # ============================================= OWNER MIXINS =============================================
 
 
-class OwnerMixin(LoginRequiredMixin):
-    """ Выборка принадлежащая пользователю """
+class OwnerMixin(LoginRequiredMixin, UserPassesTestMixin):
 
     def get_queryset(self) -> QuerySet:
+        """ Выборка принадлежащая пользователю """
         qs: QuerySet = super().get_queryset()
-
         # обязательно наличие атрибута owner у модели
         if not hasattr(qs.model, 'owner'):
             raise AttributeError('Model don\'t have owner attribute')
         return qs.filter(owner=get_user(self.request))
+
+    def test_func(self) -> bool:
+        """ проверяем является ли текущий пользователь собственником конкретного объекта """
+        # todo: не поддерживается slug
+        obj_pk = self.kwargs.get(self.pk_url_kwarg)
+        if obj_pk:
+            user = get_user(self.request)
+            return Owner.is_owning(user, obj_pk)
+        return True
 
 
 class OwnerEditMixin(LoginRequiredMixin):
@@ -111,9 +119,4 @@ class OwnProjectUpdateView(OwnProjectEditMixin, generic.UpdateView):
 
 
 class OwnProjectDeleteView(OwnProjectMixin, generic.DeleteView):
-    success_url = reverse_lazy('project_app:list')  # todo: нужна ли переменная?
-
-
-# ============================================= MEMBERS ==================================================
-
-# ============================================= исключение и выход =====================
+    success_url = reverse_lazy('project_app:list')

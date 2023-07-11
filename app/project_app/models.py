@@ -16,7 +16,7 @@ class Project(models.Model):
 
     owner = models.ForeignKey('Owner',
                               null=True,
-                              related_name="own_projects",
+                              related_name="my_projects",
                               verbose_name=_("owner"),
                               on_delete=models.SET_NULL)  # при удалении проекта не удаляем пользователя
 
@@ -59,7 +59,7 @@ class Membership(models.Model):
                              blank=True,
                              default=None,
                              related_name="memberships",
-                             on_delete=models.DO_NOTHING)
+                             on_delete=models.CASCADE)
 
     project = models.ForeignKey("Project",
                                 null=False,
@@ -81,13 +81,16 @@ class Membership(models.Model):
         unique_together = (("project", "user"),)
 
 
-class Owner(User):
+class Owner(User):  # todo: может быть в контектсе разных приложений, поэтому наверно стоит реализовать интерефейс
 
-    def is_owner(self):
-        pass
+    def is_owning(self, project_id: int):
+        return Project.objects.filter(id=project_id, owner=self.id).exists()
 
     def pass_project(self):
         pass
+
+    def __repr__(self) -> str:
+        return f'<Owner: id: {self.id}, {self.get_username()}>'
 
     class Meta:
         proxy = True
@@ -110,6 +113,29 @@ class Member(User):
 
     def leave_project(self):
         pass
+
+    def __repr__(self) -> str:
+        return f'<Member: id: {self.id}, {self.get_username()}>'
+
+    class Meta:
+        proxy = True
+
+
+import logging
+
+logger = logging.getLogger(__name__)
+
+
+class Candidate(User):
+
+    def send_application_to_join(self, project: Project) -> bool:
+        try:
+            Membership.create(user=self, project=project, active=False)
+            logger.critical(f"<SEND application message to {project.owner} from {self} to join project: {project}>")
+            return True
+        except Exception('Could not send application') as e:
+            logger.critical(f"<Can't SEND application message: {e}>")
+            return False
 
     class Meta:
         proxy = True

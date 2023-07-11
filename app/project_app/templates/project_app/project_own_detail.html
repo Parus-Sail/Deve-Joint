@@ -3,39 +3,19 @@
 {% block content %}
     <div class="container">
         <h1>Участники {{ object.title }}</h1>
-        {% with members=object.memberships.all %}
-            {% if object %}
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Имя</th>
-                            <th>Роль</th>
-                            <th>Проект</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for member in members %}
-                            <tr>
-                                <td>{{ member }}</td>
-                                <td>{{ member.user.email }}</td>
-                                <td>{{ member.active }}</td>
-                                {% if not member.active %}
-                                    <!-- Создать форму с методом POST и скрытым полем csrf_token -->
-                                    <td>
-                                        <form method="post" action="#">
-                                            {% csrf_token %}
-                                            <!-- Создать кнопку с классом btn и текстом Approve -->
-                                            <button type="submit" class="btn">Approve</button>
-                                        </form>
-                                    </td>
-                                {% endif %}
-                            </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            {% else %}
-                <p>Нет участников в этом проекте.</p>
-            {% endif %}
+        {{ object.members }}
+        {{ object.memberships }}
+        <section class="job-section section-padding">
+            <div class="container">
+                <div class="row align-items-center">
+                    {% if object %}
+                        {% include 'project_app/includes/project_own_members.html' with members=object.memberships.all %}
+                    {% else %}
+                        <p>Нет участников в этом проекте.</p>
+                    {% endif %}
+                </div>
+            </div>
         </div>
-    {% endwith %}
-{% endblock %}
+    </section>
+</div>
+{% endblock content %}

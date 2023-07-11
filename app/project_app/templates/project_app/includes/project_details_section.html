@@ -60,15 +60,31 @@
                     <!-- Members FINISH -->
                     <!-- Buttons START -->
                     <div class="d-flex justify-content-center flex-wrap mt-5 border-top pt-4">
-                        <a href="#" class="custom-btn btn mt-2">Apply now</a>
-                        <a href="#" class="custom-btn custom-border-btn btn mt-2 ms-lg-4 ms-3">Save this job</a>
-                        <a href="{% url 'project_app:update' project.pk %}"
-                           class="custom-btn btn mt-2 ms-lg-4 ms-3">Update</a>
-                        <a href="{% url 'project_app:delete' project.pk %}"
-                           class="custom-btn btn mt-2  ms-lg-4 ms-3">Delete</a>
-                        <a href="{% url 'favorite_app:favorite_projects_add' project.pk %}"
-                           class="custom-btn btn mt-2 ms-lg-4 ms-3">Add to Favorites</a>
-                        <a href="#" class="custom-btn btn mt-2 ms-lg-4 ms-3">Members</a>
+                        {% if not user in project.members.all %}
+                            <form method="post" action="{% url 'project_app:application' %}">
+                                {% csrf_token %}
+                                <!-- Кнопка  Исключить -->
+                                <input type="hidden" id="id" name="project_id" value="{{ object.id }}">
+                                <button type="submit" class="custom-btn btn mt-2">Вступить</button>
+                            </form>
+                        {% else %}
+                            <form method="post" action="{% url 'project_app:leave' %}">
+                                {% csrf_token %}
+                                <!-- Кнопка  Исключить -->
+                                <input type="hidden" id="id" name="project_id" value="{{ object.id }}">
+                                <button type="submit" class="custom-btn btn mt-2">Выйти/Отозвать завяку</button>
+                            </form>
+                        {% endif %}
+                        {% if user.is_authenticated and project.owner == user %}
+                            <a href="{% url 'project_app:update' project.pk %}"
+                               class="custom-btn btn mt-2 ms-lg-4 ms-3">Update</a>
+                            <a href="{% url 'project_app:delete' project.pk %}"
+                               class="custom-btn btn mt-2  ms-lg-4 ms-3">Delete</a>
+                        {% endif %}
+                        {% if user.is_authenticated %}
+                            <a href="{% url 'favorite_app:favorite_projects_add' project.pk %}"
+                               class="custom-btn btn mt-2 ms-lg-4 ms-3">Add to Favorites</a>
+                        {% endif %}
                         <div class="job-detail-share d-flex align-items-center">
                             <p class="mb-0 me-lg-4 me-3">Share:</p>
                             <a href="#" class="bi-facebook"></a>

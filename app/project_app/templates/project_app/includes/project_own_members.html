@@ -1,0 +1,58 @@
+{% load static %}
+{% for member in members %}
+    <div class="row">
+        <div class="col-lg-12 col-12">
+            <div class="job-thumb d-flex">
+                <div class="job-body d-flex flex-wrap flex-auto align-items-center ms-4">
+                    <div class="mb-3">
+                        <h4 class="job-title mb-lg-0">
+                            <a href="#" class="job-title-link">{{ member }}</a>
+                        </h4>
+                        <p class="mb-0">E-mail: {{ member.user.email }}</p>
+                        <p class="mb-3">Status: {{ member.active }}</p>
+                        <div class="d-flex">
+                            <!-- todo: переписать на JS script  -->
+                            {% if member.active %}
+                                <form method="post" action="{% url 'project_app:exclude' %}">
+                                    {% csrf_token %}
+                                    <!-- Кнопка  Исключить -->
+                                    <input type="hidden" id="id" name="project_id" value="{{ object.id }}">
+                                    <input type="hidden"
+                                           id="membership_id"
+                                           name="membership_id"
+                                           value="{{ member.id }}">
+                                    <button type="submit" class="badge badge-level">Исключить</button>
+                                </form>
+                            {% else %}
+                                <form method="post" action="{% url 'project_app:accept' %}">
+                                    {% csrf_token %}
+                                    <!-- Кнопка  Одобрить -->
+                                    <input type="hidden" id="id" name="project_id" value="{{ object.id }}">
+                                    <input type="hidden"
+                                           id="membership_id"
+                                           name="membership_id"
+                                           value="{{ member.id }}">
+                                    <button type="submit" class="badge badge-level">Одобрить</button>
+                                </form>
+                                <form method="post" action="{% url 'project_app:reject' %}">
+                                    {% csrf_token %}
+                                    <!-- Кнопка  Отказать -->
+                                    <input type="hidden" id="id" name="project_id" value="{{ object.id }}">
+                                    <input type="hidden"
+                                           id="membership_id"
+                                           name="membership_id"
+                                           value="{{ member.id }}">
+                                    <button type="submit" class="badge badge-level">Отказать</button>
+                                </td>
+                            </form>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="job-section-btn-wrap">
+                    <a href="/projects/1/" class="custom-btn btn">More</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}

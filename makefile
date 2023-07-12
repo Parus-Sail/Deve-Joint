@@ -22,6 +22,8 @@ go_db: down
 	# ✨✨ superuser is created ✨✨ 
 	# 👤 login: admin@mail.ru 
 	# 🔒 password: pass
+
+add_fixtures:
 	# 📦 add fake datas:
 	./app/manage.py loaddata ./dev_tools/fixtures/auth_app_user.yaml
 	./app/manage.py loaddata ./dev_tools/fixtures/project_app_project.yaml

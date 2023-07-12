@@ -3,13 +3,12 @@
     <div class="container">
         <div class="row align-items-center">
             <div class="col-lg-6 col-12 mb-lg-4">
-            <form class="search-custom-form" action="{% url 'project_app:search_results' %}" method="get">
-                <input class="search-custom-form-control placeholder"  name="q" type="text"
-                       placeholder="Search..." value={{ request.query }}>
-            </form>
-                <span class="current">
-                   Results: page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }} pages
-                </span>
+                <form class="search-custom-form"
+                      action="{% url 'project_app:search_results' %}"
+                      method="get">
+                    <input class="search-custom-form-control placeholder"  name="q" type="text" placeholder="Search..." value={{ request.query }}>
+                </form>
+                <span class="current">Results: page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }} pages</span>
             </div>
             <div class="col-lg-4 col-12 d-flex align-items-center ms-auto mb-5 mb-lg-4">
                 <p class="mb-0 ms-lg-auto">Sort by:</p>
@@ -103,26 +102,29 @@
                                     <span aria-hidden="true">first</span></a>
                             </li>
                             <li class="page-item">
-                            <a href="?page={{ page_obj.previous_page_number }}" class="page-link">
-                                <span aria-hidden="true">prev</span></a>
+                                <a href="?page={{ page_obj.previous_page_number }}" class="page-link">
+                                    <span aria-hidden="true">prev</span></a>
                             </li>
                         {% endif %}
                         {% if page_obj %}
                             {% for page in page_obj.paginator %}
-                                <a class="page-link" href="?page={{ page.number }}"
+                                <a class="page-link"
+                                   href="?page={{ page.number }}"
                                    aria-label="page{{ page.number }}">{{ page.number }}</a>
                             {% endfor %}
                         {% endif %}
-                            {% if page_obj.has_next %}
-                                <li class="page-item">
-                            <a class="page-link"  aria-label="Next" href="?page={{ page_obj.next_page_number }}">
-                                <span aria-hidden="true">Next</span></a>
-                                </li>
-                                <li class="page-item">
-                            <a  class="page-link" href="?page={{ page_obj.paginator.num_pages }}">
-                                <span aria-hidden="true">Last</span></a>
-                                </li>
-                            {% endif %}
+                        {% if page_obj.has_next %}
+                            <li class="page-item">
+                                <a class="page-link"
+                                   aria-label="Next"
+                                   href="?page={{ page_obj.next_page_number }}">
+                                    <span aria-hidden="true">Next</span></a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">
+                                    <span aria-hidden="true">Last</span></a>
+                            </li>
+                        {% endif %}
                     </ul>
                 </nav>
             </div>

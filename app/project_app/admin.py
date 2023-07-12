@@ -11,7 +11,7 @@ class RoleInline(admin.TabularInline):
 
 @admin.register(Project)
 class ProjectAdmin(admin.ModelAdmin):
-    list_display = ('title', 'description')
+    # list_display = g
 
     # list_filter = ('role',)
     # search_fields = ('title',)

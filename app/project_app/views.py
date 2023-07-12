@@ -1,8 +1,11 @@
 from typing import Any
 
+from auth_app.models import BaseOpenSailUser
+from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import get_user, get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db.models import Q
 from django.db.models.query import QuerySet
 from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
@@ -11,12 +14,31 @@ from django.views.generic.edit import ModelFormMixin
 from favorite_app.models import FavoriteProjects
 
 from . import forms, models, permissions, service
+from .models import Project
 
 User = get_user_model()
 
 
 class ProjectListView(generic.ListView):
-    queryset = service.project_list()
+    paginate_by = settings.DEFAULT_PAGINATE_SIZE
+
+    def get_queryset(self):  # новый
+        query = self.request.GET.get('q')
+        search_user = None
+        try:
+            search_user = BaseOpenSailUser.objects.get(username=query)
+        except Exception:
+            pass
+        if query and not search_user:
+            object_list = Project.objects.filter(Q(title__icontains=query) | Q(description__icontains=query))
+        elif search_user:
+            object_list = Project.objects.filter(owner__exact=search_user.pk)
+        else:
+            object_list = service.project_list()
+        return object_list
+
+    # queryset = service.project_list()
+    # переопределен метод get_queryset
     template_name = 'project_app/project_list.html'
     context_object_name = 'projects'
 

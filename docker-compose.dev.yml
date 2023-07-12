@@ -10,7 +10,7 @@ services:
     container_name: ${PROJECT_NAME}-web
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.dev
     env_file:
       - .env
     volumes:

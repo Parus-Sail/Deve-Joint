@@ -1,16 +1,12 @@
 from django.contrib import admin
-# from role_app.models import Role
 from django.contrib.auth.models import Group
+from role_app.models import Role
 
 from .models import Membership, Project
 
-# class GroupInline(admin.TabularInline):
-# model = Group
-# extra = 0
 
-
-class MemberInline(admin.TabularInline):
-    model = Membership
+class RoleInline(admin.TabularInline):
+    model = Role
     extra = 0
 
 

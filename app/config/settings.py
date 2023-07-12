@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     "debug_toolbar",
     ################
     "auth_app",
-    # "role_app",
+    "role_app",
     ################
     "main_app",
     "project_app",

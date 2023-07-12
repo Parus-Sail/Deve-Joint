@@ -68,7 +68,13 @@ class Membership(models.Model):
                                 related_name="memberships",
                                 on_delete=models.CASCADE)
 
-    active = models.BooleanField("Active", default=None)
+    role = models.ForeignKey("role_app.Role",
+                             null=False,
+                             blank=False,
+                             related_name="memberships",
+                             on_delete=models.CASCADE)
+
+    active = models.BooleanField("Active", default=False)
 
     def __repr__(self):
         return f'<Membership: {self.user} - {self.project}>'

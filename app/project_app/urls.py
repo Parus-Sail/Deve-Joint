@@ -8,8 +8,8 @@ app_name = ProjectAppConfig.name
 urlpatterns = [
     # ============================================= PROJECTS =================================================
     path('', views.ProjectListView.as_view(), name='list'),
+    path('search/', views.ProjectListView.as_view(), name='search'),
     path('<int:project_id>/', views.ProjectDetailView.as_view(), name='detail'),
-    path('search_results/', views.ProjectListView.as_view(), name='search_results'),
     # ============================================= OWN PROJECTS =============================================
     path('my_projects/', views.OwnProjectListView.as_view(), name='my_project_list'),
     path('<int:project_id>/my_project/', views.OwnProjectDetail.as_view(), name='my_project'),

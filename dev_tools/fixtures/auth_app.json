@@ -1,0 +1,98 @@
+[
+{
+    "model": "auth_app.baseopensailuser",
+    "pk": 1,
+    "fields": {
+        "password": "pbkdf2_sha256$600000$pSDCTQt1Bc6tFm4RwMxdXP$XjXnMzorSFpDvR8fKLhuHWvYYehztxcaWxPN/P8Ey10=",
+        "last_login": "2023-07-12T12:25:10.786Z",
+        "is_superuser": true,
+        "username": "admin",
+        "first_name": "",
+        "last_name": "",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2023-07-12T12:25:01.116Z",
+        "email": "admin@mail.ru",
+        "email_verify": true,
+        "age": null,
+        "avatar": "",
+        "about": null,
+        "country": null,
+        "city": null,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "auth_app.baseopensailuser",
+    "pk": 2,
+    "fields": {
+        "password": "",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "user1",
+        "first_name": "",
+        "last_name": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2023-07-12T12:25:01.592Z",
+        "email": "user1@example.com",
+        "email_verify": true,
+        "age": null,
+        "avatar": "",
+        "about": null,
+        "country": null,
+        "city": null,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "auth_app.baseopensailuser",
+    "pk": 3,
+    "fields": {
+        "password": "",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "user2",
+        "first_name": "",
+        "last_name": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2023-07-12T12:25:01.601Z",
+        "email": "user2@example.com",
+        "email_verify": false,
+        "age": null,
+        "avatar": "",
+        "about": null,
+        "country": null,
+        "city": null,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "auth_app.baseopensailuser",
+    "pk": 4,
+    "fields": {
+        "password": "",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "user3",
+        "first_name": "",
+        "last_name": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2023-07-12T12:25:01.603Z",
+        "email": "user3@example.com",
+        "email_verify": true,
+        "age": null,
+        "avatar": "",
+        "about": null,
+        "country": null,
+        "city": null,
+        "groups": [],
+        "user_permissions": []
+    }
+}
+]

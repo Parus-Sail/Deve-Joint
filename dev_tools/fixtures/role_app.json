@@ -1,0 +1,26 @@
+[
+{
+    "model": "role_app.role",
+    "pk": 1,
+    "fields": {
+        "name": "test_role",
+        "project": 1
+    }
+},
+{
+    "model": "role_app.role",
+    "pk": 2,
+    "fields": {
+        "name": "test_role_2",
+        "project": 2
+    }
+},
+{
+    "model": "role_app.role",
+    "pk": 3,
+    "fields": {
+        "name": "test",
+        "project": 5
+    }
+}
+]

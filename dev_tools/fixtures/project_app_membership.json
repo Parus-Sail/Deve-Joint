@@ -1,0 +1,65 @@
+[
+{
+    "model": "project_app.membership",
+    "pk": 1,
+    "fields": {
+        "user": 1,
+        "project": 1,
+        "role": 1
+    }
+},
+{
+    "model": "project_app.membership",
+    "pk": 2,
+    "fields": {
+        "user": 2,
+        "project": 1,
+        "role": 1
+    }
+},
+{
+    "model": "project_app.membership",
+    "pk": 3,
+    "fields": {
+        "user": 3,
+        "project": 1,
+        "role": 1
+    }
+},
+{
+    "model": "project_app.membership",
+    "pk": 4,
+    "fields": {
+        "user": 2,
+        "project": 2,
+        "role": 2
+    }
+},
+{
+    "model": "project_app.membership",
+    "pk": 5,
+    "fields": {
+        "user": 3,
+        "project": 2,
+        "role": 2
+    }
+},
+{
+    "model": "project_app.membership",
+    "pk": 6,
+    "fields": {
+        "user": 1,
+        "project": 5,
+        "role": 3
+    }
+},
+{
+    "model": "project_app.membership",
+    "pk": 7,
+    "fields": {
+        "user": 2,
+        "project": 5,
+        "role": 3
+    }
+}
+]

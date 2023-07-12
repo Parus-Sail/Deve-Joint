@@ -1,0 +1,47 @@
+[
+{
+    "model": "favorite_app.favoriteprojects",
+    "pk": 1,
+    "fields": {
+        "user": 1,
+        "add_datetime": "2023-07-12T12:28:58.259Z",
+        "project": 1
+    }
+},
+{
+    "model": "favorite_app.favoriteprojects",
+    "pk": 2,
+    "fields": {
+        "user": 1,
+        "add_datetime": "2023-07-12T12:29:03.615Z",
+        "project": 3
+    }
+},
+{
+    "model": "favorite_app.favoriteprojects",
+    "pk": 3,
+    "fields": {
+        "user": 2,
+        "add_datetime": "2023-07-12T12:29:07.608Z",
+        "project": 1
+    }
+},
+{
+    "model": "favorite_app.favoriteprojects",
+    "pk": 4,
+    "fields": {
+        "user": 3,
+        "add_datetime": "2023-07-12T12:29:11.777Z",
+        "project": 5
+    }
+},
+{
+    "model": "favorite_app.favoriteprojects",
+    "pk": 5,
+    "fields": {
+        "user": 4,
+        "add_datetime": "2023-07-12T12:38:51.608Z",
+        "project": 1
+    }
+}
+]

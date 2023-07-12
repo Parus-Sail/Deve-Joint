@@ -22,13 +22,12 @@ go_db: down
 	# ✨✨ superuser is created ✨✨ 
 	# 👤 login: admin@mail.ru 
 	# 🔒 password: pass
-
-add_fixtures:
 	# 📦 add fake datas:
-	./app/manage.py loaddata ./dev_tools/fixtures/auth_app_user.yaml
-	./app/manage.py loaddata ./dev_tools/fixtures/project_app_project.yaml
-	./app/manage.py loaddata ./dev_tools/fixtures/role_app_role.yaml
-	./app/manage.py loaddata ./dev_tools/fixtures/project_app_membership.yaml
+	./app/manage.py loaddata ./dev_tools/fixtures/auth_app.json
+	./app/manage.py loaddata ./dev_tools/fixtures/project_app_project.json
+	./app/manage.py loaddata ./dev_tools/fixtures/role_app.json
+	./app/manage.py loaddata ./dev_tools/fixtures/project_app_membership.json
+	./app/manage.py loaddata ./dev_tools/fixtures/favorite_app.json
 	./app/manage.py loaddata ./dev_tools/fixtures/vacancy_app_applicant_level.json
 	./app/manage.py loaddata ./dev_tools/fixtures/vacancy_app_employment_type.json
 	./app/manage.py loaddata ./dev_tools/fixtures/vacancy_app_job_type.json
@@ -40,7 +39,7 @@ go_docker: down build up
 
 go_local: down go_db local
 
-local:
+local: 
 	python app/manage.py runserver localhost:8000
 
 test:

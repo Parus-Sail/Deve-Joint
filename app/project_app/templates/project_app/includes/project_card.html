@@ -28,8 +28,7 @@
                          alt="">
                     <p class="mb-0">Salesforce</p>
                 </div>
-                <a href="#" class="bi-bookmark ms-auto me-2"></a>
-                <a href="#" class="bi-heart"></a>
+                {% include 'project_app/includes/favorite_button.html' with object_id=project.id %}
             </div>
             <div class="d-flex align-items-center">
                 <p class="job-location">

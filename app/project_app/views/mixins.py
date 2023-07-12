@@ -49,11 +49,23 @@ class OwnerEditMixin(LoginRequiredMixin):
 
 # ============================================= PROJECTS MIXIN ===========================================
 
+from favorite_app.models import FavoriteProjects
+
+from ..models import Project
+
 
 class ProjectMixin:
     """ Предоставляет доступ к модели проектов """
     model = Project
     pk_url_kwarg: str = 'project_id'
+
+    def get_context_data(self, **kwargs):
+        # todo: refactor Favorites to came to way single responsibility
+        context: dict = super().get_context_data(**kwargs)
+        favorites_of_user = FavoriteProjects.objects.filter(user=self.request.user.id)
+        favorites_pk_list = [item.project.pk for item in favorites_of_user]
+        context["favorites_pk_list"] = favorites_pk_list
+        return context
 
 
 class OwnProjectMixin(OwnerMixin, ProjectMixin):

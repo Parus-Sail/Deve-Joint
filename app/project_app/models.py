@@ -13,6 +13,7 @@ User = get_user_model()
 class Project(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField(blank=True)
+    created = models.DateTimeField(auto_now_add=True, blank=True)
 
     owner = models.ForeignKey('Owner',
                               null=True,

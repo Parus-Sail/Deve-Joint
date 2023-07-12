@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% load vacancy_app_tags %}
+{% block title %}
+    Vacancy Detail
+{% endblock title %}
+{% block content %}
+    <div class="row justify-content-center pt-3">
+        <div class="col-md-12 col-lg-8">
+            <div class="card shadow">
+                <div class="card-body">
+                    <h5 class="card-title logo-text">
+                        <strong>Vacancy:</strong> {{ object.name }}
+                    </h5>
+                    <p class="card-text">
+                        <strong>ID:</strong> {{ object.id }}
+                        <br>
+                        <strong>Description:</strong> {{ object.description }}
+                        <br>
+                        <strong>Requirements:</strong> {{ object.requirements|default:"Not set" }}
+                        <br>
+                        <strong>location:</strong> {{ object.location }}
+                        <br>
+                        <strong>Salary from:</strong> {{ object.salary_from|default:"Not set" }}
+                        <br>
+                        <strong>Salary to:</strong> {{ object.salary_to|default:"Not set" }}
+                        <br>
+                        <a href="{% url 'vacancy:company_detail' pk=object.company.pk %}"
+                           class="custom-link smoothscroll"><strong>Company:</strong> {{ object.company }}
+                        </a>
+                        <br>
+                        <strong>Applicant level:</strong>
+                        {% for level in object.applicant_level.all %}
+                            {% if forloop.last %}
+                                {{ level }}
+                            {% else %}
+                                {{ level }},
+                            {% endif %}
+                        {% endfor %}
+                        <br>
+                        <strong>Employment type:</strong>
+                        {% for level in object.employment_type.all %}
+                            {% if forloop.last %}
+                                {{ level }}
+                            {% else %}
+                                {{ level }},
+                            {% endif %}
+                        {% endfor %}
+                        <br>
+                        <strong>Job_type:</strong>
+                        {% for level in object.job_type.all %}
+                            {% if forloop.last %}
+                                {{ level }}
+                            {% else %}
+                                {{ level }},
+                            {% endif %}
+                        {% endfor %}
+                        <br>
+                        <strong>Created at:</strong> {% get_user_date_time object.created_at %}
+                        <br>
+                        <strong>Last update:</strong> {% get_user_date_time object.update_at %}
+                        <br>
+                        <strong>Status:</strong> {{ object.get_status_display }}
+                        <br>
+                        {% if object.get_status_display == 'Blocked' %}
+                            <strong>Reason for block:</strong> {{ object.reason_for_block }}
+                            <br>
+                        {% endif %}
+                    </p>
+                    <a href="javascript:history.go(-1)"
+                       class="custom-btn custom-border-btn btn me-4">Back</a>
+                    <a href="{% url 'vacancy:vacancy_list' %}" class="custom-btn btn">Vacancy List</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

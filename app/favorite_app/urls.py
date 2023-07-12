@@ -1,9 +1,10 @@
 from django.urls import path
-from favorite_app.views import FavoriteProjectsAdd, FavoriteProjectsView
+from favorite_app.views import FavoriteProjectsAdd, FavoriteProjectsRemove, FavoriteProjectsView
 
 app_name = 'favorite_app'
 
 urlpatterns = [
     path('', FavoriteProjectsView.as_view(), name='favorite_projects_view'),
-    path('add/<project_id>/', FavoriteProjectsAdd.as_view(), name='favorite_projects_add'),
+    path('add/<int:pk>/', FavoriteProjectsAdd.as_view(), name='favorite_projects_add'),
+    path('remove/<int:pk>/', FavoriteProjectsRemove.as_view(), name='favorite_projects_remove'),
 ]

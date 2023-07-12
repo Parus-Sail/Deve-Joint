@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% load vacancy_app_tags %}
+{% block title %}
+    Vacancy List
+{% endblock title %}
+{% block content %}
+    <div class="container">
+        {% if object_list %}
+            <div class="row">
+                <div class="col-lg-6 col-12 text-center mx-auto mb-4">
+                    <h2 class="text-center mb-4 logo-text">Vacancy List</h2>
+                </div>
+                <div class="col-lg-12 col-12">
+                    {% for item in object_list %}
+                        <div class="job-thumb d-flex">
+                            <div class="job-body d-flex flex-wrap flex-auto align-items-center ms-4">
+                                <div class="mb-3">
+                                    <h5 class="job-title mb-lg-0">
+                                        <a href="{{ item.get_absolute_url }}" class="job-title-link">{{ item.name }}</a>
+                                    </h5>
+                                    <div class="d-flex flex-wrap align-items-center">
+                                        <p class="job-location mb-0">
+                                            <strong>ID:</strong>{{ item.id }}
+                                        </p>
+                                    </div>
+                                    <div class="d-flex flex-wrap align-items-center">
+                                        <p class="job-location mb-0">
+                                            <strong>Description:</strong>{{ item.description|truncatechars:200 }}
+                                        </p>
+                                    </div>
+                                    <div class="d-flex flex-wrap align-items-center">
+                                        <p class="mb-0">
+                                            <strong>Company:</strong> {{ item.company }}
+                                        </p>
+                                    </div>
+                                    <div class="d-flex flex-wrap align-items-center">
+                                        <p class="mb-0">
+                                            <strong>Last update:</strong>{% get_user_date_time item.update_at %}
+                                        </p>
+                                    </div>
+                                    <div class="d-flex mt-2">
+                                        {% if item.get_status_display == 'Active' %}
+                                            <p class="mb-0 text-success">
+                                                <strong>Status: {{ item.get_status_display }}</strong>
+                                            </p>
+                                        {% else %}
+                                            <p class="mb-0 text-danger">
+                                                <strong>Status: {{ item.get_status_display }}</strong>
+                                            </p>
+                                        {% endif %}
+                                    </div>
+                                    <div class="d-flex mt-2">
+                                        {% if item.get_status_display != 'Blocked' %}
+                                            <p class="mb-0">
+                                                <a href="{% url 'vacancy:vacancy_update' pk=item.pk %}"
+                                                   class="badge badge-level">Edit</a>
+                                            </p>
+                                        {% endif %}
+                                        <p class="mb-0">
+                                            <a href="{% url 'vacancy:vacancy_delete' pk=item.pk %}" class="badge">Delete</a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="job-section-btn-wrap">
+                                <a href="{{ item.get_absolute_url }}" class="custom-btn btn">More</a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        {% else %}
+            <div class="mt-4">
+                <p>No vacancy's yet.</p>
+            </div>
+        {% endif %}
+        <div class="col-lg-6 col-12 mb-5 mb-lg-0">
+            <a href="{% url 'vacancy:vacancy_create' %}" class="custom-btn btn">Create vacancy</a>
+        </div>
+        {% include 'includes/paginations.html' %}
+    </div>
+{% endblock content %}

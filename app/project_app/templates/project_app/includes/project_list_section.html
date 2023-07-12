@@ -1,10 +1,14 @@
 {% load static %}
 <section class="job-section section-padding">
     <div class="container">
-        <!-- Pre List start -->
         <div class="row align-items-center">
             <div class="col-lg-6 col-12 mb-lg-4">
-                <h3>Results of 30-65 of 1500 projects</h3>
+                <form class="search-custom-form"
+                      action="{% url 'project_app:search_results' %}"
+                      method="get">
+                    <input class="search-custom-form-control placeholder"  name="q" type="text" placeholder="Search..." value={{ request.query }}>
+                </form>
+                <span class="current">Results: page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }} pages</span>
             </div>
             <div class="col-lg-4 col-12 d-flex align-items-center ms-auto mb-5 mb-lg-4">
                 <p class="mb-0 ms-lg-auto">Sort by:</p>
@@ -19,10 +23,10 @@
                             <a class="dropdown-item" href="#">Latest Projects</a>
                         </li>
                         <li>
-                            <a class="dropdown-item" href="#">Higher Salary Projects</a>
+                            <a class="dropdown-item" href="#">Project Owner</a>
                         </li>
                         <li>
-                            <a class="dropdown-item" href="#">Internship Projects</a>
+                            <a class="dropdown-item" href="#">Projects Name</a>
                         </li>
                     </ul>
                 </div>
@@ -64,8 +68,13 @@
                                              alt="">
                                         <p class="mb-0">Salesforce</p>
                                     </div>
-                                    <a href="#" class="bi-bookmark ms-auto me-2"></a>
-                                    <a href="#" class="bi-heart"></a>
+                                    {% if project.pk in favorites_pk_list %}
+                                        <a href="{% url 'favorite_app:favorite_projects_remove' project.pk %}"
+                                           class="bi-heart-fill ms-auto me-2"></a>
+                                    {% else %}
+                                        <a href="{% url 'favorite_app:favorite_projects_add' project.pk %}"
+                                           class="bi-heart ms-auto me-2"></a>
+                                    {% endif %}
                                 </div>
                                 <div class="d-flex align-items-center">
                                     <p class="job-location">
@@ -82,7 +91,7 @@
                                         <i class="custom-icon bi-cash me-1"></i>
                                         $50k
                                     </p>
-                                    <a href="{% url 'vacancy:job-details' %}" class="custom-btn btn ms-auto">Apply now</a>
+                                    <a href="{% url 'vacancy:job-listing' %}" class="custom-btn btn ms-auto">Apply now</a>
                                 </div>
                             </div>
                         </div>
@@ -91,40 +100,41 @@
             {% else %}
                 <p>No projects found.</p>
             {% endif %}
-            <!-- List of projects finish -->
-            <!-- Pagination example START -->
             <div class="col-lg-12 col-12">
                 <nav aria-label="Page navigation example">
                     <ul class="pagination justify-content-center mt-5">
-                        <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Previous">
-                                <span aria-hidden="true">Prev</span>
-                            </a>
-                        </li>
-                        <li class="page-item active" aria-current="page">
-                            <a class="page-link" href="#">1</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="#">2</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="#">3</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="#">4</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="#">5</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Next">
-                                <span aria-hidden="true">Next</span>
-                            </a>
-                        </li>
+                        {% if page_obj.has_previous %}
+                            <li class="page-item">
+                                <a href="?page=1" class="page-link">
+                                    <span aria-hidden="true">first</span></a>
+                            </li>
+                            <li class="page-item">
+                                <a href="?page={{ page_obj.previous_page_number }}" class="page-link">
+                                    <span aria-hidden="true">prev</span></a>
+                            </li>
+                        {% endif %}
+                        {% if page_obj %}
+                            {% for page in page_obj.paginator %}
+                                <a class="page-link"
+                                   href="?page={{ page.number }}"
+                                   aria-label="page{{ page.number }}">{{ page.number }}</a>
+                            {% endfor %}
+                        {% endif %}
+                        {% if page_obj.has_next %}
+                            <li class="page-item">
+                                <a class="page-link"
+                                   aria-label="Next"
+                                   href="?page={{ page_obj.next_page_number }}">
+                                    <span aria-hidden="true">Next</span></a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">
+                                    <span aria-hidden="true">Last</span></a>
+                            </li>
+                        {% endif %}
                     </ul>
                 </nav>
             </div>
-            <!-- Pagination example END -->
         </div>
     </div>
 </section>

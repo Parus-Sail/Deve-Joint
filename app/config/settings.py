@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     "crispy_bootstrap5",
     # for test with bootstrap end
     ################
+    'django_filters',
 ]
 
 MIDDLEWARE = [
@@ -125,7 +126,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
-LANGUAGE_CODE = "ru-ru"
+LANGUAGE_CODE = "en-en"
 
 TIME_ZONE = "UTC"
 
@@ -175,3 +176,6 @@ else:
 AUTH_USER_MODEL = "auth_app.BaseOpenSailUser"
 
 LOGIN_URL = 'auth_app:login'
+
+# pagination params
+DEFAULT_PAGINATE_SIZE = 3

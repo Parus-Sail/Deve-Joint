@@ -1,0 +1,107 @@
+[
+{
+  "model": "vacancy_app.company",
+  "pk": 1,
+  "fields": {
+    "name": "user 1 Company FreeLance",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\"",
+    "location": "Russia, St. Petersburg",
+    "url": "http://www.example.com",
+    "created_at": "2023-07-06T19:36:12.676Z",
+    "update_at": "2023-07-08T20:29:18.316Z",
+    "status": "ACT",
+    "owner": 2,
+    "payment_account": 2
+  }
+},
+{
+  "model": "vacancy_app.company",
+  "pk": 2,
+  "fields": {
+    "name": "User 1 Local Super Company",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\"",
+    "location": "Russia, Moscow",
+    "url": "http://www.sberbank.ru/",
+    "created_at": "2023-07-06T19:37:29.099Z",
+    "update_at": "2023-07-09T20:21:19.008Z",
+    "status": "ACT",
+    "owner": 2,
+    "payment_account": 2
+  }
+},
+{
+  "model": "vacancy_app.company",
+  "pk": 3,
+  "fields": {
+    "name": "user1 Super Company Turkey",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\"",
+    "location": "Turkey",
+    "url": "http://www.google.com",
+    "created_at": "2023-07-07T20:05:13.712Z",
+    "update_at": "2023-07-08T20:35:17.049Z",
+    "status": "ACT",
+    "owner": 2,
+    "payment_account": 2
+  }
+},
+{
+  "model": "vacancy_app.company",
+  "pk": 6,
+  "fields": {
+    "name": "1",
+    "description": "1",
+    "location": "1",
+    "url": null,
+    "created_at": "2023-07-08T09:53:41.747Z",
+    "update_at": "2023-07-08T15:14:56.749Z",
+    "status": "NOT_ACT",
+    "owner": 2,
+    "payment_account": 5
+  }
+},
+{
+  "model": "vacancy_app.company",
+  "pk": 8,
+  "fields": {
+    "name": "213",
+    "description": "213",
+    "location": "123",
+    "url": null,
+    "created_at": "2023-07-08T14:37:32.609Z",
+    "update_at": "2023-07-08T15:14:56.761Z",
+    "status": "NOT_ACT",
+    "owner": 2,
+    "payment_account": 5
+  }
+},
+{
+  "model": "vacancy_app.company",
+  "pk": 9,
+  "fields": {
+    "name": "User 2 Company Super Holding",
+    "description": "Amet tellus cras adipiscing enim eu. Scelerisque viverra mauris in aliquam sem fringilla ut morbi tincidunt. Vitae et leo duis ut. Lacus laoreet non curabitur gravida arcu. Turpis egestas maecenas pharetra convallis posuere morbi. Mauris commodo quis imperdiet massa tincidunt nunc pulvinar. Velit sed ullamcorper morbi tincidunt ornare massa eget egestas purus. Ut faucibus pulvinar elementum integer enim. Egestas sed tempus urna et pharetra pharetra massa. Tellus integer feugiat scelerisque varius morbi. Vitae proin sagittis nisl rhoncus mattis rhoncus urna.",
+    "location": "USA, New York City",
+    "url": "https://www.ny.gov/",
+    "created_at": "2023-07-09T16:28:28.948Z",
+    "update_at": "2023-07-09T20:14:26.302Z",
+    "status": "ACT",
+    "owner": 3,
+    "payment_account": 9
+  }
+},
+{
+  "model": "vacancy_app.company",
+  "pk": 10,
+  "fields": {
+    "name": "User 2 Super New Company",
+    "description": "Amet tellus cras adipiscing enim eu. Scelerisque viverra mauris in aliquam sem fringilla ut morbi tincidunt. Vitae et leo duis ut. Lacus laoreet non curabitur gravida arcu. Turpis egestas maecenas pharetra convallis posuere morbi. Mauris commodo quis imperdiet massa tincidunt nunc pulvinar. Velit sed ullamcorper morbi tincidunt ornare massa eget egestas purus. Ut faucibus pulvinar elementum integer enim. Egestas sed tempus urna et pharetra pharetra massa. Tellus integer feugiat scelerisque varius morbi. Vitae proin sagittis nisl rhoncus mattis rhoncus urna.",
+    "location": "USA, New York City",
+    "url": "https://www.usbank.com/",
+    "created_at": "2023-07-09T16:29:59.208Z",
+    "update_at": "2023-07-09T20:14:36.204Z",
+    "status": "ACT",
+    "owner": 3,
+    "payment_account": 9
+  }
+}
+]

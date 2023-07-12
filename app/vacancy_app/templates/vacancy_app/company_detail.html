@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load vacancy_app_tags %}
+{% block title %}
+    Company Detail
+{% endblock title %}
+{% block content %}
+    <div class="row justify-content-center pt-3">
+        <div class="col-md-12 col-lg-8">
+            <div class="card shadow">
+                <div class="card-body">
+                    <h5 class="card-title logo-text">
+                        <strong>Company:</strong> {{ object.name }}
+                    </h5>
+                    <p class="card-text">
+                        <strong>Owner:</strong> {{ object.owner }}
+                        <br>
+                        <strong>Description:</strong> {{ object.description }}
+                        <br>
+                        <strong>location:</strong> {{ object.location }}
+                        <br>
+                        <strong>Web address:</strong> {{ object.url }}
+                        <br>
+                        <strong>Last update:</strong> {% get_user_date_time object.update_at %}
+                        <br>
+                        <a href="{% url 'vacancy:payment_account_detail' pk=object.payment_account.pk %}"
+                           class="custom-link smoothscroll">
+                            <strong>Payment Account:</strong> {{ object.payment_account }}
+                        </a>
+                        <br>
+                        <strong>Status:</strong> {{ object.get_status_display }}
+                        <br>
+                    </p>
+                    <a href="javascript:history.go(-1)"
+                       class="custom-btn custom-border-btn btn me-4">Back</a>
+                    <a href="{% url 'vacancy:company_list' %}" class="custom-btn btn">Company list</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

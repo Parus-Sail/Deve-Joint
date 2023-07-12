@@ -12,11 +12,20 @@ class CustomUserAdmin(UserAdmin):
     model = User
     list_display = ["email", "username"]
     list_display_links = ("username", "email")
+    fieldsets = (
+        *UserAdmin.fieldsets,
+        (
+            "Custom fields",
+            {
+                "fields": ("age", "country", "city", "about", "email_verify", "avatar")
+            },
+        ),
+    )
 
     add_fieldsets = (
         *UserAdmin.add_fieldsets,
         (
-            "Дополнительные обязательные поля",
+            "Custom required fields",
             {
                 "fields": ("email",)
             },

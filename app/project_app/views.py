@@ -42,6 +42,13 @@ class ProjectListView(generic.ListView):
     template_name = 'project_app/project_list.html'
     context_object_name = 'projects'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        favorites = FavoriteProjects.objects.filter(user=self.request.user.id)
+        favorites_pk_list = [item.project.pk for item in favorites]
+        context["favorites_pk_list"] = favorites_pk_list
+        return context
+
 
 class ProjectDetailView(generic.DetailView):
     queryset = service.project_list()

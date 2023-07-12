@@ -1,6 +1,13 @@
 from django.conf import settings
-from django.db import models
+from django.contrib.auth import get_user_model
+from django.contrib.auth.models import Group
+from django.db import models, transaction
+from django.shortcuts import get_object_or_404
+from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
+from typing_extensions import Self
+
+User = get_user_model()
 
 
 class Project(models.Model):
@@ -8,19 +15,37 @@ class Project(models.Model):
     description = models.TextField(blank=True)
     created = models.DateTimeField(auto_now_add=True, blank=True)
 
-    owner = models.ForeignKey(settings.AUTH_USER_MODEL,
+    owner = models.ForeignKey('Owner',
                               null=True,
-                              blank=True,
-                              related_name="owned_projects",
+                              related_name="my_projects",
                               verbose_name=_("owner"),
-                              on_delete=models.SET_NULL)
+                              on_delete=models.SET_NULL)  # при удалении проекта не удаляем пользователя
 
-    members = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name="projects",
-                                     through="Membership", verbose_name=_("members"),
-                                     through_fields=("project", "user"))
+    members = models.ManyToManyField(
+        'Member',
+        through='Membership',
+        related_name='projects',
+    )
 
     def __repr__(self):
         return f'<Project: {self.title}>'
+
+    def get_absolute_url(self):
+        return reverse_lazy('project_app:detail', kwargs={'project_id': self.pk})
+
+    # def get_all_roles(self):
+    #     return self.memberships.all()
+
+    def save(self, *args, **kwargs) -> Self:
+        if self.pk:
+            #  При обновлени проекта — стандартное поведение
+            super().save(*args, **kwargs)
+        else:
+            # При создании проекта — владелец становиться первым участником
+            with transaction.atomic():
+                super().save(*args, **kwargs)
+                Membership.objects.create(user=self.owner, project=self, active=True)
+        return self
 
     class Meta:
         verbose_name = _("Project")
@@ -30,7 +55,7 @@ class Project(models.Model):
 
 class Membership(models.Model):
 
-    user = models.ForeignKey(settings.AUTH_USER_MODEL,
+    user = models.ForeignKey('Member',
                              null=True,
                              blank=True,
                              default=None,
@@ -49,10 +74,75 @@ class Membership(models.Model):
                              related_name="memberships",
                              on_delete=models.CASCADE)
 
+    active = models.BooleanField("Active", default=False)
+
     def __repr__(self):
-        return f'<Membership: {self.user} - {self.project} ({self.role})>'
+        return f'<Membership: {self.user} - {self.project}>'
+
+    def get_absolute_url(self):
+        return reverse_lazy('project_app:members', kwargs={'project_id': self.project, 'member_id': self.id})
 
     class Meta:
         verbose_name = _("Membership")
         verbose_name_plural = _("Membership")
         unique_together = (("project", "user"),)
+
+
+class Owner(User):  # todo: может быть в контектсе разных приложений, поэтому наверно стоит реализовать интерефейс
+
+    def is_owning(self, project_id: int):
+        return Project.objects.filter(id=project_id, owner=self.id).exists()
+
+    def pass_project(self):
+        pass
+
+    def __repr__(self) -> str:
+        return f'<Owner: id: {self.id}, {self.get_username()}>'
+
+    class Meta:
+        proxy = True
+
+
+class Member(User):
+
+    def is_member(self, project: Project) -> bool:
+        """ Проверяет что пользователь является активным участником проекта """
+        return self.objects.select_related('memberships').filter(memberships_project=project).exists(
+            memberships_active=True)
+
+    # filter(id=project.id).exists()
+
+    def is_invited_to_project(self, project: Project) -> bool:
+        return self.projectinvitation_set.filter(project=project).exists()
+
+    def invite_to_project(self):
+        pass
+
+    def leave_project(self):
+        pass
+
+    def __repr__(self) -> str:
+        return f'<Member: id: {self.id}, {self.get_username()}>'
+
+    class Meta:
+        proxy = True
+
+
+import logging
+
+logger = logging.getLogger(__name__)
+
+
+class Candidate(User):
+
+    def send_application_to_join(self, project: Project) -> bool:
+        try:
+            Membership.create(user=self, project=project, active=False)
+            logger.critical(f"<SEND application message to {project.owner} from {self} to join project: {project}>")
+            return True
+        except Exception('Could not send application') as e:
+            logger.critical(f"<Can't SEND application message: {e}>")
+            return False
+
+    class Meta:
+        proxy = True

@@ -1,14 +1,16 @@
-from auth_app.utils import DivErrorList  # todo может вынести в отдельный блок?
+from auth_app.utils import DivErrorList
 from django import forms
 
 from . import models
 
 
-class ProjectCreateForm(forms.ModelForm):
+# todo может вынести в отдельный блок?
+class MixinCssFormClasses:
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         fields = ("title", "description")
+
         for field in fields:
             # кастомный css для полей
             self.fields[field].widget.attrs.update({"class": "form-control"})
@@ -17,10 +19,16 @@ class ProjectCreateForm(forms.ModelForm):
         # кастомный css для ошибок
         self.error_class = DivErrorList
 
+
+class ProjectForm(MixinCssFormClasses, forms.ModelForm):
+
     class Meta:
         model = models.Project
         fields = ("title", "description")
 
 
-class ProjectUpdateForm(ProjectCreateForm):
-    ...
+class ConfirmDelete(MixinCssFormClasses, forms.ModelForm):
+
+    class Meta:
+        model = models.Project
+        fields = ("title", "description")

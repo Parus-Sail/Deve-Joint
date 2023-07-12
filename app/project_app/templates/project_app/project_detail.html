@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% block title %}{{ object.title }}{% endblock %}
 {% block content %}
     <header class="site-header">
         <div class="section-overlay"></div>
@@ -7,17 +8,10 @@
             <div class="row">
                 <div class="col-lg-12 col-12 text-center">
                     <h1 class="text-white">Project Detail</h1>
-                    <nav aria-label="breadcrumb">
-                        <ol class="breadcrumb justify-content-center">
-                            <li class="breadcrumb-item">
-                                <a href="{% url 'main:index' %}">Home</a>
-                            </li>
-                            <li class="breadcrumb-item active" aria-current="page">Project detail</li>
-                        </ol>
-                    </nav>
+                    {% include 'includes/breadcrumb.html' %}
                 </div>
             </div>
         </div>
     </header>
-    {% include 'project_app/includes/project_details/project_details_section.html' %}
+    {% include 'project_app/includes/project_details_section.html' with project=object %}
 {% endblock %}

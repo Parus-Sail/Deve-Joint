@@ -5,7 +5,8 @@
     "fields": {
         "user": 1,
         "project": 1,
-        "role": 1
+        "role": 1,
+        "active": true
     }
 },
 {
@@ -14,7 +15,8 @@
     "fields": {
         "user": 2,
         "project": 1,
-        "role": 1
+        "role": 1,
+        "active": true
     }
 },
 {
@@ -23,7 +25,8 @@
     "fields": {
         "user": 3,
         "project": 1,
-        "role": 1
+        "role": 1,
+        "active": true
     }
 },
 {
@@ -32,7 +35,8 @@
     "fields": {
         "user": 2,
         "project": 2,
-        "role": 2
+        "role": 2,
+        "active": false
     }
 },
 {
@@ -41,7 +45,8 @@
     "fields": {
         "user": 3,
         "project": 2,
-        "role": 2
+        "role": 2,
+        "active": true
     }
 },
 {
@@ -50,7 +55,8 @@
     "fields": {
         "user": 1,
         "project": 5,
-        "role": 3
+        "role": 3,
+        "active": true
     }
 },
 {
@@ -59,7 +65,8 @@
     "fields": {
         "user": 2,
         "project": 5,
-        "role": 3
+        "role": 3,
+        "active": true
     }
 }
 ]

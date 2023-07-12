@@ -23,13 +23,13 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12 col-12">
-                {% if projects %}
-                    {% for project in projects %}
+                {% if object_list %}
+                    {% for project in object_list %}
                         <div class="job-thumb d-flex">
                             <div class="job-body d-flex flex-wrap flex-auto align-items-center ms-4">
                                 <div class="mb-3">
                                     <h4 class="job-title mb-lg-0">
-                                        <a href="{% url 'project_app:detail' pk=project.pk %}"
+                                        <a href="{% url 'project_app:my_project' project_id=project.pk %}"
                                            class="job-title-link">{{ project.title }}</a>
                                     </h4>
                                     <div class="d-flex">
@@ -45,7 +45,7 @@
                                     </div>
                                 </div>
                                 <div class="job-section-btn-wrap">
-                                    <a href="{% url 'project_app:detail' pk=project.pk %}"
+                                    <a href="{% url 'project_app:detail' project_id=project.pk %}"
                                        class="custom-btn btn">More</a>
                                 </div>
                             </div>

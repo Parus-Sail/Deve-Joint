@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.contrib.auth.models import Group
 from role_app.models import Role
 
 from .models import Membership, Project

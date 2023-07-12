@@ -10,14 +10,7 @@
             <div class="row">
                 <div class="col-lg-12 col-12 text-center">
                     <h1 class="text-white">Project Listings</h1>
-                    <nav aria-label="breadcrumb">
-                        <ol class="breadcrumb justify-content-center">
-                            <li class="breadcrumb-item">
-                                <a href="{% url 'main:index' %}">Home</a>
-                            </li>
-                            <li class="breadcrumb-item active" aria-current="page">Project listings</li>
-                        </ol>
-                    </nav>
+                    {% include 'includes/breadcrumb.html' %}
                 </div>
             </div>
         </div>

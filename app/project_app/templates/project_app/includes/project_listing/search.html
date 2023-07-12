@@ -1,0 +1,6 @@
+{% load static %}
+<form class="search-custom-form"
+      action="{% url 'project_app:search_results' %}"
+      method="get">
+    <input class="search-custom-form-control placeholder"  name="q" type="text" placeholder="Search..." value={{ request.query }}>
+</form>

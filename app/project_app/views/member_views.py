@@ -32,7 +32,7 @@ class MakeAppicationView(LoginRequiredMixin, View):
 
         # todo: needs to refactor
         from role_app.models import Role
-        role, is_created = Role.objects.get_or_create(project=project.id, name='member')
+        role, is_created = Role.objects.get_or_create(project=project, name='member')
 
         membership = Membership.objects.get_or_create(project=project, user=user, active=True, role=role)
 

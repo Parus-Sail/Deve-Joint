@@ -21,7 +21,7 @@ User: type[AbstractBaseUser] = get_user_model()
 # ============================================= MEMBERS ACTIVITIES (HARDCODE) ==================================
 
 
-class MakeAppicationView(View):
+class MakeAppicationView(LoginRequiredMixin, View):
 
     def post(self, request):
 
@@ -30,12 +30,16 @@ class MakeAppicationView(View):
         user = get_user(request)
         project = Project.objects.get(id=project_id)
 
-        membership = Membership.objects.get_or_create(project=project, user=user, active=True)
+        # todo: needs to refactor
+        from role_app.models import Role
+        role, is_created = Role.objects.get_or_create(project=project.id, name='member')
+
+        membership = Membership.objects.get_or_create(project=project, user=user, active=True, role=role)
 
         return redirect(reverse('project_app:detail', kwargs={'project_id': project_id}))
 
 
-class LeaveProjectView(View):
+class LeaveProjectView(LoginRequiredMixin, View):
 
     def post(self, request):
 
@@ -50,7 +54,7 @@ class LeaveProjectView(View):
         return redirect(reverse('project_app:detail', kwargs={'project_id': project_id}))
 
 
-class AcceptAppicationView(View):
+class AcceptAppicationView(LoginRequiredMixin, View):
 
     def post(self, request):
 
@@ -65,7 +69,7 @@ class AcceptAppicationView(View):
         return redirect(reverse('project_app:my_project', kwargs={'project_id': project_id}))
 
 
-class RejectApplicationView(View):
+class RejectApplicationView(LoginRequiredMixin, View):
 
     def post(self, request):
 
@@ -79,7 +83,7 @@ class RejectApplicationView(View):
         return redirect(reverse('project_app:my_project', kwargs={'project_id': project_id}))
 
 
-class ExcludeMemberView(View):
+class ExcludeMemberView(LoginRequiredMixin, View):
 
     def post(self, request):
 
@@ -98,7 +102,7 @@ class ExcludeMemberView(View):
 from django.views.generic.base import ContextMixin
 
 
-class ApplicationMemberView(UserPassesTestMixin, ContextMixin, View):  #todo: implement
+class ApplicationMemberView(LoginRequiredMixin, UserPassesTestMixin, ContextMixin, View):  #todo: implement
     """ пользователь (НЕ участник проекта) отправляет заявку на участие в проекте """
 
     def get_test_func(self) -> Callable[[any], bool]:

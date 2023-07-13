@@ -3,7 +3,7 @@ from django.utils.translation import gettext_lazy as _
 
 
 class Role(models.Model):
-    name = models.CharField(max_length=255)
+    name = models.CharField(max_length=255, default='member')
     project = models.ForeignKey(
         "project_app.Project",
         null=True,

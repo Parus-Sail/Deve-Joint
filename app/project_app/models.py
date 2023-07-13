@@ -37,6 +37,8 @@ class Project(models.Model):
     #     return self.memberships.all()
 
     def save(self, *args, **kwargs) -> Self:
+        from role_app.models import Role
+
         if self.pk:
             #  При обновлени проекта — стандартное поведение
             super().save(*args, **kwargs)
@@ -44,7 +46,8 @@ class Project(models.Model):
             # При создании проекта — владелец становиться первым участником
             with transaction.atomic():
                 super().save(*args, **kwargs)
-                Membership.objects.create(user=self.owner, project=self, active=True)
+                role = Role.objects.create(project=self, name='Owner')
+                Membership.objects.create(user=self.owner, project=self, role=role, active=True)
         return self
 
     class Meta:

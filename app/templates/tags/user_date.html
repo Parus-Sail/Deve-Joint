@@ -1,0 +1,6 @@
+<script>
+    function userDate(utcDatetime) {
+        return new Date(utcDatetime).toLocaleString().slice(0, 10);
+    }
+    document.write(userDate("{{ utc_date_time|safe }}"));
+</script>

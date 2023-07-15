@@ -13,7 +13,7 @@ from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.utils.http import urlsafe_base64_decode
 from django.views import View
-from django.views.generic import CreateView, TemplateView, UpdateView
+from django.views.generic import CreateView, DetailView, TemplateView, UpdateView
 
 from . import forms as authapp_forms
 from .utils import SendEmailForVerify
@@ -51,6 +51,12 @@ class UserUpdateView(LoginRequiredMixin, UpdateView):
 
     def get_object(self):
         return self.request.user
+
+
+class UserProfileView(LoginRequiredMixin, DetailView):
+    template_name = "auth_app/registration/profile_detail.html"
+    model = User
+    context_object_name = 'user'
 
 
 class UserPasswordReset(PasswordResetView):

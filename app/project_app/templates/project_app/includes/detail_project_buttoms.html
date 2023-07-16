@@ -21,8 +21,13 @@
            class="custom-btn btn mt-2  ms-lg-4 ms-3">Delete</a>
     {% endif %}
     {% if user.is_authenticated %}
-        <a href="{% url 'favorite_app:favorite_projects_add' project.pk %}"
-           class="custom-btn btn mt-2 ms-lg-4 ms-3">Add to Favorites</a>
+        {% if project.pk in favorites_pk_list %}
+            <a href="{% url 'favorite_app:favorite_projects_remove' project.pk %}"
+               class="custom-btn custom-border-btn btn mt-2 ms-lg-4 ms-3">Remove from Favorites</a>
+        {% else %}
+            <a href="{% url 'favorite_app:favorite_projects_add' project.pk %}"
+               class="custom-btn btn mt-2 ms-lg-4 ms-3">Add to Favorites</a>
+        {% endif %}
     {% endif %}
     <div class="job-detail-share d-flex align-items-center">
         <p class="mb-0 me-lg-4 me-3">Share:</p>

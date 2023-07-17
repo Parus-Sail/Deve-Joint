@@ -1,1 +1,23 @@
-[{"model": "cv_app.relocationtype", "pk": 1, "fields": {"name": "Anyway"}}, {"model": "cv_app.relocationtype", "pk": 2, "fields": {"name": "True"}}, {"model": "cv_app.relocationtype", "pk": 3, "fields": {"name": "False"}}]
+[
+  {
+    "model": "cv_app.relocationtype",
+    "pk": 1,
+    "fields": {
+      "name": "Anyway"
+    }
+  },
+  {
+    "model": "cv_app.relocationtype",
+    "pk": 2,
+    "fields": {
+      "name": "True"
+    }
+  },
+  {
+    "model": "cv_app.relocationtype",
+    "pk": 3,
+    "fields": {
+      "name": "False"
+    }
+  }
+]

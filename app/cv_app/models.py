@@ -56,9 +56,6 @@ class CV(VacancyAppBaseModel):
     def owner_full_name(self):
         return ' '.join([self.owner.first_name.capitalize(), self.owner.last_name.capitalize()])
 
-    def get_absolute_url(self):
-        return reverse_lazy('cv_app:my-cv-list', kwargs={'pk': self.pk})
-
     class Meta:
         verbose_name = _("CV")
         verbose_name_plural = _("CVs")

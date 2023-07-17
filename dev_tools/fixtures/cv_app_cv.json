@@ -1,0 +1,56 @@
+[
+  {
+    "model": "cv_app.cv",
+    "pk": 1,
+    "fields": {
+      "created": "2023-07-16T22:53:25.692Z",
+      "updated": "2023-07-16T22:53:25.692Z",
+      "owner": 1,
+      "title": "My first CV",
+      "salary": 100000,
+      "technologies": "SQL, Python, Docker",
+      "summary": "Call me please :)",
+      "education": "Moscow State University",
+      "experience": "None",
+      "busy_type": 1,
+      "relocation": 1,
+      "is_published": true
+    }
+  },
+  {
+    "model": "cv_app.cv",
+    "pk": 2,
+    "fields": {
+      "created": "2023-07-16T23:01:32.311Z",
+      "updated": "2023-07-16T23:01:32.311Z",
+      "owner": 2,
+      "title": "My next CV",
+      "salary": 100000,
+      "technologies": "SQL, Python, Docker",
+      "summary": "Call me please :)",
+      "education": "Moscow State University",
+      "experience": "None",
+      "busy_type": 1,
+      "relocation": 3,
+      "is_published": true
+    }
+  },
+  {
+    "model": "cv_app.cv",
+    "pk": 3,
+    "fields": {
+      "created": "2023-07-16T23:11:32.311Z",
+      "updated": "2023-07-16T23:11:32.311Z",
+      "owner": 1,
+      "title": "My unpublished CV",
+      "salary": 100000,
+      "technologies": "SQL, Python, Docker",
+      "summary": "Call me please :)",
+      "education": "Moscow State University",
+      "experience": "None",
+      "busy_type": 2,
+      "relocation": 2,
+      "is_published": false
+    }
+  }
+]

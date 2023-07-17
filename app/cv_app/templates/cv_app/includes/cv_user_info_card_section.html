@@ -1,0 +1,40 @@
+<div class="col-lg-4 col-12 mt-5 mt-lg-0">
+    <div class="job-thumb job-thumb-detail-box bg-white shadow-lg">
+        <div class="clearfix">
+            {% if user.is_authenticated %}
+                <button onclick="location.href='{% url 'cv_app:create' %}'"
+                    class="nav-link custom-btn float-end mx-1">
+                    Create CV
+                </button>
+                {% if cv.owner == user %}
+                    <button onclick="location.href='{% url 'cv_app:delete' cv.pk %}'"
+                        class="nav-link custom-btn float-end mx-1">
+                        Delete
+                    </button>
+                    <button onclick="location.href='{% url 'cv_app:update' cv.pk %}'"
+                        class="nav-link custom-btn float-end mx-1">
+                        Update
+                    </button>
+                {% endif %}
+            {% endif %}
+        </div>
+        <h6 class="mt-4 mb-3">Contact Information</h6>
+        <p>{{ cv.owner.username }}</p>
+        <p><strong>{{ cv.owner_full_name }}</strong></p>
+        {% if cv.owner.phone %}
+            <p class="mb-2">
+                <i class="custom-icon bi-telephone me-1"></i>
+                <a href="tel:{{ cv.owner.phone }}" class="site-footer-link">{{ cv.owner.phone }}</a>
+            </p>
+        {% endif %}
+        {% if cv.owner.email %}
+            <p>
+                <i class="custom-icon bi-envelope me-1"></i>
+                <a href="mailto:{{ cv.owner.email }}" class="site-footer-link">{{ cv.owner.email }}</a>
+            </p>
+        {% endif %}
+        <h6 class="mt-4 mb-3">Information</h6>
+        <p>Created: {{ cv.created }}</p>
+        <p>Updated: {{ cv.updated }}</p>
+    </div>
+</div>

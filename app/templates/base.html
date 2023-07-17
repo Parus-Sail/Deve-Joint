@@ -28,16 +28,16 @@
         <link href="{% static 'css/tooplate-gotto-job.css' %}" rel="stylesheet">
         <!-- Tooplate 2134 Gotto Job https://www.tooplate.com/view/2134-gotto-job Bootstrap 5 HTML CSS Template -->
     </head>
-    <body id="top">
-        <main>
+    <body id="top" class="d-flex flex-column min-vh-100">
+        <main class="flex-shrink-0">
             {% include 'includes/main_menu.html' %}
             {% block content %}
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur optio est esse? Veritatis laborum expedita
                 quibusdam numquam! Expedita amet nisi dolor similique autem, mollitia ipsa et, natus vel explicabo
                 reprehenderit?
             {% endblock content %}
-            {% include 'includes/footer.html' %}
         </main>
+        {% include 'includes/footer.html' %}
         <!-- JAVASCRIPT FILES -->
         <script src="{% static 'js/jquery.min.js' %}"></script>
         <script src="{% static 'js/bootstrap.min.js' %}"></script>

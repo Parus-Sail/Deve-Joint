@@ -34,6 +34,9 @@ go_db: down
 	./app/manage.py loaddata ./dev_tools/fixtures/vacancy_app_payment_account.json
 	./app/manage.py loaddata ./dev_tools/fixtures/vacancy_app_company.json
 	./app/manage.py loaddata ./dev_tools/fixtures/vacancy_app_vacancy.json
+	./app/manage.py loaddata ./dev_tools/fixtures/cv_app_busy_type.json
+	./app/manage.py loaddata ./dev_tools/fixtures/cv_app_relocation_type.json
+	./app/manage.py loaddata ./dev_tools/fixtures/cv_app_cv.json
 
 go_docker: down build up
 

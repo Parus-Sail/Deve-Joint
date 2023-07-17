@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Delete CV
+{% endblock title %}
+
+{% block content %}
+    <div class="container my-5">
+        <div class="col-lg-8 col-12 mx-auto">
+            <form class="custom-form contact-form" method="post">
+                {% csrf_token %}
+                <h2 class="text-center mb-4 logo-text">Delete CV</h2>
+                <hr class="my-4">
+                <p>Are you sure you want to delete your CV &#171;{{ cv.title }}&#187;?</p>
+                <div class="row justify-content-center">
+                    <form method="post">
+                        {% csrf_token %}
+                        <br>
+                        <a href="{% url 'cv_app:detail' pk=cv.pk %}" class="custom-btn float-end col-auto mx-1">
+                            Cancel
+                        </a>
+                        <button type="submit" class="col-auto custom-btn mx-1 float-end">
+                            Delete
+                        </button>
+                    </form>
+                    <br>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock content %}

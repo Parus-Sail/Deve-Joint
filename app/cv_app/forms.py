@@ -9,10 +9,3 @@ class CVCreationForm(forms.ModelForm):
     class Meta:
         model = models.CV
         exclude = ['owner', 'created', 'updated']
-
-
-class CVDetailForm(forms.ModelForm):
-
-    class Meta:
-        model = models.CV
-        fields = '__all__'

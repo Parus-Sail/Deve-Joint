@@ -1,7 +1,6 @@
 from django.conf import settings
 from django.contrib.auth import get_user, get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.db.models import Q
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DeleteView, DetailView, ListView, UpdateView
 
@@ -16,23 +15,6 @@ class CVListView(ListView):
     context_object_name = 'cv_list'
     paginate_by = settings.DEFAULT_PAGINATE_SIZE
     queryset = models.CV.objects.filter(is_published=True)
-
-    # Возможно, пригодится позже для организации поиска:
-    # def get_queryset(self):  # новый
-    #     query = self.request.GET.get('q')
-    #     search_user = None
-    #     try:
-    #         search_user = UserModel.objects.get(username=query)
-    #     except Exception:
-    #         pass
-    #     if query and not search_user:
-    #         object_list = models.CV.objects.filter(is_published=True).filter(
-    #             Q(title__icontains=query) | Q(description__icontains=query))
-    #     elif search_user:
-    #         object_list = models.CV.objects.filter(is_published=True).filter(owner__exact=search_user.pk)
-    #     else:
-    #         object_list = models.CV.objects.filter(is_published=True)
-    #     return object_list
 
 
 class UserCVListView(ListView, LoginRequiredMixin):

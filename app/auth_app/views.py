@@ -14,6 +14,7 @@ from django.urls import reverse_lazy
 from django.utils.http import urlsafe_base64_decode
 from django.views import View
 from django.views.generic import CreateView, DetailView, TemplateView, UpdateView
+from project_app.models import Membership, Project
 
 from . import forms as authapp_forms
 from .utils import SendEmailForVerify
@@ -47,10 +48,18 @@ class UserUpdateView(LoginRequiredMixin, UpdateView):
     model = User
     form_class = authapp_forms.CustomUserChangeForm
     template_name = "auth_app/registration/profile.html"
-    success_url = reverse_lazy("main:index")
+    success_url = reverse_lazy("auth_app:profile")
 
     def get_object(self):
         return self.request.user
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        projects = Project.objects.filter(owner=self.request.user)
+        context['projects'] = projects
+        projects_member = Project.objects.filter(members=self.request.user).exclude(owner=self.request.user)
+        context['projects_member'] = projects_member
+        return context
 
 
 class UserProfileView(LoginRequiredMixin, DetailView):

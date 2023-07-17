@@ -33,6 +33,7 @@ urlpatterns = [
     path('company/create/', views.CompanyCreateView.as_view(), name='company_create'),
     path('company/<int:pk>/update/', views.CompanyUpdateView.as_view(), name='company_update'),
     path('company/<int:pk>/delete/', views.CompanyDeleteView.as_view(), name='company_delete'),
+    path('company/<int:pk>/profile/', views.CompanyProfileView.as_view(), name='company_profile'),
     # Vacancy url
     path('vacancy/create/', views.VacancyCreateView.as_view(), name='vacancy_create'),
     path('vacancy/', views.VacancyListView.as_view(), name='vacancy_list'),

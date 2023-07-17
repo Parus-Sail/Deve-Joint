@@ -4,6 +4,16 @@ from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 
 
+def users_avatars_path(instance, filename):
+    """
+    file will be uploaded to
+    MEDIA_ROOT / user_<username> / avatars / <filename>
+    """
+    num = int(time() * 1000)
+    suff = Path(filename).suffix
+    return f"user_{instance.username}/avatars/pic_{num}{suff}"
+
+
 class BaseOpenSailUser(AbstractUser):
     email = models.EmailField(_("email address"), unique=True)
     email_verify = models.BooleanField(default=False)

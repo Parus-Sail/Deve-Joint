@@ -16,8 +16,57 @@
                     flex-direction: row;
                     justify-content: flex-start;
                     margin-top: 10%">
+
             <div class="col-lg-6 col-md-6 col-12" style="max-width: 40%;">
-                <img style="max-height: 250px; max-width: 250px" src="{% if user.avatar %} {{ user.avatar.url }} {% else %} {% static "img/avatar/default.png" %} {% endif %}" class="img-thumbnail">
+                <img style="max-height: 250px; max-width: 250px"
+                     src="{% if user.avatar %} {{ user.avatar.url }} {% else %} {% static "img/avatar/default.png" %} {% endif %}"
+                     class="img-thumbnail">
+                <form  method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="col-lg-6 col-md-6 col-12" style="margin-top: 45px; width: auto">
+                        <h6>Choose your avatar</h6>
+                        <div class="input-group">
+                            {{ form.avatar }}
+                        </div>
+                        <button type="submit" class="form-control" style="width: 50%; margin-top: 20px">Save</button>
+                    </div>
+                </form>
+                <div style="margin-top: 40px; width: 70%">
+                    <h4>List of yours projects: </h4>
+                    {% if projects %}
+                        <ul>
+                            {% for project in projects %}
+                                <li>
+                                    <a href="{% url 'project_app:detail' project.id %}">
+                                        {{ project.title }}
+                                    </a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <p>
+                            You don't have your own projects
+                        </p>
+                    {% endif %}
+                </div>
+                <div style="margin-top: 40px; width: 70%">
+                    <h4>List of projects, you take part: </h4>
+                    {% if projects_member %}
+                        <ul>
+                            {% for project in projects_member %}
+                                <li>
+                                    <a href="{% url 'project_app:detail' project.id %}">
+                                        {{ project.title }}
+                                    </a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <p>
+                            There is no projects, you take part
+                        </p>
+                    {% endif %}
+                </div>
             </div>
             <div class="col-lg-12 col-12" style="max-width: 60%">
                 <form class="custom-form hero-form"
@@ -68,21 +117,14 @@
                                 {{ form.city }}
                             </div>
                         </div>
-                        <div class="col-lg-6 col-md-6 col-12">
+                        <div class="col-lg-12 col-md-6 col-12">
                             <h6>Your username</h6>
                             <div class="input-group">
                                 <span class="input-group-text" id="basic-addon1"><i class="bi-person custom-icon"></i></span>
                                 {{ form.username }}
                             </div>
                         </div>
-                        <div class="col-lg-6 col-md-6 col-12">
-                            <h6>Choose your avatar</h6>
-                            <div class="input-group">
-                                <span class="input-group-text" id="basic-addon1"><i class="bi-person custom-icon"></i></span>
-                                {{ form.avatar }}
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-md-6 col-12">
+                        <div class="col-lg-12 col-md-6 col-12">
                             <h6>Write here about yourself</h6>
                             <div class="input-group">{{ form.about }}</div>
                         </div>

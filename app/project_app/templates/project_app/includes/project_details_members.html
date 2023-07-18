@@ -7,16 +7,14 @@
                 <div class="job-body d-flex flex-wrap flex-auto align-items-center ms-4">
                     <div class="mb-3">
                         <h4 class="job-title mb-lg-0">
-                            <a href="{% url "vacancy:user_profile_detail" pk=user.id %}" class="job-title-link">
-                                {{ membership.user.username }}
-                            </a>
+                            <a href="{% url 'auth_app:profile_detail' membership.user.id %}" class="job-title-link">{{ membership.user.username }}</a>
                         </h4>
                         <div class='d-flex flex-wrap align-items-center'>
                             <p>User role: {{ membership.role.name }}</p>
                         </div>
                     </div>
                     <div class="job-section-btn-wrap">
-                        <a href="{% url "vacancy:user_profile_detail" pk=user.id %}" class="custom-btn btn">More</a>
+                        <a href="{% url 'auth_app:profile_detail' membership.user.id %}" class="custom-btn btn">More</a>
                     </div>
                 </div>
             </div>

@@ -1,0 +1,12 @@
+{% if vacancies_items %}
+    <h5 class="mt-4">Your {{ vacancies_title }}:</h5>
+    <ul>
+        {% for item in vacancies_items %}
+            <li>
+                <a href="{% url 'vacancy_app:job-details' item.vacancy.pk %}">{{ item.vacancy.name }}</a>
+                - added to favorites on {{ item.add_datetime }}
+                (<a href="{% url 'favorite_app:favorite_vacancies_remove' item.vacancy.pk %}">Remove</a>)
+            </li>
+        {% endfor %}
+    </ul>
+{% endif %}

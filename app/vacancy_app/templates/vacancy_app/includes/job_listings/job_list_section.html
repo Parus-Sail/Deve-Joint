@@ -74,13 +74,15 @@
                                 <div class="job-section-btn-wrap">
                                     <a href="{% url 'vacancy:job-details' pk=item.id %}#job-details-section"
                                        class="custom-btn btn">More</a>
-                                    {% if item.id in favorites_pk_list %}
-                                        <a href="{% url 'favorite_app:favorite_vacancies_remove' pk=item.id %}"
-                                           class="custom-btn custom-border-btn btn ms-2">Remove from Favorites</a>
-                                    {% else %}
-                                        <a href="{% url 'favorite_app:favorite_vacancies_add' pk=item.id %}"
-                                           class="custom-btn btn ms-2">Add to Favorites</a>
-                                    {% endif %}
+                                    <div class="d-flex justify-content-center">
+                                        {% if item.id in favorites_pk_list %}
+                                            <a href="{% url 'favorite_app:favorite_vacancies_remove' pk=item.id %}#job-section"
+                                               class="bi-heart-fill my-2"></a>
+                                        {% else %}
+                                            <a href="{% url 'favorite_app:favorite_vacancies_add' pk=item.id %}#job-section"
+                                               class="bi-heart my-2"></a>
+                                        {% endif %}
+                                    </div>
                                 </div>
                             </div>
                         {% endfor %}

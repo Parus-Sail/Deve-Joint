@@ -8,12 +8,12 @@ from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import CreateView, DeleteView, DetailView, ListView, UpdateView
 from django_filters.views import FilterView
-
 from favorite_app.models import FavoriteVacancies
+
 from . import forms as vacancy_forms
 from . import models as vacancy_models
 from .filters import PaymentAccountFilter, VacancyFilter
-from .mixins import RequestFormKwargsMixin, FavoritesMixin
+from .mixins import FavoritesMixin, RequestFormKwargsMixin
 from .permissions import OwnerRequiredMixin, StaffRequiredMixin
 
 

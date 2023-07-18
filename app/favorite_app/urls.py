@@ -1,5 +1,11 @@
 from django.urls import path
-from favorite_app.views import FavoriteProjectsAdd, FavoriteProjectsRemove, FavoriteVacanciesAdd, FavoriteVacanciesRemove, FavoritesView
+from favorite_app.views import (
+    FavoriteProjectsAdd,
+    FavoriteProjectsRemove,
+    FavoritesView,
+    FavoriteVacanciesAdd,
+    FavoriteVacanciesRemove,
+)
 
 app_name = 'favorite_app'
 

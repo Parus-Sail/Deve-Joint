@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.db import models
 from project_app.models import Project
+from vacancy_app.models import Vacancy
 
 
 class FavoriteBase(models.Model):
@@ -21,3 +22,11 @@ class FavoriteProjects(FavoriteBase):
     class Meta:
         verbose_name = "Favorite project"
         verbose_name_plural = "Favorite projects"
+
+
+class FavoriteVacancies(FavoriteBase):
+    vacancy = models.ForeignKey(Vacancy, null=False, blank=False, on_delete=models.CASCADE, verbose_name="Vacancy")
+
+    class Meta:
+        verbose_name = "Favorite vacancies"
+        verbose_name_plural = "Favorite vacancies"

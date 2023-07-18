@@ -3,25 +3,21 @@
     Favorites
 {% endblock title %}
 {% block content %}
-    <div class="container">
-        <div class="col-lg-8 col-12 mx-auto custom-form contact-form">
-            <h2 class="text-center mb-4 logo-text">Favorites</h2>
+    <header class="site-header">
+        <div class="section-overlay"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-12 text-center">
+                    <h1 class="text-white">Favorites</h1>
+                </div>
+            </div>
         </div>
-    </div>
+    </header>
     <div class="container">
-        <div class="col-lg-8 col-12">
-            {% if favorite_projects_items %}
-                <h5 class="mb-4">Your {{ title }}:</h5>
-                <ul>
-                    {% for item in favorite_projects_items %}
-                        <li>
-                            <a href="{% url 'project_app:detail' item.project.pk %}">{{ item.project.title }}</a>
-                            - added to favorites {{ item.add_datetime }}
-                            (<a href="{% url 'favorite_app:favorite_projects_remove' item.project.pk %}">Remove</a>)
-                        </li>
-                    {% endfor %}
-                </ul>
-            {% else %}
+        <div class="col-lg-12 col-12">
+            {% include 'favorite_app/includes/fav_projects_list.html' %}
+            {% include 'favorite_app/includes/fav_vacancies_list.html' %}
+            {% if not projects_items and not vacancies_items %}
                 <p>Your favorites list is empty.</p>
             {% endif %}
         </div>

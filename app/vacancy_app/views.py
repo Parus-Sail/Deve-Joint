@@ -9,10 +9,11 @@ from django.views import View
 from django.views.generic import CreateView, DeleteView, DetailView, ListView, UpdateView
 from django_filters.views import FilterView
 
+from favorite_app.models import FavoriteVacancies
 from . import forms as vacancy_forms
 from . import models as vacancy_models
 from .filters import PaymentAccountFilter, VacancyFilter
-from .mixins import RequestFormKwargsMixin
+from .mixins import RequestFormKwargsMixin, FavoritesMixin
 from .permissions import OwnerRequiredMixin, StaffRequiredMixin
 
 
@@ -206,7 +207,7 @@ class VacancyDeleteView(LoginRequiredMixin, OwnerRequiredMixin, DeleteView):
 
 
 # ========== Job List View for template==============
-class JobsListView(ListView):
+class JobsListView(FavoritesMixin, ListView):
     paginate_by = 3
     model = vacancy_models.Vacancy
     template_name: str = "vacancy_app/job_listing.html"
@@ -268,7 +269,7 @@ class JobsListView(ListView):
         return context
 
 
-class JobsDetailView(DetailView):
+class JobsDetailView(FavoritesMixin, DetailView):
     model = vacancy_models.Vacancy
     template_name: str = "vacancy_app/job_details.html"
 

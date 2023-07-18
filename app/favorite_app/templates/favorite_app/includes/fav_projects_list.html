@@ -1,0 +1,12 @@
+{% if projects_items %}
+    <h5 class="mt-4">Your {{ projects_title }}:</h5>
+    <ul>
+        {% for item in projects_items %}
+            <li>
+                <a href="{% url 'project_app:detail' item.project.pk %}">{{ item.project.title }}</a>
+                - added to favorites on {{ item.add_datetime }}
+                (<a href="{% url 'favorite_app:favorite_projects_remove' item.project.pk %}">Remove</a>)
+            </li>
+        {% endfor %}
+    </ul>
+{% endif %}

@@ -12,6 +12,7 @@ class BaseOpenSailUser(AbstractUser):
     about = models.TextField(blank=True, null=True, verbose_name=_('about yourself'))
     country = models.CharField(max_length=50, verbose_name=_('country'), blank=True, null=True)
     city = models.CharField(max_length=50, verbose_name=_('city'), blank=True, null=True)
+    phone = models.CharField(max_length=150, null=True, verbose_name=_('Phone'))
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = ["username"]

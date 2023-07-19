@@ -70,16 +70,18 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="job-section-btn-wrap">
-                                    <a href="{% url 'vacancy:job-details' pk=item.id %}#job-details-section"
-                                       class="custom-btn btn">More</a>
+                                <div class="d-flex flex-wrap align-items-center me-3 mt-2">
                                     {% if item.id in favorites_pk_list %}
                                         <a href="{% url 'favorite_app:favorite_vacancies_remove' pk=item.id %}"
-                                           class="custom-btn custom-border-btn btn ms-2">Remove from Favorites</a>
+                                           class="bi-heart-fill"></a>
                                     {% else %}
                                         <a href="{% url 'favorite_app:favorite_vacancies_add' pk=item.id %}"
-                                           class="custom-btn btn ms-2">Add to Favorites</a>
+                                           class="bi-heart"></a>
                                     {% endif %}
+                                </div>
+                                <div class="d-flex flex-wrap align-items-center">
+                                    <a href="{% url 'vacancy:job-details' pk=item.id %}#job-details-section"
+                                       class="custom-btn btn">More</a>
                                 </div>
                             </div>
                         {% endfor %}

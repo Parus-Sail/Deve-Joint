@@ -5,7 +5,9 @@
 {% block content %}
     <div class="container">
         <div class="col-lg-8 col-12 mx-auto">
-            <form class="custom-form contact-form" method="post">
+            <form class="custom-form contact-form"
+                  method="post"
+                  enctype="multipart/form-data">
                 {% csrf_token %}
                 <h2 class="text-center mb-4 logo-text">Create Company</h2>
                 <div class="row justify-content-center">

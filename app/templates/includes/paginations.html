@@ -1,6 +1,6 @@
 {% load url_add_get_param %}
 {% if page_obj.has_other_pages %}
-    <nav aria-label="Page navigation example">
+    <nav aria-label="Page navigation example" class="mb-4">
         <ul class="pagination justify-content-center mt-5">
             {% if page_obj.has_previous %}
                 <li class="page-item">
@@ -34,37 +34,3 @@
         </ul>
     </nav>
 {% endif %}
-{% comment %} 
-
-<div class="col-lg-12 col-12">
-    <nav aria-label="Page navigation example">
-        <ul class="pagination justify-content-center mt-5">
-            {% if page_obj.has_previous %}
-                <li class="page-item">
-                    <a href="?page=1" class="page-link">
-                        <span aria-hidden="true">first</span></a>
-                </li>
-                <li class="page-item">
-                    <a href="?page={{ page_obj.previous_page_number }}" class="page-link">
-                        <span aria-hidden="true">prev</span></a>
-                </li>
-            {% endif %}
-            {% if page_obj %}
-                {% for page in page_obj.paginator %}
-                    <a class="page-link" href="?page={{ page.number }}" aria-label="page{{ page.number }}">{{ page.number }}</a>
-                {% endfor %}
-            {% endif %}
-            {% if page_obj.has_next %}
-                <li class="page-item">
-                    <a class="page-link" aria-label="Next" href="?page={{ page_obj.next_page_number }}">
-                        <span aria-hidden="true">Next</span></a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">
-                        <span aria-hidden="true">Last</span></a>
-                </li>
-            {% endif %}
-        </ul>
-    </nav>
-</div> 
-{% endcomment %}

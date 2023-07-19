@@ -3,24 +3,20 @@
         <div class="clearfix">
             {% if user.is_authenticated %}
                 <button onclick="location.href='{% url 'cv_app:create' %}'"
-                    class="nav-link custom-btn float-end mx-1">
-                    Create CV
-                </button>
+                        class="nav-link custom-btn float-end mx-1">Create CV</button>
                 {% if cv.owner == user %}
                     <button onclick="location.href='{% url 'cv_app:delete' cv.pk %}'"
-                        class="nav-link custom-btn float-end mx-1">
-                        Delete
-                    </button>
+                            class="nav-link custom-btn float-end mx-1">Delete</button>
                     <button onclick="location.href='{% url 'cv_app:update' cv.pk %}'"
-                        class="nav-link custom-btn float-end mx-1">
-                        Update
-                    </button>
+                            class="nav-link custom-btn float-end mx-1">Update</button>
                 {% endif %}
             {% endif %}
         </div>
         <h6 class="mt-4 mb-3">Contact Information</h6>
         <p>{{ cv.owner.username }}</p>
-        <p><strong>{{ cv.owner_full_name }}</strong></p>
+        <p>
+            <strong>{{ cv.owner_full_name }}</strong>
+        </p>
         {% if cv.owner.phone %}
             <p class="mb-2">
                 <i class="custom-icon bi-telephone me-1"></i>

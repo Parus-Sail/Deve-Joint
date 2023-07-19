@@ -2,7 +2,7 @@
 {% load static %}
 {% load vacancy_app_tags %}
 {% block title %}
-    Company Detail
+    Company Profile
 {% endblock title %}
 {% block content %}
     <div class="row justify-content-center pt-3">
@@ -15,29 +15,19 @@
                     <p class="card-text">
                         <img alt="company avatar" style="max-height: 250px; max-width: 250px" src=" {% if object.avatar %} {{ object.avatar.url }} {% else %} {% static "img/avatar/company_default_avatar.png" %} {% endif %} " class="rounded mx-auto d-block my-4">
                         <br>
-                        <strong>Owner:</strong> {{ object.owner }}
-                        <br>
                         <strong>Description:</strong> {{ object.description }}
                         <br>
                         <strong>location:</strong> {{ object.location }}
                         <br>
                         <strong>Web address:</strong> <a href="{{ object.url }}">{{ object.url }}</a>
                         <br>
-                        <strong>Last update:</strong> {% get_user_date_time object.update_at %}
-                        <br>
-                        <a href="{% url 'vacancy:payment_account_detail' pk=object.payment_account.pk %}"
-                           class="custom-link smoothscroll">
-                            <strong>Payment Account:</strong> {{ object.payment_account }}
-                        </a>
-                        <br>
-                        <strong>Status:</strong> {{ object.get_status_display }}
+                        <strong>Created:</strong> {% get_user_date_time object.created_at %}
                         <br>
                     </p>
                     <a href="javascript:history.go(-1)"
                        class="custom-btn custom-border-btn btn me-4">Back</a>
-                    <a href="{% url 'vacancy:company_list' %}" class="custom-btn btn me-4">Company list</a>
                     <a href="{% url 'vacancy:job-listing' %}?company-id={{ object.pk }}#job-section"
-                       class="custom-btn btn">Active Job list</a>
+                       class="custom-btn btn">Company Job list</a>
                 </div>
             </div>
         </div>

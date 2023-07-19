@@ -20,12 +20,12 @@
                                     </h5>
                                     <div class="d-flex flex-wrap align-items-center">
                                         <p class="job-location mb-0">
-                                            <strong>ID:</strong>{{ item.id }}
+                                            <strong>ID:</strong> {{ item.id }}
                                         </p>
                                     </div>
                                     <div class="d-flex flex-wrap align-items-center">
                                         <p class="job-location mb-0">
-                                            <strong>Description:</strong>{{ item.description|truncatechars:200 }}
+                                            <strong>Description:</strong> {{ item.description|truncatechars:200 }}
                                         </p>
                                     </div>
                                     <div class="d-flex flex-wrap align-items-center">
@@ -35,7 +35,7 @@
                                     </div>
                                     <div class="d-flex flex-wrap align-items-center">
                                         <p class="mb-0">
-                                            <strong>Last update:</strong>{% get_user_date_time item.update_at %}
+                                            <strong>Last update:</strong> {% get_user_date_time item.update_at %}
                                         </p>
                                     </div>
                                     <div class="d-flex mt-2">

@@ -13,7 +13,7 @@
                         </p>
                         <p class="job-date mb-0">
                             <i class="custom-icon bi-clock me-1"></i>
-                            {% get_user_date_time object.update_at %}
+                            {{ object.update_at|date_diff }}
                         </p>
                         <p class="job-price mb-0">
                             {% if object.salary_from or object.salary_to %}<i class="custom-icon bi-cash me-1"></i>{% endif %}
@@ -30,21 +30,30 @@
                             {% endif %}
                         </p>
                         <div class="d-flex">
-                            <p class="mb-0">
-                                {% for level in object.applicant_level.all %}
-                                    <a href="{% url 'main:index' %}" class="badge badge-level">{{ level }}</a>
-                                {% endfor %}
-                            </p>
-                            <p class="mb-0">
-                                {% for emp in object.employment_type.all %}
-                                    <a href="{% url 'main:index' %}" class="badge">{{ emp }}</a>
-                                {% endfor %}
-                            </p>
-                            <p class="mb-0">
-                                {% for type in object.job_type.all %}
-                                    <a href="{% url 'main:index' %}" class="badge">{{ type }}</a>
-                                {% endfor %}
-                            </p>
+                            {% if object.applicant_level.count > 0 %}
+                                <p class="mb-0">
+                                    {% for object in object.applicant_level.all %}
+                                        <a href="{% url 'vacancy:job-listing' %}?selected-applicant-level={{ object.pk }}#job-section"
+                                           class="badge badge-level">{{ object.name }}</a>
+                                    {% endfor %}
+                                </p>
+                            {% endif %}
+                            {% if object.employment_type.count > 0 %}
+                                <p class="mb-0">
+                                    {% for object in object.employment_type.all %}
+                                        <a href="{% url 'vacancy:job-listing' %}?selected-employment-type={{ object.pk }}#job-section"
+                                           class="badge">{{ object.name }}</a>
+                                    {% endfor %}
+                                </p>
+                            {% endif %}
+                            {% if object.job_type.count > 0 %}
+                                <p class="mb-0">
+                                    {% for object in object.job_type.all %}
+                                        <a href="{% url 'vacancy:job-listing' %}?selected-job-type={{ object.pk }}#job-section"
+                                           class="badge">{{ object.name }}</a>
+                                    {% endfor %}
+                                </p>
+                            {% endif %}
                         </div>
                     </div>
                     <h4 class="mt-4 mb-2">Job Description</h4>
@@ -66,6 +75,8 @@
                                class="custom-btn btn mt-2 ms-lg-4 ms-3 me-4">Add to Favorites</a>
                         {% endif %}
                         <a href="#" class="custom-btn btn mt-2">Apply now</a>
+                        <a href="{% url 'vacancy:job-listing' %}?company-id={{ object.company.pk }}#job-section"
+                           class="custom-btn custom-border-btn btn mt-2 ms-lg-4 ms-3">Company Job list</a>
                         <div class="job-detail-share d-flex align-objects-center">
                             <p class="mb-0 me-lg-4 me-3">Share:</p>
                             <a href="#" class="bi-facebook"></a>
@@ -79,9 +90,7 @@
                 <div class="job-thumb job-thumb-detail-box bg-white shadow-lg">
                     <div class="d-flex align-objects-center">
                         <div class="job-image-wrap d-flex align-objects-center bg-white shadow-lg mb-3">
-                            <img src="{% static 'img/logos/google.png' %}"
-                                 class="job-image me-3 img-fluid"
-                                 alt="">
+                            <img src=" {% if object.company.avatar %} {{ object.company.avatar.url }} {% else %} {% static "img/avatar/company_default_avatar.png" %} {% endif %} " class="job-image me-3 img-fluid" alt="">
                         </div>
                         {% if object.id in favorites_pk_list %}
                             <a href="{% url 'favorite_app:favorite_vacancies_remove' pk=object.id %}"
@@ -91,9 +100,15 @@
                                class="bi-heart ms-auto me-2"></a>
                         {% endif %}
                     </div>
-                    <h5 class="mt-3 mb-2">{{ object.company.name|truncatechars:35 }}</h5>
-                    <h6 class="mt-3 mb-2">About the Company</h6>
-                    <p>{{ object.company.description }}</p>
+                    <a href="{% url 'vacancy:company_profile' pk=object.company.pk %}"
+                       class="custom-link smoothscroll">
+                        <h5 class="mt-3 mb-2">{{ object.company.name|truncatechars:35 }}</h5>
+                    </a>
+                    <a href="{% url 'vacancy:company_profile' pk=object.company.pk %}"
+                       class="custom-link smoothscroll">
+                        <h6 class="mt-3 mb-2">About the Company</h6>
+                    </a>
+                    <p>{{ object.company.description|truncatechars:200 }}</p>
                     <h6 class="mt-4 mb-3">Additional Information</h6>
                     {% if object.company.url %}
                         <p class="mb-2">

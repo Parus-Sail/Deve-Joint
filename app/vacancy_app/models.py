@@ -1,7 +1,22 @@
+from pathlib import Path
+from time import time
+
+from config.settings import STATIC_ROOT
 from django.contrib.auth import get_user_model
 from django.db import models
+from django.db.models.functions import Lower
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
+
+
+def company_avatars_path(instance, filename):
+    """
+    file will be uploaded to
+    MEDIA_ROOT / company name / avatars / <filename>
+    """
+    num = int(time() * 1000)
+    suffix = Path(filename).suffix
+    return f"company_{instance.name}/avatars/pic_{num}{suffix}"
 
 
 class PaymentAccount(models.Model):
@@ -12,7 +27,7 @@ class PaymentAccount(models.Model):
         REQ_APP = "REQ_APP", _("Request Approve")
         BLOCKED = "BLC", _("Blocked")
 
-    name = models.CharField(max_length=255, verbose_name=_("name"))
+    name = models.CharField(max_length=255, verbose_name=_("name"), unique=True)
     description = models.TextField(verbose_name=_("description"))
     address = models.CharField(null=True, blank=True, max_length=255, verbose_name=_("address"))
     status = models.CharField(max_length=10, choices=Status.choices, default=Status.NOT_APP, verbose_name=_("status"))
@@ -60,7 +75,7 @@ class Company(models.Model):
         ACTIVE = "ACT", _("Active")
         NOT_ACTIVE = "NOT_ACT", _("Not Active")
 
-    name = models.CharField(max_length=255, verbose_name=_("name"))
+    name = models.CharField(max_length=255, verbose_name=_("name"), unique=True)
     description = models.TextField(verbose_name=_("description"))
     location = models.CharField(max_length=255, verbose_name=_("location"))
     url = models.URLField(null=True, blank=True, verbose_name=_("web address"))
@@ -81,6 +96,7 @@ class Company(models.Model):
         verbose_name=_("payment account"),
         related_name=_("company_list"),
     )
+    avatar = models.ImageField(upload_to=company_avatars_path, verbose_name=_("avatar"), null=True, blank=True)
 
     def get_absolute_url(self):
         return reverse("vacancy:company_detail", kwargs={'pk': self.pk})
@@ -99,7 +115,15 @@ class Company(models.Model):
 
         super(Company, self).save(*args, **kwargs)
 
+    # def get_avatar(self):
+    #     if self.avatar:
+    #         return self.avatar.url
+    #     return STATIC_ROOT
+
     class Meta:
+        constraints = [
+            models.UniqueConstraint(Lower("name"), name=_("company name case insensitive")),
+        ]
         verbose_name = _("Company")
         verbose_name_plural = _("Company's")
         ordering = ["-update_at", "name"]

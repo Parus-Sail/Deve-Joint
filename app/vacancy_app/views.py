@@ -8,12 +8,12 @@ from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import CreateView, DeleteView, DetailView, ListView, UpdateView
 from django_filters.views import FilterView
-
 from favorite_app.models import FavoriteVacancies
+
 from . import forms as vacancy_forms
 from . import models as vacancy_models
 from .filters import PaymentAccountFilter, VacancyFilter
-from .mixins import RequestFormKwargsMixin, FavoritesMixin
+from .mixins import FavoritesMixin, RequestFormKwargsMixin
 from .permissions import OwnerRequiredMixin, StaffRequiredMixin
 
 
@@ -158,6 +158,16 @@ class CompanyDeleteView(LoginRequiredMixin, OwnerRequiredMixin, DeleteView):
         return super().form_valid(form)
 
 
+class CompanyProfileView(DetailView):
+    template_name = "vacancy_app/company_profile.html"
+    model = vacancy_models.Company
+
+    def get_queryset(self):
+        queryset = super(CompanyProfileView, self).get_queryset()
+        queryset = queryset.filter(status=vacancy_models.Company.Status.ACTIVE)
+        return queryset
+
+
 # ===============Vacancy views start here=====================
 class VacancyCreateView(LoginRequiredMixin, RequestFormKwargsMixin, CreateView):
     form_class = vacancy_forms.VacancyCreationForm
@@ -233,8 +243,10 @@ class JobsListView(FavoritesMixin, ListView):
             queryset = queryset.filter(employment_type=params["selected_employment_type"])
         if params["selected_job_type"]:
             queryset = queryset.filter(job_type=params["selected_job_type"])
+        if params["company_id"]:
+            queryset = queryset.filter(company__id=params["company_id"])
         queryset = queryset.filter(status=vacancy_models.Vacancy.Status.ACTIVE).prefetch_related(
-            "applicant_level", "employment_type", "job_type")
+            "applicant_level", "employment_type", "job_type").select_related('company')
         return queryset
 
     def get_params_from_url(self):
@@ -244,6 +256,7 @@ class JobsListView(FavoritesMixin, ListView):
         selected_applicant_level = int(self.request.GET.get("selected-applicant-level", 0))
         selected_employment_type = int(self.request.GET.get("selected-employment-type", 0))
         selected_job_type = int(self.request.GET.get("selected-job-type", 0))
+        company_id = int(self.request.GET.get("company-id", 0))
 
         params = {
             "job_title": job_title,
@@ -252,6 +265,7 @@ class JobsListView(FavoritesMixin, ListView):
             "selected_applicant_level": selected_applicant_level,
             "selected_employment_type": selected_employment_type,
             "selected_job_type": selected_job_type,
+            "company_id": company_id,
         }
         return params
 

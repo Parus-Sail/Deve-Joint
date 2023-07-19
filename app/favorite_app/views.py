@@ -63,6 +63,3 @@ class FavoriteVacanciesRemove(LoginRequiredMixin, View):
         favorites_record = get_object_or_404(FavoriteVacancies, pk=favorites_pk)
         favorites_record.delete()
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
-
-
-

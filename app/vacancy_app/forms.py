@@ -57,7 +57,7 @@ class CompanyCreationForm(forms.ModelForm):
         self.request = kwargs.pop("request")
         super().__init__(*args, **kwargs)
 
-        fields = ("name", "description", "location", "url", "status", "payment_account")
+        fields = ("name", "description", "location", "url", "status", "payment_account", "avatar")
         for field in fields:
             # кастомный css для полей
             self.fields[field].widget.attrs.update({"class": "form-control"})

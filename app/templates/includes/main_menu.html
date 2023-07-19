@@ -2,22 +2,22 @@
 <nav class="navbar navbar-expand-lg">
     <div class="container">
         <a class="navbar-brand d-flex align-items-center"
-            href="{% url 'main:index' %}">
+           href="{% url 'main:index' %}">
             <img src="{% static 'img/logo.png' %}"
-                class="img-fluid logo-image"
-                alt="Deve-Joint">
+                 class="img-fluid logo-image"
+                 alt="Deve-Joint">
             <div class="d-flex flex-column">
                 <strong class="logo-text">Deve-Joint</strong>
                 <small class="logo-slogan">Online Job Portal</small>
             </div>
         </a>
         <button class="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarNav"
-            aria-controls="navbarNav"
-            aria-expanded="false"
-            aria-label="Toggle navigation">
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarNav"
+                aria-controls="navbarNav"
+                aria-expanded="false"
+                aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
@@ -33,11 +33,11 @@
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle"
-                        href="{% url 'main:index' %}"
-                        id="navbarLightDropdownMenuLink"
-                        role="button"
-                        data-bs-toggle="dropdown"
-                        aria-expanded="false">Projects</a>
+                       href="{% url 'main:index' %}"
+                       id="navbarLightDropdownMenuLink"
+                       role="button"
+                       data-bs-toggle="dropdown"
+                       aria-expanded="false">Projects</a>
                     <ul class="dropdown-menu dropdown-menu-light"
                         aria-labelledby="navbarLightDropdownMenuLink">
                         <li>
@@ -50,11 +50,11 @@
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle"
-                        href="{% url 'main:index' %}"
-                        id="navbarLightDropdownMenuLink"
-                        role="button"
-                        data-bs-toggle="dropdown"
-                        aria-expanded="false">Vacancy</a>
+                       href="{% url 'main:index' %}"
+                       id="navbarLightDropdownMenuLink"
+                       role="button"
+                       data-bs-toggle="dropdown"
+                       aria-expanded="false">Vacancy</a>
                     <ul class="dropdown-menu dropdown-menu-light"
                         aria-labelledby="navbarLightDropdownMenuLink">
                         <li>
@@ -72,11 +72,11 @@
                 {% if user.is_authenticated %}
                     <li class="nav-item dropdown ms-lg-auto">
                         <a class="nav-link dropdown-toggle"
-                            href="{% url 'auth_app:profile' %}"
-                            id="navbarLightDropdownMenuLink"
-                            role="button"
-                            data-bs-toggle="dropdown"
-                            aria-expanded="false">{{ user.get_current_name|truncatechars:20|upper }}</a>
+                           href="{% url 'auth_app:profile' %}"
+                           id="navbarLightDropdownMenuLink"
+                           role="button"
+                           data-bs-toggle="dropdown"
+                           aria-expanded="false">{{ user.get_current_name|truncatechars:20|upper }}</a>
                         <ul class="dropdown-menu dropdown-menu-light"
                             aria-labelledby="navbarLightDropdownMenuLink">
                             <li>
@@ -93,7 +93,7 @@
                             </li>
                             <li>
                                 <a class="dropdown-item" href="{% url 'vacancy:payment_account_list' %}">Payment
-                                    Account</a>
+                                Account</a>
                             </li>
                             <li>
                                 <a class="dropdown-item" href="{% url 'vacancy:company_list' %}">Company List</a>
@@ -104,16 +104,18 @@
                             {% if user.is_staff %}
                                 <li>
                                     <a class="dropdown-item"
-                                        href="{% url 'vacancy:payment_account_moderation_list' %}">Payment
-                                        Account Moderation</a>
+                                       href="{% url 'vacancy:payment_account_moderation_list' %}">Payment
+                                    Account Moderation</a>
                                 </li>
                                 <li>
                                     <a class="dropdown-item"
-                                        href="{% url 'vacancy:vacancy_moderation_list' %}">Vacancy Moderation</a>
+                                       href="{% url 'vacancy:vacancy_moderation_list' %}">Vacancy Moderation</a>
                                 </li>
                             {% endif %}
                             {% if user.is_superuser %}
-                                <li><a class="dropdown-item" href="{% url 'admin:index' %}">Admin site</a></li>
+                                <li>
+                                    <a class="dropdown-item" href="{% url 'admin:index' %}">Admin site</a>
+                                </li>
                             {% endif %}
                         </ul>
                     </li>

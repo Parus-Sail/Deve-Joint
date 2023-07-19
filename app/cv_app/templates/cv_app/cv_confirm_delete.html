@@ -1,9 +1,7 @@
 {% extends 'base.html' %}
-
 {% block title %}
     Delete CV
 {% endblock title %}
-
 {% block content %}
     <div class="container my-5">
         <div class="col-lg-8 col-12 mx-auto">
@@ -16,12 +14,9 @@
                     <form method="post">
                         {% csrf_token %}
                         <br>
-                        <a href="{% url 'cv_app:detail' pk=cv.pk %}" class="custom-btn float-end col-auto mx-1">
-                            Cancel
-                        </a>
-                        <button type="submit" class="col-auto custom-btn mx-1 float-end">
-                            Delete
-                        </button>
+                        <a href="{% url 'cv_app:detail' pk=cv.pk %}"
+                           class="custom-btn float-end col-auto mx-1">Cancel</a>
+                        <button type="submit" class="col-auto custom-btn mx-1 float-end">Delete</button>
                     </form>
                     <br>
                 </div>

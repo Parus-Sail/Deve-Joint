@@ -12,10 +12,10 @@
                 {% else %}
                     {% if cv.id in favorites_pk_list %}
                         <a href="{% url 'favorite_app:favorite_cvs_remove' pk=cv.id %}"
-                           class="nav-link custom-btn custom-border-btn float-end mx-1">Remove from Favorites</a>
+                           class="nav-link custom-btn custom-border-btn float-end mx-1 mt-2">Remove from Favorites</a>
                     {% else %}
                         <a href="{% url 'favorite_app:favorite_cvs_add' pk=cv.id %}"
-                           class="nav-link custom-btn float-end mx-1">Add to Favorites</a>
+                           class="nav-link custom-btn float-end mx-1 mt-2">Add to Favorites</a>
                     {% endif %}
                 {% endif %}
             {% endif %}

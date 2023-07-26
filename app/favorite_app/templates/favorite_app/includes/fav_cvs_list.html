@@ -1,0 +1,12 @@
+{% if cvs_items %}
+    <h5 class="mt-4">Your {{ cvs_title }}:</h5>
+    <ul>
+        {% for item in cvs_items %}
+            <li>
+                <a href="{% url 'cv_app:detail' item.cv.pk %}">{{ item.cv.title }}</a>
+                - added to favorites on {{ item.add_datetime }}
+                (<a href="{% url 'favorite_app:favorite_cvs_remove' item.cv.pk %}">Remove</a>)
+            </li>
+        {% endfor %}
+    </ul>
+{% endif %}

@@ -45,6 +45,17 @@
                                     <p>Technologies: {{ cv.technologies }}</p>
                                 </div>
                             </div>
+                            {% if user.is_authenticated and cv.owner != user %}
+                                <div class="job-section-btn-wrap">
+                                    {% if cv.id in favorites_pk_list %}
+                                        <a href="{% url 'favorite_app:favorite_cvs_remove' pk=cv.id %}"
+                                           class="bi-heart-fill me-5"></a>
+                                    {% else %}
+                                        <a href="{% url 'favorite_app:favorite_cvs_add' pk=cv.id %}"
+                                           class="bi-heart me-5"></a>
+                                    {% endif %}
+                                </div>
+                            {% endif %}
                             {% if user.is_authenticated and cv.owner == user %}
                                 <div class="job-section-btn-wrap">
                                     <a href="{% url 'cv_app:update' cv.pk %}" class="custom-btn btn">Update</a>

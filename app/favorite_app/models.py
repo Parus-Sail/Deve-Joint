@@ -1,5 +1,7 @@
 from django.conf import settings
 from django.db import models
+
+from cv_app.models import CV
 from project_app.models import Project
 from vacancy_app.models import Vacancy
 
@@ -30,3 +32,11 @@ class FavoriteVacancies(FavoriteBase):
     class Meta:
         verbose_name = "Favorite vacancies"
         verbose_name_plural = "Favorite vacancies"
+
+
+class FavoriteCVs(FavoriteBase):
+    cv = models.ForeignKey(CV, null=False, blank=False, on_delete=models.CASCADE, verbose_name="CV")
+
+    class Meta:
+        verbose_name = "Favorite CV"
+        verbose_name_plural = "Favorite CVs"

@@ -5,11 +5,12 @@ from django.urls import reverse_lazy
 from django.views.generic import CreateView, DeleteView, DetailView, ListView, UpdateView
 
 from . import forms, models
+from .mixins import FavoriteCVsMixin
 
 UserModel = get_user_model()
 
 
-class CVListView(ListView):
+class CVListView(FavoriteCVsMixin, ListView):
     template_name: str = "cv_app/cv_list.html"
     model = models.CV
     context_object_name = 'cv_list'
@@ -27,7 +28,7 @@ class UserCVListView(ListView, LoginRequiredMixin):
         return models.CV.objects.filter(owner=get_user(self.request))
 
 
-class CVDetailView(DetailView):
+class CVDetailView(FavoriteCVsMixin, DetailView):
     model = models.CV
     context_object_name = 'cv'
     template_name = 'cv_app/cv_detail.html'

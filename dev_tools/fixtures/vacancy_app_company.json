@@ -12,7 +12,7 @@
     "status": "ACT",
     "owner": 2,
     "payment_account": 2,
-    "avatar": "company_User 1 Local Super Company/avatars/pic_1690487845588.jpg"
+    "avatar": "company_Andre Company FreeLance/avatars/2.png"
   }
 },
 {
@@ -28,7 +28,7 @@
     "status": "ACT",
     "owner": 2,
     "payment_account": 2,
-    "avatar": "company_User 1 Local Super Company/avatars/pic_1690487845588.jpg"
+    "avatar": "company_Andre Local Super Company/avatars/pic_1690487845588.png"
   }
 },
 {
@@ -44,7 +44,7 @@
     "status": "ACT",
     "owner": 2,
     "payment_account": 2,
-    "avatar": "company_User 1 Local Super Company/avatars/pic_1690487845588.jpg"
+    "avatar": "company_Andre Super Company Turkey/avatars/3.png"
   }
 },
 {
@@ -60,7 +60,7 @@
     "status": "NOT_ACT",
     "owner": 2,
     "payment_account": 5,
-    "avatar": "company_User 1 Local Super Company/avatars/pic_1690487845588.jpg"
+    "avatar": "company_Andre Super Company Russian/avatars/4.png"
   }
 },
 {
@@ -76,7 +76,7 @@
     "status": "NOT_ACT",
     "owner": 2,
     "payment_account": 5,
-    "avatar": "company_User 1 Local Super Company/avatars/pic_1690487845588.jpg"
+    "avatar": "company_Andre Super Company Belarus/avatars/5.png"
   }
 },
 {
@@ -92,7 +92,7 @@
     "status": "ACT",
     "owner": 3,
     "payment_account": 9,
-    "avatar": "company_User 1 Local Super Company/avatars/pic_1690487845588.jpg"
+    "avatar": "company_Sergo Company Super Holding/avatars/6.png"
   }
 },
 {
@@ -108,7 +108,7 @@
     "status": "ACT",
     "owner": 3,
     "payment_account": 9,
-    "avatar": "company_User 1 Local Super Company/avatars/pic_1690487845588.jpg"
+    "avatar": "company_Sergo Super New Company/avatars/7.png"
   }
 }
 ]

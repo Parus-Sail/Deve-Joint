@@ -3,8 +3,8 @@
   "model": "vacancy_app.paymentaccount",
   "pk": 1,
   "fields": {
-    "name": "user1 payment account",
-    "description": "user5 payment account description",
+    "name": "Andre payment account",
+    "description": "Andre payment account description",
     "address": "Moscow street 24",
     "status": "REQ_APP",
     "type": "Joint Stock Company",
@@ -21,8 +21,8 @@
   "model": "vacancy_app.paymentaccount",
   "pk": 2,
   "fields": {
-    "name": "user 1 payment account 2",
-    "description": "user5 payment account 2 desc",
+    "name": "Andre payment account 2",
+    "description": "Andre payment account 2 desc",
     "address": "Moscow street 24",
     "status": "APP",
     "type": "Joint Stock Company",
@@ -75,7 +75,7 @@
   "model": "vacancy_app.paymentaccount",
   "pk": 8,
   "fields": {
-    "name": "User 2 Payment account",
+    "name": "Sergo Payment account",
     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
     "address": "GB, London",
     "status": "NOT_APP",
@@ -93,7 +93,7 @@
   "model": "vacancy_app.paymentaccount",
   "pk": 9,
   "fields": {
-    "name": "User 2 Payment Account Bank of America",
+    "name": "Sergo Payment Account Bank of America",
     "description": "Amet tellus cras adipiscing enim eu. Scelerisque viverra mauris in aliquam sem fringilla ut morbi tincidunt. Vitae et leo duis ut. Lacus laoreet non curabitur gravida arcu. Turpis egestas maecenas pharetra convallis posuere morbi. Mauris commodo quis imperdiet massa tincidunt nunc pulvinar. Velit sed ullamcorper morbi tincidunt ornare massa eget egestas purus. Ut faucibus pulvinar elementum integer enim. Egestas sed tempus urna et pharetra pharetra massa. Tellus integer feugiat scelerisque varius morbi. Vitae proin sagittis nisl rhoncus mattis rhoncus urna.",
     "address": "New York - 100",
     "status": "APP",

@@ -3,7 +3,7 @@
     "model": "project_app.project",
     "pk": 1,
     "fields": {
-        "title": "Project 1",
+        "title": "Lorem ipsum dolor.",
         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
         "created": "2023-07-12T12:25:33.089Z",
         "owner": 1
@@ -13,7 +13,7 @@
     "model": "project_app.project",
     "pk": 2,
     "fields": {
-        "title": "Project 2",
+        "title": "Lorem ipsum.",
         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
         "created": "2023-07-12T12:26:48.225Z",
         "owner": 2
@@ -23,7 +23,7 @@
     "model": "project_app.project",
     "pk": 3,
     "fields": {
-        "title": "Project 3",
+        "title": "Pellentesque nec arcu sed.",
         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
         "created": "2023-07-12T12:27:43.604Z",
         "owner": 3
@@ -33,7 +33,7 @@
     "model": "project_app.project",
     "pk": 4,
     "fields": {
-        "title": "Project 4",
+        "title": "Fusce hendrerit at risus.",
         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
         "created": "2023-07-12T12:28:01.908Z",
         "owner": 4
@@ -43,7 +43,7 @@
     "model": "project_app.project",
     "pk": 5,
     "fields": {
-        "title": "Project 5",
+        "title": "Cras vitae.",
         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
         "created": "2023-07-12T12:28:21.136Z",
         "owner": 1

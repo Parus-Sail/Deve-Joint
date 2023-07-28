@@ -1,7 +1,7 @@
 from pathlib import Path
 from time import time
 
-from config.settings import STATIC_ROOT
+from cv_app.models import CV
 from django.contrib.auth import get_user_model
 from django.db import models
 from django.db.models.functions import Lower
@@ -115,11 +115,6 @@ class Company(models.Model):
 
         super(Company, self).save(*args, **kwargs)
 
-    # def get_avatar(self):
-    #     if self.avatar:
-    #         return self.avatar.url
-    #     return STATIC_ROOT
-
     class Meta:
         constraints = [
             models.UniqueConstraint(Lower("name"), name=_("company name case insensitive")),
@@ -143,9 +138,6 @@ class ApplicantLevel(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, verbose_name=_("created time"))
     update_at = models.DateTimeField(auto_now=True, verbose_name=_("update_time"))
 
-    # def get_absolute_url(self):
-    #     return reverse("vacancy:company_detail", kwargs={'pk': self.pk})
-
     class Meta:
         verbose_name = _("Applicant Level")
         verbose_name_plural = _("Applicant Level's")
@@ -168,9 +160,6 @@ class EmploymentType(models.Model):
     sort_order = models.PositiveIntegerField(verbose_name=_("sort order"))
     created_at = models.DateTimeField(auto_now_add=True, verbose_name=_("created time"))
     update_at = models.DateTimeField(auto_now=True, verbose_name=_("update_time"))
-
-    # def get_absolute_url(self):
-    #     return reverse("vacancy:company_detail", kwargs={'pk': self.pk})
 
     class Meta:
         verbose_name = _("Employment Type")
@@ -272,3 +261,43 @@ class Vacancy(models.Model):
 
     def __str__(self):
         return f"{self.name}, {self.get_status_display()}"
+
+
+class Response(models.Model):
+
+    class Status(models.TextChoices):
+        VIEWED = "VIEWED", _("Viewed")
+        NOT_VIEWED = "NOT_VIEWED", _("Not Viewed")
+        REJECTED = "REJECTED", _("Rejected")
+        ACCEPTED = "ACCEPTED", _("Accepted")
+
+    description = models.TextField(null=True, blank=True, verbose_name=_("description"))
+    answer = models.TextField(null=True, blank=True, verbose_name=_("answer"))
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name=_("created time"))
+    update_at = models.DateTimeField(auto_now=True, verbose_name=_("update_time"))
+    status = models.CharField(max_length=20, choices=Status.choices, default=Status.NOT_VIEWED,
+                              verbose_name=_("status"))
+
+    cv = models.ForeignKey(
+        CV,
+        on_delete=models.PROTECT,
+        verbose_name=_("cv"),
+        related_name=_("response_list"),
+    )
+    vacancy = models.ForeignKey(
+        Vacancy,
+        on_delete=models.PROTECT,
+        verbose_name=_("vacancy"),
+        related_name=_("response_list"),
+    )
+
+    def get_absolute_url(self):
+        return reverse("vacancy:response_detail", kwargs={'pk': self.pk})
+
+    class Meta:
+        verbose_name = _("Response")
+        verbose_name_plural = _("Response's")
+        ordering = ["-created_at"]
+
+    def __str__(self):
+        return f"{self.cv.title}, {self.get_status_display()}"

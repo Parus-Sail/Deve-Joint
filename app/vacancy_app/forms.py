@@ -2,7 +2,7 @@ from django import forms
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
 
-from .models import Company, PaymentAccount, Vacancy
+from .models import Company, PaymentAccount, Response, Vacancy
 from .utils import DivErrorList
 
 
@@ -174,3 +174,63 @@ class VacancyModerationCreationForm(forms.ModelForm):
     class Meta:
         model = Vacancy
         exclude = ("owner",)
+
+
+class ResponseCreationForm(forms.ModelForm):
+
+    def __init__(self, *args, **kwargs):
+        # получаем request в форме
+        self.request = kwargs.pop("request")
+        super().__init__(*args, **kwargs)
+
+        fields = (
+            "description",
+            "cv",
+        )
+        for field in fields:
+            # кастомный css для полей
+            self.fields[field].widget.attrs.update({"class": "form-control"})
+        # кастомный css для ошибок
+        self.error_class = DivErrorList
+        # только активное резюме и правильный user
+        self.fields['cv'].queryset = self.fields['cv'].queryset.filter(owner=self.request.user)
+        self.fields["cv"].empty_label = _("Choose CV")
+        self.fields["description"].label = _("Your letter pls...")
+
+    class Meta:
+        model = Response
+        exclude = ("vacancy", "status", "answer")
+
+
+class AnswerUpdateForm(forms.ModelForm):
+    # Пользователю меняет не все статусы
+    USER_ALLOWED_STATUS = (
+        ("VIEWED", _("Viewed")),
+        ("ACCEPTED", _("Accepted")),
+        ("REJECTED", _("Rejected")),
+    )
+    status = forms.CharField(widget=forms.Select(choices=USER_ALLOWED_STATUS))
+
+    def __init__(self, *args, **kwargs):
+        # получаем request в форме
+        self.request = kwargs.pop("request")
+        super().__init__(*args, **kwargs)
+
+        fields = (
+            "answer",
+            "status",
+        )
+        for field in fields:
+            # кастомный css для полей
+            self.fields[field].widget.attrs.update({"class": "form-control"})
+        # кастомный css для ошибок
+        self.error_class = DivErrorList
+        if self.fields['status'] == Response.Status.NOT_VIEWED:
+            self.fields['status'] = Response.Status.VIEWED
+
+    class Meta:
+        model = Response
+        fields = [
+            "answer",
+            "status",
+        ]

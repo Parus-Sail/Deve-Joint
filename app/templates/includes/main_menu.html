@@ -86,6 +86,9 @@
                                 <a class="dropdown-item" href="{% url 'cv_app:my-cv-list' %}">My CVs</a>
                             </li>
                             <li>
+                                <a class="dropdown-item" href="{% url 'vacancy:response_list' %}">My Responses</a>
+                            </li>
+                            <li>
                                 <a class="dropdown-item" href="{% url 'project_app:my_project_list' %}">My projects</a>
                             </li>
                             <li>
@@ -100,6 +103,9 @@
                             </li>
                             <li>
                                 <a class="dropdown-item" href="{% url 'vacancy:vacancy_list' %}">Vacancy List</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{% url 'vacancy:answer_list' %}">Vacancy Response List</a>
                             </li>
                             {% if user.is_staff %}
                                 <li>

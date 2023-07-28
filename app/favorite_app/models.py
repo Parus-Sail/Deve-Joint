@@ -1,7 +1,6 @@
+from cv_app.models import CV
 from django.conf import settings
 from django.db import models
-
-from cv_app.models import CV
 from project_app.models import Project
 from vacancy_app.models import Vacancy
 

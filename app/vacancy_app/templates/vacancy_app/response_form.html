@@ -1,21 +1,21 @@
 {% extends 'base.html' %}
 {% block title %}
-    Create Payment Account
+    Send Response
 {% endblock title %}
 {% block content %}
     <div class="container">
         <div class="col-lg-8 col-12 mx-auto mb-4">
             <form class="custom-form contact-form" method="post">
                 {% csrf_token %}
-                <h2 class="text-center mb-4 logo-text">Create Payment Account</h2>
+                <h2 class="text-center mb-4 logo-text">Send Response to: {{ vacancy.name }}</h2>
                 <div class="row justify-content-center">
                     <div class="col-lg-8 col-md-8 col-12">
                         {% csrf_token %}
                         {{ form }}
                         <button type="submit" class="form-control">Save</button>
                         <br>
-                        <a href="{% url 'vacancy:payment_account_list' %}"
-                           class="custom-btn custom-border-btn btn me-4">Back</a>
+                        <a href="{% url 'vacancy:response_list' %}"
+                           class="custom-btn custom-border-btn btn me-4">Response list</a>
                     </div>
                 </div>
             </form>

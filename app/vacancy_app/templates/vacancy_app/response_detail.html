@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load vacancy_app_tags %}
+{% block title %}
+    Response Detail
+{% endblock title %}
+{% block content %}
+    <div class="row justify-content-center pt-3">
+        <div class="col-md-12 col-lg-8">
+            <div class="card shadow">
+                <div class="card-body">
+                    <h5 class="card-title logo-text">
+                        <a href="{% url 'vacancy:job-details' pk=object.vacancy.pk %}"
+                           class="smoothscroll">
+                            <strong>Response To Vacancy:</strong> {{ object.vacancy.name }}
+                        </a>
+                    </h5>
+                    <p class="card-text">
+                        <a href="{% url 'cv_app:detail' pk=object.cv.pk %}"
+                           class="custom-link smoothscroll">
+                            <strong>CV:</strong> {{ object.cv.title }}
+                        </a>
+                        <br>
+                        <strong>Description:</strong> {{ object.description }}
+                        <br>
+                        <a href="{% url 'vacancy:company_profile' pk=object.vacancy.company.pk %}"
+                           class="custom-link smoothscroll">
+                            <strong>Company:</strong> {{ object.vacancy.company }}
+                        </a>
+                        {% if object.answer %}
+                            <br>
+                            <strong>Answer:</strong> {{ object.answer }}
+                        {% endif %}
+                        <br>
+                        <strong>Created at:</strong> {% get_user_date_time object.created_at %}
+                        <br>
+                        <strong>Last update:</strong> {% get_user_date_time object.update_at %}
+                        {% if object.get_status_display == 'Accepted' %}
+                            <p class="mb-0 text-success">
+                                <strong>Status: {{ object.get_status_display }}</strong>
+                            </p>
+                        {% elif object.get_status_display == 'Rejected' %}
+                            <p class="mb-0 text-danger">
+                                <strong>Status: {{ object.get_status_display }}</strong>
+                            </p>
+                        {% elif object.get_status_display == 'Viewed' %}
+                            <p class="mb-0 text-primary">
+                                <strong>Status: {{ object.get_status_display }}</strong>
+                            </p>
+                        {% else %}
+                            <p class="mb-0 text-secondary">
+                                <strong>Status: {{ object.get_status_display }}</strong>
+                            </p>
+                        {% endif %}
+                    </p>
+                    <a href="javascript:history.go(-1)"
+                       class="custom-btn custom-border-btn btn me-4">Back</a>
+                    <a href="{% url 'vacancy:response_list' %}" class="custom-btn btn">Response List</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

@@ -1,9 +1,8 @@
+from cv_app.models import CV
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import HttpResponseRedirect, get_object_or_404, render
 from django.views import View
-
-from cv_app.models import CV
-from favorite_app.models import FavoriteProjects, FavoriteVacancies, FavoriteCVs
+from favorite_app.models import FavoriteCVs, FavoriteProjects, FavoriteVacancies
 from project_app.models import Project
 from vacancy_app.models import Vacancy
 

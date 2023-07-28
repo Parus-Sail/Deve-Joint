@@ -3,7 +3,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import PermissionDenied
 from django.db.models import Q
-from django.shortcuts import redirect
+from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import CreateView, DeleteView, DetailView, ListView, UpdateView
@@ -312,3 +312,65 @@ class VacancyModerationUpdateView(LoginRequiredMixin, StaffRequiredMixin, Update
     model = vacancy_models.Vacancy
     template_name = 'vacancy_app/vacancy_moderation_form.html'
     success_url = reverse_lazy("vacancy:vacancy_moderation_list")
+
+
+# ===============Response views start here=====================
+class ResponseCreateView(LoginRequiredMixin, RequestFormKwargsMixin, CreateView):
+    form_class = vacancy_forms.ResponseCreationForm
+    template_name = 'vacancy_app/response_form.html'
+
+    def form_valid(self, form):
+        # отклик для какой вакансии
+        form.instance.vacancy = get_object_or_404(vacancy_models.Vacancy, pk=self.kwargs.get('pk'))
+        return super().form_valid(form)
+
+    def get_context_data(self, **kwargs):
+        ctx = super(ResponseCreateView, self).get_context_data(**kwargs)
+        ctx['vacancy'] = get_object_or_404(vacancy_models.Vacancy, pk=self.kwargs.get('pk'))
+        return ctx
+
+
+class UserResponseListView(LoginRequiredMixin, ListView):
+    paginate_by = 3
+    model = vacancy_models.Response
+
+    def get_queryset(self):
+        queryset = super(UserResponseListView, self).get_queryset()
+        queryset = queryset.filter(cv__owner=self.request.user).select_related('vacancy', 'cv').order_by("-update_at")
+        return queryset
+
+
+class ResponseDetailView(DetailView):
+    model = vacancy_models.Response
+    template_name: str = "vacancy_app/response_detail.html"
+
+    def get_queryset(self):
+        queryset = super(ResponseDetailView, self).get_queryset()
+        queryset = queryset.select_related('vacancy', 'cv')
+        return queryset
+
+
+class AnswerListView(LoginRequiredMixin, ListView):
+    paginate_by = 3
+    model = vacancy_models.Response
+    template_name: str = "vacancy_app/answer_list.html"
+
+    def get_queryset(self):
+        queryset = super(AnswerListView, self).get_queryset()
+        queryset = queryset.filter(vacancy__owner=self.request.user).select_related('vacancy', 'cv')
+        queryset = queryset.order_by("-update_at")
+        return queryset
+
+
+class AnswerUpdateView(LoginRequiredMixin, RequestFormKwargsMixin, UpdateView):
+    form_class = vacancy_forms.AnswerUpdateForm
+    model = vacancy_models.Response
+    template_name = 'vacancy_app/answer_form.html'
+    success_url = reverse_lazy("vacancy:answer_list")
+
+    def get_context_data(self, **kwargs):
+        ctx = super(AnswerUpdateView, self).get_context_data(**kwargs)
+        if ctx['object'].status == vacancy_models.Response.Status.NOT_VIEWED:
+            ctx['object'].status = vacancy_models.Response.Status.VIEWED
+            ctx['object'].save()
+        return ctx

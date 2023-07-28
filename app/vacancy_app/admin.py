@@ -23,3 +23,9 @@ class EmploymentTypeAdmin(admin.ModelAdmin):
 class JobTypeAdmin(admin.ModelAdmin):
     list_display = ["name", "sort_order"]
     search_fields = ["name"]
+
+
+@admin.register(vacancy_models.Response)
+class ResponseAdmin(admin.ModelAdmin):
+    list_display = ["cv", "vacancy"]
+    search_fields = ["cv"]

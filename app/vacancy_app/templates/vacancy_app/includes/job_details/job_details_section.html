@@ -74,7 +74,8 @@
                             <a href="{% url 'favorite_app:favorite_vacancies_add' pk=object.id %}"
                                class="custom-btn btn mt-2 ms-lg-4 ms-3 me-4">Add to Favorites</a>
                         {% endif %}
-                        <a href="#" class="custom-btn btn mt-2">Apply now</a>
+                        <a href="{% url 'vacancy:response_create' pk=object.pk %}"
+                           class="custom-btn btn mt-2">Apply now</a>
                         <a href="{% url 'vacancy:job-listing' %}?company-id={{ object.company.pk }}#job-section"
                            class="custom-btn custom-border-btn btn mt-2 ms-lg-4 ms-3">Company Job list</a>
                         <div class="job-detail-share d-flex align-objects-center">

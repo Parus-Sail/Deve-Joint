@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load vacancy_app_tags %}
+{% block title %}
+    Send Answer
+{% endblock title %}
+{% block content %}
+    <div class="container">
+        <div class="col-lg-8 col-12 mx-auto mb-4">
+            <div class="card shadow mb-4">
+                <div class="card-body">
+                    <h5 class="card-title logo-text">
+                        <a href="{% url 'vacancy:job-details' pk=object.vacancy.pk %}"
+                           class="smoothscroll">
+                            <strong>Answer To Response:</strong> {{ object.vacancy.name }}
+                        </a>
+                    </h5>
+                    <p class="card-text">
+                        <a href="{% url 'cv_app:detail' pk=object.cv.pk %}"
+                           class="custom-link smoothscroll">
+                            <strong>CV:</strong> {{ object.cv.title }}
+                        </a>
+                        <br>
+                        <a href="{% url 'auth_app:profile_detail' pk=object.cv.owner.pk %}"
+                           class="custom-link smoothscroll">
+                            <strong>User Profile:</strong> {{ object.cv.owner.get_current_name }}
+                        </a>
+                        <br>
+                        <strong>Description:</strong> {{ object.description }}
+                        <br>
+                        <a href="{% url 'vacancy:company_profile' pk=object.vacancy.company.pk %}"
+                           class="custom-link smoothscroll">
+                            <strong>Company:</strong> {{ object.vacancy.company }}
+                        </a>
+                        <br>
+                        <strong>Created at:</strong> {% get_user_date_time object.created_at %}
+                    </p>
+                </div>
+            </div>
+            <form class="custom-form contact-form" method="post">
+                {% csrf_token %}
+                <h2 class="text-center mb-4 logo-text">Sent Answer</h2>
+                <div class="row justify-content-center">
+                    <div class="col-lg-8 col-md-8 col-12">
+                        {% csrf_token %}
+                        {{ form }}
+                        <button type="submit" class="form-control">Sent</button>
+                        <br>
+                        <a href="{% url 'vacancy:answer_list' %}"
+                           class="custom-btn custom-border-btn btn me-4">Vacancy Response list</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

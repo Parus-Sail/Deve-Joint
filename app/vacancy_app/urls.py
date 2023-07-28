@@ -45,4 +45,10 @@ urlpatterns = [
     path("vacancy/<int:pk>/moderation-update/",
          views.VacancyModerationUpdateView.as_view(),
          name="vacancy_moderation_update"),
+    # User Response urls
+    path('response/<int:pk>/create/', views.ResponseCreateView.as_view(), name='response_create'),
+    path('response/', views.UserResponseListView.as_view(), name='response_list'),
+    path('response/<int:pk>/detail/', views.ResponseDetailView.as_view(), name='response_detail'),
+    path('answer/', views.AnswerListView.as_view(), name='answer_list'),
+    path('answer/<int:pk>/update/', views.AnswerUpdateView.as_view(), name='answer_update'),
 ]

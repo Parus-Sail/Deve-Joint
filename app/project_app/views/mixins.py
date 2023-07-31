@@ -5,9 +5,8 @@ from django.db.models import Prefetch
 from django.db.models.query import QuerySet
 from django.views import View
 
+from .. import forms
 from ..models import Membership, Owner, Project
-
-# from .. import forms
 
 User: type[AbstractBaseUser] = get_user_model()
 
@@ -74,8 +73,9 @@ class OwnProjectMixin(OwnerMixin, ProjectMixin):
 
 class OwnProjectEditMixin(OwnProjectMixin, OwnerEditMixin):
     """ Помечаем все новые проекты, как свои и ограничивам в их рамках свой доступ """
-    # form_class = ProjectForm # todo: включить после тестов
-    fields = ['title', 'description']
+    form_class = forms.ProjectForm  # todo: включить после тестов
+
+    # fields = ['title', 'description']
 
 
 # ============================================= MEMBER MIXIN =============================================

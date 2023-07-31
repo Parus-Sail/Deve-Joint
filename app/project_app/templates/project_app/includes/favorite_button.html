@@ -1,9 +1,3 @@
-</br>
-{{ object_id }}
-</br>
-{{ favorites_pk_list }}
-</br>
-</br>
 {% if project.pk in favorites_pk_list %}
     <a href="{% url 'favorite_app:favorite_projects_remove' pk=object_id %}"
        class="bi-heart-fill ms-auto me-2"></a>

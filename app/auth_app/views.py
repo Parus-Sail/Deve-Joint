@@ -47,6 +47,7 @@ class LoginUser(LoginView):
 class UserUpdateView(LoginRequiredMixin, UpdateView):
     model = User
     form_class = authapp_forms.CustomUserChangeForm
+    second_form_class = authapp_forms.UserAvatarChangeForm
     template_name = "auth_app/registration/profile.html"
     success_url = reverse_lazy("auth_app:profile")
 
@@ -59,7 +60,18 @@ class UserUpdateView(LoginRequiredMixin, UpdateView):
         context['projects'] = projects
         projects_member = Project.objects.filter(members=self.request.user).exclude(owner=self.request.user)
         context['projects_member'] = projects_member
+        if 'avatar_form' not in context:
+            context['avatar_form'] = self.second_form_class(instance=self.object)
         return context
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        if 'avatar' in request.POST:
+            avatar_form = self.second_form_class(request.POST, request.FILES, instance=self.object)
+            if avatar_form.is_valid():
+                return self.form_valid(avatar_form)
+        else:
+            return super().post(request, *args, **kwargs)
 
 
 class UserProfileView(LoginRequiredMixin, DetailView):

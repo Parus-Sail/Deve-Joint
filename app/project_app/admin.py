@@ -1,8 +1,14 @@
+from chat_app.models import Chat
 from django.contrib import admin
 from django.contrib.auth.models import Group
 from role_app.models import Role
 
 from .models import Membership, Project
+
+
+class ChatInline(admin.TabularInline):
+    model = Chat
+    extra = 0
 
 
 class RoleInline(admin.TabularInline):
@@ -22,7 +28,7 @@ class ProjectAdmin(admin.ModelAdmin):
     # list_filter = ('role',)
     # search_fields = ('title',)
     # search_fields = ('user__username', 'project__name', 'role__name')
-    inlines = [RoleInline, MemberInline]
+    inlines = [RoleInline, MemberInline, ChatInline]
 
 
 @admin.register(Membership)

@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     ################
     "main_app",
     "project_app",
+    "chat_app",
     "vacancy_app",
     "favorite_app",
     "cv_app",
@@ -89,6 +90,17 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = "config.wsgi.application"
+
+ASGI_APPLICATION = "config.asgi.application"
+
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [("127.0.0.1", 6379)],
+        },
+    },
+}
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases

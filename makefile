@@ -11,6 +11,7 @@ export DOCKER_BUILDKIT=1
 
 
 go_db: down
+	docker run --rm -p 6379:6379 redis:7
 	docker-compose --file ./docker-compose.dev.yml up db -d;
 	docker exec -it devejoint-db psql -U postgres -d postgres -c "DROP DATABASE deve_joint;"
 	docker exec -it devejoint-db psql -U postgres -d postgres -c "CREATE DATABASE deve_joint;"

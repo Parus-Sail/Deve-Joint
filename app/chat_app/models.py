@@ -11,3 +11,6 @@ class Chat(models.Model):
     project = models.ForeignKey(Project, blank=True, on_delete=models.CASCADE)
 
     time = models.DateTimeField(auto_now_add=True, blank=True, null=True)
+
+    class Meta:
+        ordering = ('-time',)

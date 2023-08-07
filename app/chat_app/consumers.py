@@ -17,8 +17,21 @@ class ChatConsumer(AsyncWebsocketConsumer):
         self.room_group_name = f'chat_{self.id}'
         # join room group
         await self.channel_layer.group_add(self.room_group_name, self.channel_name)
+        now = timezone.now()
+
         # accept connection
         await self.accept()
+        messages = await self.load_messages_from_db(project_id=self.id)
+
+        for message in messages:
+            event = {
+                'type': 'chat_message',
+                'message': message['message'],
+                'user': message['author__username'],
+                'datetime': now.isoformat(),
+            }
+
+            await self.send(json.dumps(event))
 
     async def disconnect(self, close_code):
         # leave room group
@@ -29,6 +42,14 @@ class ChatConsumer(AsyncWebsocketConsumer):
         text_data_json = json.loads(text_data)
         message = text_data_json['message']
         now = timezone.now()
+
+        # Сохранение сообщения в базе данных (пример для асинхронного режима)
+        await self.save_message_to_db(
+            project_id=self.id,
+            user=self.user,
+            message=message,
+        )
+
         # send message to room group
         await self.channel_layer.group_send(self.room_group_name, {
             'type': 'chat_message',
@@ -41,21 +62,13 @@ class ChatConsumer(AsyncWebsocketConsumer):
     async def chat_message(self, event):
         # send message to WebSocket
         await self.send(text_data=json.dumps(event))
-        # Сохранение сообщения в базе данных (пример для асинхронного режима)
-        message = event['message']
-        await self.save_message_to_db(
-            project_id=self.id,
-            user_id=self.user,
-            message=message,
-        )
 
     @database_sync_to_async
-    def save_message_to_db(self, project_id: int, user_id: int, message: str):
+    def save_message_to_db(self, project_id: int, user, message: str):
         project = Project.objects.get(id=project_id)
-        return Chat.objects.create(author=user_id, project=project, message=message)
+        return Chat.objects.create(author=user, project=project, message=message)
 
     @database_sync_to_async
-    def load_messages(self, project_id: int):
-        messages = Chat.objects.filter(project=project_id).vlaues()
-        json_messages = json.loads(messages)
-        return json_messages
+    def load_messages_from_db(self, project_id: int):
+        messages = Chat.objects.filter(project=project_id).values('message', 'author__username', 'time')[:3][::-1]
+        return list(messages)

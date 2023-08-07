@@ -14,7 +14,9 @@
             </div>
             <div class="col-lg-4 col-12 mt-5 mt-lg-0">
                 {% include 'project_app/includes/detail_side_pannel.html' %}
-                {% include 'chat_app/includes/chat.html' %}
+                {% if user.is_authenticated %}
+                    {% include 'chat_app/includes/chat.html' %}
+                {% endif %}
             </div>
         </div>
     </div>

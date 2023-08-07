@@ -16,5 +16,7 @@
     {% include 'project_app/includes/project_details_section.html' with project=object %}
 {% endblock %}
 {% block jscode %}
-    {% include 'chat_app/includes/js_script.html' with project=object %}
+    {% if user.is_authenticated %}
+        {% include 'chat_app/includes/js_script.html' with project=object %}
+    {% endif %}
 {% endblock jscode %}
